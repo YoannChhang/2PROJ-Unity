@@ -170,3 +170,733 @@ Received Import Request.
   path: Assets/Landscapes/Sprites/landscape_15_out.asset
   artifactKey: Guid(75a483ab5c0f4274d8443bed84a50ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Landscapes/Sprites/landscape_15_out.asset using Guid(75a483ab5c0f4274d8443bed84a50ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cc7d332cbb781b5d383c143cf462733') in 0.074533 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1983.691621 seconds.
+  path: Packages/com.unity.2d.path
+  artifactKey: Guid(b408cb5710d3960a737996681ad0c300) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.path using Guid(b408cb5710d3960a737996681ad0c300) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5762a0cea76d48a7b0e0a05df9e8765c') in 0.008070 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.989359 seconds.
+  path: Packages/com.unity.2d.path/Tests
+  artifactKey: Guid(a1eb330a613ceea45af21585e08fd0bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.path/Tests using Guid(a1eb330a613ceea45af21585e08fd0bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bdd44f7862c851a3f66cc3c02f7b1a1') in 0.011883 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.787688 seconds.
+  path: Packages/com.unity.2d.path/Editor
+  artifactKey: Guid(ebb15515f9c03364089baa7120b54453) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.path/Editor using Guid(ebb15515f9c03364089baa7120b54453) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '173dd97b3fc3b606b6672000759c5d7b') in 0.008004 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009367 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.75 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.463 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1464ms)
+		BeginReloadAssembly (166ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (18ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (51ms)
+		EndReloadAssembly (1150ms)
+			LoadAssemblies (130ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (360ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (65ms)
+			SetupLoadedEditorAssemblies (507ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (21ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (93ms)
+				ProcessInitializeOnLoadAttributes (331ms)
+				ProcessInitializeOnLoadMethodAttributes (50ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (12ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.64 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3730 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (195.5 KB). Loaded Objects now: 4195.
+Memory consumption went from 142.3 MB to 142.1 MB.
+Total: 4.470600 ms (FindLiveObjects: 0.355400 ms CreateObjectMapping: 0.388400 ms MarkObjects: 3.540500 ms  DeleteObjects: 0.185200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008275 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.00 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.388 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1389ms)
+		BeginReloadAssembly (154ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (39ms)
+		EndReloadAssembly (1108ms)
+			LoadAssemblies (102ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (399ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (65ms)
+			SetupLoadedEditorAssemblies (473ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (21ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (106ms)
+				ProcessInitializeOnLoadAttributes (297ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.33 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3730 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (195.5 KB). Loaded Objects now: 4198.
+Memory consumption went from 142.3 MB to 142.1 MB.
+Total: 3.316900 ms (FindLiveObjects: 0.263100 ms CreateObjectMapping: 0.232600 ms MarkObjects: 2.633900 ms  DeleteObjects: 0.185800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009385 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.96 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.095 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1096ms)
+		BeginReloadAssembly (147ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (10ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (39ms)
+		EndReloadAssembly (813ms)
+			LoadAssemblies (101ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (267ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (49ms)
+			SetupLoadedEditorAssemblies (348ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (78ms)
+				ProcessInitializeOnLoadAttributes (209ms)
+				ProcessInitializeOnLoadMethodAttributes (37ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.90 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3730 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (195.8 KB). Loaded Objects now: 4201.
+Memory consumption went from 142.3 MB to 142.1 MB.
+Total: 4.051600 ms (FindLiveObjects: 0.394100 ms CreateObjectMapping: 0.292700 ms MarkObjects: 3.201200 ms  DeleteObjects: 0.162000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006966 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.80 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.266 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1266ms)
+		BeginReloadAssembly (141ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (996ms)
+			LoadAssemblies (97ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (301ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (81ms)
+			SetupLoadedEditorAssemblies (435ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (20ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (96ms)
+				ProcessInitializeOnLoadAttributes (263ms)
+				ProcessInitializeOnLoadMethodAttributes (43ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (11ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.44 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3731 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 28 unused Assets / (195.9 KB). Loaded Objects now: 4205.
+Memory consumption went from 142.3 MB to 142.1 MB.
+Total: 3.189300 ms (FindLiveObjects: 0.288700 ms CreateObjectMapping: 0.231300 ms MarkObjects: 2.508300 ms  DeleteObjects: 0.160000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 70169.357965 seconds.
+  path: Assets/Resources/Sample.png
+  artifactKey: Guid(f8f0b7f263fec8b47a5bc1fb83d0f394) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Sample.png using Guid(f8f0b7f263fec8b47a5bc1fb83d0f394) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df118247120cf7098a419e81e722fcf3') in 0.271045 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1982.326754 seconds.
+  path: Assets/Resources/Models/FBX format/detail_crystalLarge.fbx
+  artifactKey: Guid(96b3c0cd1820f3f43a68780aac0cd038) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/detail_crystalLarge.fbx using Guid(96b3c0cd1820f3f43a68780aac0cd038) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3f505f0bf01f1fb11945b65bc574c6d') in 0.442787 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_wideTransition.fbx
+  artifactKey: Guid(708307e9184ea1241a31ad67c372068b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_wideTransition.fbx using Guid(708307e9184ea1241a31ad67c372068b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b7c88617afacec14e6e53c2e72adf07') in 0.228231 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Resources/Models/FBX format/detail_rocksLarge.fbx
+  artifactKey: Guid(b52bac2522bd07b4f90f55bb388fb4ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/detail_rocksLarge.fbx using Guid(b52bac2522bd07b4f90f55bb388fb4ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fe5ac5ef30e3f10b8fa7f17caf3390f') in 0.024635 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/FBX format/tile_riverCorner.fbx
+  artifactKey: Guid(764a5c7657c994d41adcf43bef0c92f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_riverCorner.fbx using Guid(764a5c7657c994d41adcf43bef0c92f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '605248e0025d0cb3446199f9a6a987f8') in 0.033880 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_straightHill.fbx
+  artifactKey: Guid(0b1f1635e35ac404083cf0960c38584f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_straightHill.fbx using Guid(0b1f1635e35ac404083cf0960c38584f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66baa55bb204fe4a1a7e871598857567') in 0.036913 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Models/FBX format/tile_crossing.fbx
+  artifactKey: Guid(8ca8dec699c70314c8aeb7be785d79cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_crossing.fbx using Guid(8ca8dec699c70314c8aeb7be785d79cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '764e1691b2c6cabcfd6d1f993f93b6bd') in 0.034266 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Resources/Models/FBX format/tile_dirt.fbx
+  artifactKey: Guid(d4c79d3b10cc95c48b2c743f5b321b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_dirt.fbx using Guid(d4c79d3b10cc95c48b2c743f5b321b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d9cc6addfded8e54f35f2e0c146a738') in 0.020458 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_cornerSquare.fbx
+  artifactKey: Guid(03c4cd45ed43e3e4ba5de9b5e2870b50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_cornerSquare.fbx using Guid(03c4cd45ed43e3e4ba5de9b5e2870b50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd26c8ee6c5bc973439e3f8a63dd2a53b') in 0.036389 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Models/FBX format/tile_hill.fbx
+  artifactKey: Guid(638dccccc7034c64d9d1de442700107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_hill.fbx using Guid(638dccccc7034c64d9d1de442700107c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd491ded4df32a335031cb3f27c7fbe97') in 0.040193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_treeQuad.fbx
+  artifactKey: Guid(6780c1961f881d843adefb147a97932e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_treeQuad.fbx using Guid(6780c1961f881d843adefb147a97932e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59a14a810608bad45d2af8b07a3cf655') in 0.065915 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Models/FBX format/enemy_ufoRedWeapon.fbx
+  artifactKey: Guid(2d9268b6000aea84dbe94064f528ab34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/enemy_ufoRedWeapon.fbx using Guid(2d9268b6000aea84dbe94064f528ab34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecaba008a85184486aa21be4ca7fe709') in 0.036459 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Resources/Models/FBX format/enemy_ufoRed.fbx
+  artifactKey: Guid(8686911860dbb624ebab3fcf89248987) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/enemy_ufoRed.fbx using Guid(8686911860dbb624ebab3fcf89248987) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '619c83e223362dc782bbb2cbf8d2a7c8') in 0.039130 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_treeDouble.fbx
+  artifactKey: Guid(a4ae6bc888d78e0419ea519894c126a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_treeDouble.fbx using Guid(a4ae6bc888d78e0419ea519894c126a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1c329e19436e404b20a3737aa0d5b30') in 0.054224 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Models/FBX format/snow_detail_rocksLarge.fbx
+  artifactKey: Guid(138dec2954b70e442909e028918e8e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_detail_rocksLarge.fbx using Guid(138dec2954b70e442909e028918e8e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ef8dd1c3c51306198c72cccafc9ed66') in 0.027484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/Resources/Models/FBX format/tile_cornerInner.fbx
+  artifactKey: Guid(54cb1fc986705d04c8a5d4e090f03763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_cornerInner.fbx using Guid(54cb1fc986705d04c8a5d4e090f03763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b3f4f5aa679a4593b26e2186f422031') in 0.025669 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Models/FBX format/tile_cornerOuter.fbx
+  artifactKey: Guid(f3a8c0b4f0f518a448d5030c2ec2075f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_cornerOuter.fbx using Guid(f3a8c0b4f0f518a448d5030c2ec2075f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a54fad4e7af6e89cbfe3514dae2adf5') in 0.028244 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_crystal.fbx
+  artifactKey: Guid(e3441fd457e28664f91bd9f705fab01d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_crystal.fbx using Guid(e3441fd457e28664f91bd9f705fab01d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73998e04909c8004dfc19b8182b28873') in 0.066810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Models/FBX format/snow_detail_dirt.fbx
+  artifactKey: Guid(5708a4d8e1646ac4c89e0f05b5ca0c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_detail_dirt.fbx using Guid(5708a4d8e1646ac4c89e0f05b5ca0c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a757c7df1ed8b6c6a6787fc246d5fd30') in 0.027434 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_spawnRound.fbx
+  artifactKey: Guid(ceea796bbf8d8df4fb3feeefd256e5f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_spawnRound.fbx using Guid(ceea796bbf8d8df4fb3feeefd256e5f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34bbba1de9787e599d24f765fa0ada6c') in 0.041937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_endRoundSpawn.fbx
+  artifactKey: Guid(71cc8f8d30aaf964aaaa2cdcf279e48b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_endRoundSpawn.fbx using Guid(71cc8f8d30aaf964aaaa2cdcf279e48b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd51fd9af424051c8ac21eb71e965217d') in 0.047117 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Resources/Models/FBX format/snow_detail_tree.fbx
+  artifactKey: Guid(12cf790d4a1f9af47934c680380f436c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_detail_tree.fbx using Guid(12cf790d4a1f9af47934c680380f436c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f8fd385ee5c719d87ffb3a2d627f11b') in 0.037262 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Resources/Models/FBX format/enemy_ufoPurpleWeapon.fbx
+  artifactKey: Guid(5c38daa52769b95498217adc6af255e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/enemy_ufoPurpleWeapon.fbx using Guid(5c38daa52769b95498217adc6af255e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3e815e1f87c01545fbc8872138e9c90') in 0.039330 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Resources/Models/FBX format/tile.fbx
+  artifactKey: Guid(ae636109ab9439e48a20e162260e702c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile.fbx using Guid(ae636109ab9439e48a20e162260e702c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e8165d034ce8cd95aab63ceeca39d86') in 0.026867 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_riverSlope.fbx
+  artifactKey: Guid(c6c5ba2687444ab4eb70f1e0634da80c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_riverSlope.fbx using Guid(c6c5ba2687444ab4eb70f1e0634da80c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed1100e44e0d9974d5919ef014ae52a3') in 0.037741 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_riverSlopeLarge.fbx
+  artifactKey: Guid(3fbd7c4e188ef934dba48c2b67d4c73b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_riverSlopeLarge.fbx using Guid(3fbd7c4e188ef934dba48c2b67d4c73b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af07a76146065bcd187859a21b446907') in 0.038576 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/FBX format/enemy_ufoGreenWeapon.fbx
+  artifactKey: Guid(1b503bebe8aea5541a4ae38767914653) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/enemy_ufoGreenWeapon.fbx using Guid(1b503bebe8aea5541a4ae38767914653) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '299c28ea920e51532df1e3fac2fdab7b') in 0.046657 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Resources/Models/FBX format/tile_endRoundSpawn.fbx
+  artifactKey: Guid(8ec0c466379a0ac49ac476f6545be047) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_endRoundSpawn.fbx using Guid(8ec0c466379a0ac49ac476f6545be047) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42ba0c20f86f1e75a8e10a39bd91b784') in 0.041868 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_rock.fbx
+  artifactKey: Guid(7472daa269eddcd40a4f55e558f18200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_rock.fbx using Guid(7472daa269eddcd40a4f55e558f18200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d1538420a8c2a63f305d32f342a14e9') in 0.035054 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Models/FBX format/snow_woodStructure_high.fbx
+  artifactKey: Guid(f36489ff9db013344b00ba0b58ceb18a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_woodStructure_high.fbx using Guid(f36489ff9db013344b00ba0b58ceb18a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bae62fc06a1d5a585496bc4e3c302604') in 0.031638 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Models/FBX format/detail_dirt.fbx
+  artifactKey: Guid(90f23162e11f22042bcabe2256b4a7a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/detail_dirt.fbx using Guid(90f23162e11f22042bcabe2256b4a7a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfab6e4a94e9b16c6bfb813aba1dd09f') in 0.022162 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/Models/FBX format/tile_bump.fbx
+  artifactKey: Guid(3bf068613ba70d3429c794ebbc43a069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_bump.fbx using Guid(3bf068613ba70d3429c794ebbc43a069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9fc01e5d7a5cf2b8a37ee68c30dff16') in 0.030097 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Models/FBX format/snow_detail_dirtLarge.fbx
+  artifactKey: Guid(e81faf086018e2349ad5684258277d95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_detail_dirtLarge.fbx using Guid(e81faf086018e2349ad5684258277d95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '340386423233ee050be0ae1468092272') in 0.029869 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_endSpawn.fbx
+  artifactKey: Guid(c872fa810fc72d047a6a0cd4a03745ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_endSpawn.fbx using Guid(c872fa810fc72d047a6a0cd4a03745ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56e80cad29861e9ecf5b74697927424d') in 0.046131 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_split.fbx
+  artifactKey: Guid(8793d64d44d022342809aba2e7bd0292) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_split.fbx using Guid(8793d64d44d022342809aba2e7bd0292) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2118af3f479d71e220eeba3d6eef527d') in 0.037501 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_slope.fbx
+  artifactKey: Guid(0a355a10d93c73548a334bc7d86e4643) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_slope.fbx using Guid(0a355a10d93c73548a334bc7d86e4643) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '664f7a3fef6140016495e19bd728859d') in 0.031317 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_wideCorner.fbx
+  artifactKey: Guid(77663c225879ccc428f396ec44d4b3fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_wideCorner.fbx using Guid(77663c225879ccc428f396ec44d4b3fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adfe90f3f39186b88d02d5885c903245') in 0.035484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/FBX format/tile_endRound.fbx
+  artifactKey: Guid(e7cb92c85b8371f42a1b4a67ac454e03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/tile_endRound.fbx using Guid(e7cb92c85b8371f42a1b4a67ac454e03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9effd417dd9723278538a2850c7ec60f') in 0.032688 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Models/FBX format/snow_woodStructure.fbx
+  artifactKey: Guid(4b8a66a6e5c79f44782ff0903869b5a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_woodStructure.fbx using Guid(4b8a66a6e5c79f44782ff0903869b5a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fad4d8335df2cf8a150031866735d70e') in 0.032681 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/FBX format/snow_tile_riverBridge.fbx
+  artifactKey: Guid(4c923e14dd870d2478ef92054db514a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/FBX format/snow_tile_riverBridge.fbx using Guid(4c923e14dd870d2478ef92054db514a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40a01b06dac3f1356e1ebe2343c01298') in 0.036008 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 741.598078 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_crystal_N.png
+  artifactKey: Guid(c9dfe4f92c51ab84ba263aacf0213e99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_crystal_N.png using Guid(c9dfe4f92c51ab84ba263aacf0213e99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e32eca3d2f7d0211182dc5f56f37af2') in 0.041918 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_W.png
+  artifactKey: Guid(5fb396cfc31fdd040938af741f8a0dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_W.png using Guid(5fb396cfc31fdd040938af741f8a0dd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e078a383a258063bab4870b38be06427') in 0.037542 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_woodStructure_high_E.png
+  artifactKey: Guid(aa8bb83f6dfabfb498e936a57109f48a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_woodStructure_high_E.png using Guid(aa8bb83f6dfabfb498e936a57109f48a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ef7293e9e280ae33fee545ff5623f80') in 0.041833 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000092 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_woodStructure_high_N.png
+  artifactKey: Guid(97936658c93881f45ada39108c4c7926) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_woodStructure_high_N.png using Guid(97936658c93881f45ada39108c4c7926) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcaad6f46e914626354a846b8178ff6a') in 0.092096 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_E.png
+  artifactKey: Guid(23ee01ee4637f9547ad3149aaf241cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_E.png using Guid(23ee01ee4637f9547ad3149aaf241cec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bef260d58b243cb6662efa93a97fb75') in 0.026541 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_treeLarge_E.png
+  artifactKey: Guid(e2836b65be75ba5419ff99841a268013) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_treeLarge_E.png using Guid(e2836b65be75ba5419ff99841a268013) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2caaad4f01e73245e9382c72b678663') in 0.026510 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_dirt_W.png
+  artifactKey: Guid(3cfd76d82ab2b4044a012815edeee345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_dirt_W.png using Guid(3cfd76d82ab2b4044a012815edeee345) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c6745e539c72dff2c29c12d7032870b') in 0.027752 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirt_W.png
+  artifactKey: Guid(7025cce52a0a6214eb4af7b8be284ce0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirt_W.png using Guid(7025cce52a0a6214eb4af7b8be284ce0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '759ec65a85111a519c246b7e9a580109') in 0.029787 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_crystalLarge_E.png
+  artifactKey: Guid(03ab2138472c8c244be8a59d38d4f373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_crystalLarge_E.png using Guid(03ab2138472c8c244be8a59d38d4f373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f59d7f78763c06d33409d8c7abfaf0b') in 0.030155 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Detail/woodStructure_E.png
+  artifactKey: Guid(c8bdc154a8c2581438a15bbedfbd28fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/woodStructure_E.png using Guid(c8bdc154a8c2581438a15bbedfbd28fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c257aadd1612840efacd72e250f3c3f') in 0.027685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirt_E.png
+  artifactKey: Guid(ad7dd55b102c0d5439c63826c078615d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirt_E.png using Guid(ad7dd55b102c0d5439c63826c078615d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec8ef6f1a03ab223621af5bc853fc2f4') in 0.035830 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_crystalLarge_W.png
+  artifactKey: Guid(a0a2699ae2d654f49b2e2b5b4c4f2f2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_crystalLarge_W.png using Guid(a0a2699ae2d654f49b2e2b5b4c4f2f2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cf94418de5725139c1db2c7278c36e5') in 0.030176 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_W.png
+  artifactKey: Guid(956d1401934a8b24db4ee6510acc0910) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_W.png using Guid(956d1401934a8b24db4ee6510acc0910) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba86f5fd59e557062cd26df07c1e6a07') in 0.026193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_rocks_N.png
+  artifactKey: Guid(33e9e251011ef174fbff17e0eea7c6db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_rocks_N.png using Guid(33e9e251011ef174fbff17e0eea7c6db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fde8161d06977f5f0140b064cdee5f04') in 0.026133 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_tree_N.png
+  artifactKey: Guid(ab1fda1c004e0704fb32f198c4358aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_tree_N.png using Guid(ab1fda1c004e0704fb32f198c4358aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8725e4eb020f33cde9d93470f98f08d8') in 0.026600 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_dirtLarge_S.png
+  artifactKey: Guid(0e3f7090a1c438d4db2d6028cb3cf8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_dirtLarge_S.png using Guid(0e3f7090a1c438d4db2d6028cb3cf8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bbb080148339e1db4435dcec5506865') in 0.026833 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Isometric/Detail/woodStructure_high_W.png
+  artifactKey: Guid(fc0df0c29d2ee3243b430e25d13df1e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/woodStructure_high_W.png using Guid(fc0df0c29d2ee3243b430e25d13df1e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fe2f041ce9a1f43da373eaa696903a0') in 0.027882 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_rocksLarge_S.png
+  artifactKey: Guid(287e1d0bd8a54f349a982c5bbfa30809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_rocksLarge_S.png using Guid(287e1d0bd8a54f349a982c5bbfa30809) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db0f6cd8a3a3c983fcba4f91e5fb3e5e') in 0.037609 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_rocksLarge_E.png
+  artifactKey: Guid(280a49d8971ec5547885daac0016e21e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_rocksLarge_E.png using Guid(280a49d8971ec5547885daac0016e21e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a1be8fa31405c48cc4de3878a8c72ae') in 0.052810 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_rocksLarge_N.png
+  artifactKey: Guid(325344818defde843b0faab30808d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_rocksLarge_N.png using Guid(325344818defde843b0faab30808d881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9076e1085b42d2f37cba50ea216751b3') in 0.029645 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_treeLarge_S.png
+  artifactKey: Guid(6431cedb2795d0143a5a53f89e211d87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_treeLarge_S.png using Guid(6431cedb2795d0143a5a53f89e211d87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd63ccdc70b59ddf5ef67c8c4ddb9cfc') in 0.029832 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_crystal_W.png
+  artifactKey: Guid(b539012068a72ea4698bf5b0cb28e260) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_crystal_W.png using Guid(b539012068a72ea4698bf5b0cb28e260) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ebd74fff2a83471920ef9061699241') in 0.030265 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_tree_E.png
+  artifactKey: Guid(818ce447aa76cd84291d950d38114330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_tree_E.png using Guid(818ce447aa76cd84291d950d38114330) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3ece398e11649452062de08343d7039') in 0.024317 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_S.png
+  artifactKey: Guid(26a6af562e2f62d4cbe3cc5f88e9b63d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_S.png using Guid(26a6af562e2f62d4cbe3cc5f88e9b63d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'deecfe263536d4a5e8b96a9ba9467fdf') in 0.041914 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Detail/woodStructure_N.png
+  artifactKey: Guid(8115cb01bf1ce024eaf8c6f8bc655b90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/woodStructure_N.png using Guid(8115cb01bf1ce024eaf8c6f8bc655b90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '952dc4937588def07595376cba7f966e') in 0.032401 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_woodStructure_high_W.png
+  artifactKey: Guid(c7b11630ce7d19346afc4c785cbf6b00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_woodStructure_high_W.png using Guid(c7b11630ce7d19346afc4c785cbf6b00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03c0de443e84e932aa089cb10abc6a8d') in 0.028622 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000068 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_N.png
+  artifactKey: Guid(9bccfc63ee2a13b45b1ffc944b89a6c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_N.png using Guid(9bccfc63ee2a13b45b1ffc944b89a6c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d55956cfbe0398cce0d87f8fda2ee0a') in 0.027308 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirt_S.png
+  artifactKey: Guid(1154c4330f388614d9ad879ad0b52dce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirt_S.png using Guid(1154c4330f388614d9ad879ad0b52dce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99cf5c630b6390a3686de93b1ea28f2f') in 0.027705 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_crystal_E.png
+  artifactKey: Guid(7dd36438c4f8fae4c9d8b2b64404575e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_crystal_E.png using Guid(7dd36438c4f8fae4c9d8b2b64404575e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62210cd6635086c1e643ca561438d8d1') in 0.028052 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Isometric/Detail/woodStructure_S.png
+  artifactKey: Guid(f844858c924c11e4a934e8f349e8ef40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/woodStructure_S.png using Guid(f844858c924c11e4a934e8f349e8ef40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec588c5545842d5797ddb3ce3fd44120') in 0.029032 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_tree_S.png
+  artifactKey: Guid(cc37bf5f370f0a34ca1167d4522b17d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_tree_S.png using Guid(cc37bf5f370f0a34ca1167d4522b17d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '789bfdf16be47ecc87f9f528a7edc842') in 0.032000 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_treeLarge_E.png
+  artifactKey: Guid(e81d9a30a7d01084594c21a7c50c5ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_treeLarge_E.png using Guid(e81d9a30a7d01084594c21a7c50c5ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc27e70014a475e3a2b891d40c9def20') in 0.024779 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_dirtLarge_E.png
+  artifactKey: Guid(2c858337bc9e97e4da672827dea48a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_dirtLarge_E.png using Guid(2c858337bc9e97e4da672827dea48a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cfa9c5fe31aed7e83bc88e8d0dfc9aa') in 0.030928 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_tree_N.png
+  artifactKey: Guid(a3d81d6944aab7440b943cf3b933aefa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_tree_N.png using Guid(a3d81d6944aab7440b943cf3b933aefa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00831e32eaf3f619ca7d281255ff0a33') in 0.027665 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_tree_S.png
+  artifactKey: Guid(ba236328d593dbe4c947a5a8106ee576) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_tree_S.png using Guid(ba236328d593dbe4c947a5a8106ee576) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebd0324a3f9a2eb1365c428581c4d2b1') in 0.027384 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_woodStructure_high_S.png
+  artifactKey: Guid(2af1597b15740f948a836557d7a0df47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_woodStructure_high_S.png using Guid(2af1597b15740f948a836557d7a0df47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '695a10abb9c7fb22623eba15a9115fc7') in 0.026231 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_S.png
+  artifactKey: Guid(07e55b2fa4196904586b5291fced8412) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_dirtLarge_S.png using Guid(07e55b2fa4196904586b5291fced8412) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03135e1789bc97e16024efdd48e90039') in 0.033100 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_woodStructure_S.png
+  artifactKey: Guid(c535f36098ddb73478f83e1ed46438f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_woodStructure_S.png using Guid(c535f36098ddb73478f83e1ed46438f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '467335ab08d5c680803c9234678d3033') in 0.028427 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/Resources/Isometric/Detail/detail_treeLarge_W.png
+  artifactKey: Guid(33056f61c1991ff4190ed5bd180d4829) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/detail_treeLarge_W.png using Guid(33056f61c1991ff4190ed5bd180d4829) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ddc32cba3ce4d54a6aee9fcf8376365') in 0.028731 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_E.png
+  artifactKey: Guid(700e83c9b3625a741b88f810808ae823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Detail/snow_detail_crystalLarge_E.png using Guid(700e83c9b3625a741b88f810808ae823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51b565cb184e257786a497e78741b4fa') in 0.030229 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

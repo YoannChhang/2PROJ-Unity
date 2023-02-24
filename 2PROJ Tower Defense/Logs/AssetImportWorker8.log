@@ -1,0 +1,572 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.19f1 (c9714fde33b6) revision 13201743'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 32557 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.19f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker8
+-projectPath
+C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+-logFile
+Logs/AssetImportWorker8.log
+-srvPort
+55964
+Successfully changed project path to: C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [11528] Host "[IP] 192.168.249.1 [Port] 0 [Flags] 2 [Guid] 4188654718 [EditorId] 4188654718 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [11528] Host "[IP] 192.168.249.1 [Port] 0 [Flags] 2 [Guid] 4188654718 [EditorId] 4188654718 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 141.33 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.19f1 (c9714fde33b6)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA Quadro T1000 (ID=0x1fb9)
+    Vendor:   NVIDIA
+    VRAM:     3962 MB
+    Driver:   26.21.14.4294
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56856
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.009078 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 146.94 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.964 seconds
+Domain Reload Profiling:
+	ReloadAssembly (964ms)
+		BeginReloadAssembly (102ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (710ms)
+			LoadAssemblies (99ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (157ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (45ms)
+			SetupLoadedEditorAssemblies (436ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (147ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (202ms)
+				ProcessInitializeOnLoadMethodAttributes (71ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.010881 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 124.16 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.434 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1435ms)
+		BeginReloadAssembly (141ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (1133ms)
+			LoadAssemblies (112ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (302ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (83ms)
+			SetupLoadedEditorAssemblies (576ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (124ms)
+				BeforeProcessingInitializeOnLoad (114ms)
+				ProcessInitializeOnLoadAttributes (274ms)
+				ProcessInitializeOnLoadMethodAttributes (46ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.87 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3736 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (228.9 KB). Loaded Objects now: 4190.
+Memory consumption went from 142.8 MB to 142.6 MB.
+Total: 3.870100 ms (FindLiveObjects: 0.436200 ms CreateObjectMapping: 0.434400 ms MarkObjects: 2.828800 ms  DeleteObjects: 0.169300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 242382.720285 seconds.
+  path: Assets/Resources/Side/detail_crystalLarge.png
+  artifactKey: Guid(9a8b862f4f28d6347929745d2a2857a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/detail_crystalLarge.png using Guid(9a8b862f4f28d6347929745d2a2857a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f50864c9a26c236a36fdc076231d782f') in 0.191928 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Side/enemy_ufoPurpleWeapon.png
+  artifactKey: Guid(8913be27564bade429f5ec51cac80f94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/enemy_ufoPurpleWeapon.png using Guid(8913be27564bade429f5ec51cac80f94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fc86c227aa33452c96adf2ddc58530d') in 0.027156 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Side/snow_woodStructure.png
+  artifactKey: Guid(305ca240b2622504498e8aea1c69375d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_woodStructure.png using Guid(305ca240b2622504498e8aea1c69375d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb87a8138ebab4dd02b09436678e0d30') in 0.025843 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Side/snow_tile_hill.png
+  artifactKey: Guid(267fcaf8140dff54783b5c2b38576c0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_hill.png using Guid(267fcaf8140dff54783b5c2b38576c0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e44dbea0729ee7e83c1f19fd32bd730') in 0.026344 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Side/snow_detail_dirt.png
+  artifactKey: Guid(ff21898afddf57d4ba10d889aef9ee32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_detail_dirt.png using Guid(ff21898afddf57d4ba10d889aef9ee32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a488dd4110bc64b0bb436d86fc2b9596') in 0.024059 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Side/snow_tile_bump.png
+  artifactKey: Guid(71fc9d4e7d7829242af7940da871e3cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_bump.png using Guid(71fc9d4e7d7829242af7940da871e3cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4553e9f5c11a34df52050c7513b42df9') in 0.031858 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Side/snow_tile_riverSlope.png
+  artifactKey: Guid(abe582e49af06db45b00f38f5b746a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_riverSlope.png using Guid(abe582e49af06db45b00f38f5b746a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2c73e5c6b57d5f4bea6da074d75324c') in 0.024847 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Side/enemy_ufoGreen.png
+  artifactKey: Guid(bab1bc4adf19547498f27ad8b8ae1379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/enemy_ufoGreen.png using Guid(bab1bc4adf19547498f27ad8b8ae1379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e189c57d1f5acefc4b2cd0218865ae2') in 0.026909 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Resources/Side/snow_tile_wideStraight.png
+  artifactKey: Guid(fbbdd0e14c39dce49805640382053034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_wideStraight.png using Guid(fbbdd0e14c39dce49805640382053034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '948a91e84b7fbf20c2b304dd96867a56') in 0.026886 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000081 seconds.
+  path: Assets/Resources/Side/snow_detail_crystal.png
+  artifactKey: Guid(5052229a46d0d2143b7c5f9eb0433168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_detail_crystal.png using Guid(5052229a46d0d2143b7c5f9eb0433168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '013cefb59c7f08c2f420308e806f4cd4') in 0.027126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Side/snow_tile_slope.png
+  artifactKey: Guid(ec203b162064e324bb20be2eb712ce56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_slope.png using Guid(ec203b162064e324bb20be2eb712ce56) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4fb7604bb5db2eecba660f4152b8bce') in 0.023154 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Side/tile_bump.png
+  artifactKey: Guid(28a919b8f534e5d46aa0c53764e3668e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/tile_bump.png using Guid(28a919b8f534e5d46aa0c53764e3668e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97efecf36bcda0896a26ab77f4ea1d54') in 0.024193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Side/snow_tile_straightHill.png
+  artifactKey: Guid(a29462f359720514cbe0a07aac61d7f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_straightHill.png using Guid(a29462f359720514cbe0a07aac61d7f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f884877e401d054ff5fa2f7253c3aba5') in 0.024413 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Side/detail_rocks.png
+  artifactKey: Guid(407ce86ae97e41c4ba8919c11468f067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/detail_rocks.png using Guid(407ce86ae97e41c4ba8919c11468f067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f51479aad1ed7c2e0ad3b07b75aded60') in 0.022454 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Side/tile_endSpawn.png
+  artifactKey: Guid(92212839928546d4f8be67de7b26db3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/tile_endSpawn.png using Guid(92212839928546d4f8be67de7b26db3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '705ef399c4c2e07b0546e34c363fc668') in 0.023386 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Side/snow_tile_straightHillLarge.png
+  artifactKey: Guid(4ee110f2ed61f0d4cba6464c7dbd4819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_straightHillLarge.png using Guid(4ee110f2ed61f0d4cba6464c7dbd4819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b188088957529a99ce8d0a4b538471a') in 0.024821 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Side/tile_crossing.png
+  artifactKey: Guid(76d9d4fb20c5e4f428a3d9d46b43aa2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/tile_crossing.png using Guid(76d9d4fb20c5e4f428a3d9d46b43aa2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e63fe8082e34f2566b7951e38a02b57') in 0.022840 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Resources/Side/snow_tile_end.png
+  artifactKey: Guid(38c5dd1613d371d489aa95d32e2028c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_end.png using Guid(38c5dd1613d371d489aa95d32e2028c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c02a67bd55d7af805433764a2420a39') in 0.024301 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Side/tile_end.png
+  artifactKey: Guid(21858e085b1bff64dbf575fbcb9feabc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/tile_end.png using Guid(21858e085b1bff64dbf575fbcb9feabc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ba8ffb979cbdb6babd6a50a1b7e6b84') in 0.023744 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/Side/snow_tile_riverSlopeLarge.png
+  artifactKey: Guid(2de3dc8b48d487c4ea9f9e3cfb1df201) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_riverSlopeLarge.png using Guid(2de3dc8b48d487c4ea9f9e3cfb1df201) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f414defeb74ac9a40d7e9ccbc3a51283') in 0.026622 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Side/snow_detail_crystalLarge.png
+  artifactKey: Guid(ab255c8ae1215e74db3e96cb2fd78b5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_detail_crystalLarge.png using Guid(ab255c8ae1215e74db3e96cb2fd78b5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8fd74ae53903356001ee72996f5ada16') in 0.025605 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Side/snow_tile_transition.png
+  artifactKey: Guid(de15419035eb35b4d90ef5614489063d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_transition.png using Guid(de15419035eb35b4d90ef5614489063d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b683d7c9ce6f640b9694064ae1d855ef') in 0.024896 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/Side/snow_detail_rocks.png
+  artifactKey: Guid(b1a9cbd4152795242814ccfa01cc638d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_detail_rocks.png using Guid(b1a9cbd4152795242814ccfa01cc638d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1307a55db910b478beb3de6a731ce58') in 0.025504 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Side/snow_tile_wideTransition.png
+  artifactKey: Guid(53efc617a4a100849b98cfd14f27a842) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_wideTransition.png using Guid(53efc617a4a100849b98cfd14f27a842) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd85eb2e9dbc46323899d92235ad3d1f0') in 0.024943 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Side/snow_tile_wideSplit.png
+  artifactKey: Guid(be6a13fff25601f439d690a5e007fa58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Side/snow_tile_wideSplit.png using Guid(be6a13fff25601f439d690a5e007fa58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a95bafd41132c2cfd3cd2164560a8c1') in 0.020869 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.282592 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_base_N.png
+  artifactKey: Guid(cc05279970f3d634986be396c20e8851) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_base_N.png using Guid(cc05279970f3d634986be396c20e8851) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17672a1199a6dbb30077c24b1afc23cb') in 0.040941 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_topA_S.png
+  artifactKey: Guid(b8efe44588115c045b5a0e3cad84c0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_topA_S.png using Guid(b8efe44588115c045b5a0e3cad84c0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef95268a9855cf2faa481d7341483c35') in 0.038198 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_topB_W.png
+  artifactKey: Guid(8e987a19e614a584d82daa3ce83b71fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_topB_W.png using Guid(8e987a19e614a584d82daa3ce83b71fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3acb16ba3159109da4faa75f3a0930a0') in 0.048144 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleA_N.png
+  artifactKey: Guid(8ba48524da843c74bbc45a545ba6ff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleA_N.png using Guid(8ba48524da843c74bbc45a545ba6ff9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf489c39ae3c89cd5551622b5dbf7fe4') in 0.035825 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleA_W.png
+  artifactKey: Guid(f47720988a1d4754c969971ccd15f6eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleA_W.png using Guid(f47720988a1d4754c969971ccd15f6eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9862db1ff269368ce1254b737966868e') in 0.030085 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Resources/Isometric/Tower/towerSquare_bottomA_E.png
+  artifactKey: Guid(31992e0a40650e54485153b669455d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerSquare_bottomA_E.png using Guid(31992e0a40650e54485153b669455d76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecff459dfb1db81efa05dd6efad5cd2a') in 0.033235 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_roofC_N.png
+  artifactKey: Guid(c5847098c733ca54a9adda193dd0aa79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_roofC_N.png using Guid(c5847098c733ca54a9adda193dd0aa79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5cd6097de2eb5e3cccc8bb0bcea9d8f') in 0.035084 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_topC_W.png
+  artifactKey: Guid(af17d6215791b03439a5fe7a5869194e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_topC_W.png using Guid(af17d6215791b03439a5fe7a5869194e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bd8e49a4cb3c3fac16160c2560ac2be') in 0.035513 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_roofB_S.png
+  artifactKey: Guid(29788bb71d727574990103aff471aed4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_roofB_S.png using Guid(29788bb71d727574990103aff471aed4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29acb926e9e3ee6f4df2e0ee5a6edf10') in 0.034517 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleC_E.png
+  artifactKey: Guid(4f5c56b9e83311e498b5e631b7b2a72a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleC_E.png using Guid(4f5c56b9e83311e498b5e631b7b2a72a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3eb79ac86185c26095eb9f6cc5185a4') in 0.038263 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleD_W.png
+  artifactKey: Guid(187ffdb5d7f339844ace296f12787a8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleD_W.png using Guid(187ffdb5d7f339844ace296f12787a8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd15381ca934a15e43b33279b222fe424') in 0.035954 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_roofC_W.png
+  artifactKey: Guid(f05c94484cd171e45a714ace7f8c0f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_roofC_W.png using Guid(f05c94484cd171e45a714ace7f8c0f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecf8deebbd560db6dfaa7c3f5b1ec217') in 0.031056 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleF_N.png
+  artifactKey: Guid(0fb1baa3859ee3a419acb660318361e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleF_N.png using Guid(0fb1baa3859ee3a419acb660318361e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31faf00d0042feaa13e69b4b6173c36a') in 0.032998 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_bottomC_W.png
+  artifactKey: Guid(b8d569e08a98fd342a372218cb2fa511) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_bottomC_W.png using Guid(b8d569e08a98fd342a372218cb2fa511) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01d9ea9c01ced24f6304878d65c09775') in 0.046095 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleB_E.png
+  artifactKey: Guid(d8feae370d5319445b63c15c73e40f97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleB_E.png using Guid(d8feae370d5319445b63c15c73e40f97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd022e0fc607aa883f108fc0fb22a6f5b') in 0.036990 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_middleC_S.png
+  artifactKey: Guid(b7aabd1a05ac3b04d805b16d843c0381) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_middleC_S.png using Guid(b7aabd1a05ac3b04d805b16d843c0381) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7147d044cce0aaadc84be464a0422254') in 0.047686 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_middleA_E.png
+  artifactKey: Guid(309cd0a3ad6338e4e8a25bf2115eb716) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_middleA_E.png using Guid(309cd0a3ad6338e4e8a25bf2115eb716) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3035d0f7981782b9f982ae71ed18e7f7') in 0.041700 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_topA_E.png
+  artifactKey: Guid(365618f6212b3ef41bdd80adcb2d3367) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_topA_E.png using Guid(365618f6212b3ef41bdd80adcb2d3367) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a5905b0b7f2d421289e585cc15b5e54') in 0.033354 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_roofB_W.png
+  artifactKey: Guid(872d18ebb70c11a4f8fbf916dfb117aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_roofB_W.png using Guid(872d18ebb70c11a4f8fbf916dfb117aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9ead54ef418c0abaae5b44e116d74c5') in 0.034711 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_topC_N.png
+  artifactKey: Guid(4c46800b21ed8474da128ea26e917e0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_topC_N.png using Guid(4c46800b21ed8474da128ea26e917e0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9b162cef7a46818e0091f4df457360b') in 0.034484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_bottomA_S.png
+  artifactKey: Guid(27afd7b40af774f42adce7c3c72c95b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_bottomA_S.png using Guid(27afd7b40af774f42adce7c3c72c95b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df2f0e282c54f1b258cb1c701fe8ae3f') in 0.048002 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleD_E.png
+  artifactKey: Guid(701701f1fb871cc489ea456652f78ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleD_E.png using Guid(701701f1fb871cc489ea456652f78ffa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '341f02cbf6d6f6f56caf8afc1df07609') in 0.037435 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_bottomA_E.png
+  artifactKey: Guid(75699269dbdde2a44aaf5ae4bdb429f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_bottomA_E.png using Guid(75699269dbdde2a44aaf5ae4bdb429f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '209c4337422ae9a0341b4db17112557d') in 0.038216 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_bottomC_N.png
+  artifactKey: Guid(e01cc4c3b8f0bf84a83ccbd999303fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_bottomC_N.png using Guid(e01cc4c3b8f0bf84a83ccbd999303fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '124840edb84997dc64728088c24e678a') in 0.042079 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_middleA_S.png
+  artifactKey: Guid(a34afd7be723ce94fb2b05e9d77a3712) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_middleA_S.png using Guid(a34afd7be723ce94fb2b05e9d77a3712) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cb936c6ce7fb4edf74d4e038190d54e') in 0.041072 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_sampleD_N.png
+  artifactKey: Guid(cb15a1871cfa9854c98c1be70f28f40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_sampleD_N.png using Guid(cb15a1871cfa9854c98c1be70f28f40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6cdfb702836f37b1536c5c4ee7beedf') in 0.034555 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Isometric/Tower/towerRound_bottomA_N.png
+  artifactKey: Guid(39dd203426f7d6840b77024cbfd4bd87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Isometric/Tower/towerRound_bottomA_N.png using Guid(39dd203426f7d6840b77024cbfd4bd87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e55f9f4ea2cef91d0f366212e558dd4') in 0.034126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 66.145927 seconds.
+  path: Assets/Landscapes/Sprites/tile_cornerLarge_E.asset
+  artifactKey: Guid(21e930b7574fda24e81c40d8683ff0d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Landscapes/Sprites/tile_cornerLarge_E.asset using Guid(21e930b7574fda24e81c40d8683ff0d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22968b78ef3535e6b81ae480cab6165b') in 0.019207 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Landscapes/Sprites/tile_crossing_N.asset
+  artifactKey: Guid(19209271f83fa2b45bee7a057d2c1a4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Landscapes/Sprites/tile_crossing_N.asset using Guid(19209271f83fa2b45bee7a057d2c1a4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42ff72d0982b45b155db253c6d510e62') in 0.014660 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 33.877656 seconds.
+  path: Assets/Resources/Models/OBJ format/detail_crystalLarge.obj
+  artifactKey: Guid(721a80171543f374ba3f00dc1547c801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/detail_crystalLarge.obj using Guid(721a80171543f374ba3f00dc1547c801) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14ebf490fa045b0ba8ef3f747f8a448d') in 0.118747 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/OBJ format/enemy_ufoPurpleWeapon.obj
+  artifactKey: Guid(1ab8e7d03ab3b8a4189245fa38f376ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/enemy_ufoPurpleWeapon.obj using Guid(1ab8e7d03ab3b8a4189245fa38f376ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69f02d4c0b8326da343acbc64d2b5619') in 0.055206 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Models/OBJ format/detail_dirtLarge.obj
+  artifactKey: Guid(37df6c52e23a71a45b54993ac139703f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/detail_dirtLarge.obj using Guid(37df6c52e23a71a45b54993ac139703f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3d1e7856411f8b2c751f1b6a5274faf') in 0.040232 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_riverCorner.obj
+  artifactKey: Guid(c962d946ba24887459e54ec5f2e0aaf2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_riverCorner.obj using Guid(c962d946ba24887459e54ec5f2e0aaf2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '320a974c22ea5ac727203c69e7427e02') in 0.044907 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_crystal.obj
+  artifactKey: Guid(0b7af65ebcce6b241898b434dc5ae742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_crystal.obj using Guid(0b7af65ebcce6b241898b434dc5ae742) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abaf863651dfa1686b3a1f169c56855c') in 0.069320 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_detail_rocksLarge.obj
+  artifactKey: Guid(acf423dffffd8e540b9954c0849a544e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_detail_rocksLarge.obj using Guid(acf423dffffd8e540b9954c0849a544e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '253a3970722f79b946fd3f35d17a0ae0') in 0.039332 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_endSpawn.obj
+  artifactKey: Guid(411cfcb44ae22c948b22fdf90f86a10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_endSpawn.obj using Guid(411cfcb44ae22c948b22fdf90f86a10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee80dd5e293548415a64d1c4814fa155') in 0.062416 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/detail_rocksLarge.obj
+  artifactKey: Guid(150e86999aa894e4dbc87e5819e63e0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/detail_rocksLarge.obj using Guid(150e86999aa894e4dbc87e5819e63e0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '267d2309b8dc383e3e89ca944e3fa419') in 0.033776 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/Resources/Models/OBJ format/enemy_ufoRed.obj
+  artifactKey: Guid(470df7a74dc093a46911db3a0cb7c3b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/enemy_ufoRed.obj using Guid(470df7a74dc093a46911db3a0cb7c3b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55ed68b32c9d9e736c356b2f403ab792') in 0.054359 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_detail_dirt.obj
+  artifactKey: Guid(5b6826da73da0c447886ed976b8fd056) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_detail_dirt.obj using Guid(5b6826da73da0c447886ed976b8fd056) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5b8308801be2896ebf55330a7783b4e') in 0.042038 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_crossing.obj
+  artifactKey: Guid(6662fa5eea93e1e4aaac6c7951b70aa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_crossing.obj using Guid(6662fa5eea93e1e4aaac6c7951b70aa7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39cbf919675e5540f6fee43aecdf7c72') in 0.050647 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_detail_crystalLarge.obj
+  artifactKey: Guid(504d284615f7b574090601f47471517e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_detail_crystalLarge.obj using Guid(504d284615f7b574090601f47471517e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f28757c52d7484b3b41d8f620060e04') in 0.057043 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Models/OBJ format/detail_rocks.obj
+  artifactKey: Guid(426dcb36133db0c468d34323455052de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/detail_rocks.obj using Guid(426dcb36133db0c468d34323455052de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22f1641a1698ef89283b51c983f4e01d') in 0.038359 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

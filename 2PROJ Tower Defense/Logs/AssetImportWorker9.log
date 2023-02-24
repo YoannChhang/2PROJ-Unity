@@ -1,0 +1,556 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.19f1 (c9714fde33b6) revision 13201743'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 32557 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.19f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker9
+-projectPath
+C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+-logFile
+Logs/AssetImportWorker9.log
+-srvPort
+55964
+Successfully changed project path to: C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [14240] Host "[IP] 192.168.249.1 [Port] 0 [Flags] 2 [Guid] 1020360593 [EditorId] 1020360593 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [14240] Host "[IP] 192.168.249.1 [Port] 0 [Flags] 2 [Guid] 1020360593 [EditorId] 1020360593 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 129.48 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.19f1 (c9714fde33b6)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/yoann/OneDrive - SUPINFO/YEAR2/2PROJ-Unity/2PROJ Tower Defense/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA Quadro T1000 (ID=0x1fb9)
+    Vendor:   NVIDIA
+    VRAM:     3962 MB
+    Driver:   26.21.14.4294
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56568
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008445 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 127.11 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.842 seconds
+Domain Reload Profiling:
+	ReloadAssembly (843ms)
+		BeginReloadAssembly (102ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (603ms)
+			LoadAssemblies (99ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (133ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (378ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (127ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (179ms)
+				ProcessInitializeOnLoadMethodAttributes (59ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.010796 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\yoann\OneDrive - SUPINFO\YEAR2\2PROJ-Unity\2PROJ Tower Defense\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 113.45 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.304 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1305ms)
+		BeginReloadAssembly (139ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (24ms)
+		EndReloadAssembly (1024ms)
+			LoadAssemblies (106ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (273ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (68ms)
+			SetupLoadedEditorAssemblies (529ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (114ms)
+				BeforeProcessingInitializeOnLoad (108ms)
+				ProcessInitializeOnLoadAttributes (247ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.88 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3736 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 41 unused Assets / (228.9 KB). Loaded Objects now: 4190.
+Memory consumption went from 142.8 MB to 142.6 MB.
+Total: 3.465600 ms (FindLiveObjects: 0.340300 ms CreateObjectMapping: 0.342800 ms MarkObjects: 2.631800 ms  DeleteObjects: 0.149900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 242498.335385 seconds.
+  path: Assets/Resources/Models/OBJ format/detail_dirt.obj
+  artifactKey: Guid(de321916dc0154a4cb49bbd6f0e2a9bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/detail_dirt.obj using Guid(de321916dc0154a4cb49bbd6f0e2a9bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5db64ed7592af9b0a87bcf9a6f61a657') in 0.218590 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_endRoundSpawn.obj
+  artifactKey: Guid(4efa20305bf07ff4297f01f4c27147ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_endRoundSpawn.obj using Guid(4efa20305bf07ff4297f01f4c27147ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b85a7c1a0b89dd5d9d021fc4fc6324b8') in 0.059948 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_cornerInner.obj
+  artifactKey: Guid(5fbb879cb98c2084d8aae6b5ed94b37a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_cornerInner.obj using Guid(5fbb879cb98c2084d8aae6b5ed94b37a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66517fe3cc1ad1d9eedc87c87b3e7171') in 0.039641 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_cornerLarge.obj
+  artifactKey: Guid(d8cd23eeb8ba86d4880d2e3751894b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_cornerLarge.obj using Guid(d8cd23eeb8ba86d4880d2e3751894b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08bf2ffa02ab98b466e6ae0cf32b131b') in 0.050753 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_cornerOuter.obj
+  artifactKey: Guid(df98d3d398679b9438489b283c8b2b42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_cornerOuter.obj using Guid(df98d3d398679b9438489b283c8b2b42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f388436909ce5494f14b7c696d7b9b98') in 0.036675 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_detail_rocks.obj
+  artifactKey: Guid(49eefc725a4bd9a4596c928030c21d64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_detail_rocks.obj using Guid(49eefc725a4bd9a4596c928030c21d64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7aae5813ddcde12d7ffe1e493fe805c1') in 0.040727 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_bump.obj
+  artifactKey: Guid(e0808bd5f4ef2da4faa078d43c57fda0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_bump.obj using Guid(e0808bd5f4ef2da4faa078d43c57fda0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77c96431ad55caaad4343f14d2b5ba87') in 0.053089 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000065 seconds.
+  path: Assets/Resources/Models/OBJ format/enemy_ufoRedWeapon.obj
+  artifactKey: Guid(6e315af6b255518499dbc650cb25b595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/enemy_ufoRedWeapon.obj using Guid(6e315af6b255518499dbc650cb25b595) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d0631da67d0348f9b693496512e058a') in 0.048931 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_endRound.obj
+  artifactKey: Guid(1cbbb084036dfb44486e7e1d5209dc73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_endRound.obj using Guid(1cbbb084036dfb44486e7e1d5209dc73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db6e12e7c2e5d4cfb923182cfec86967') in 0.048684 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_cornerSquare.obj
+  artifactKey: Guid(0ad517a814d8ea0428ec41246bc0d06a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_cornerSquare.obj using Guid(0ad517a814d8ea0428ec41246bc0d06a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40759876359345f388e25949914b0b4e') in 0.053385 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile.obj
+  artifactKey: Guid(eb8f251ffc91b4d428c9db9502568f78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile.obj using Guid(eb8f251ffc91b4d428c9db9502568f78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dec109bc7e164689b13bd1c1e5e7893') in 0.036390 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Models/OBJ format/enemy_ufoGreen.obj
+  artifactKey: Guid(b461e3ec764d04e419e507bd1f0dbb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/enemy_ufoGreen.obj using Guid(b461e3ec764d04e419e507bd1f0dbb35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8f072dfde7249bb95debecdad5cf572') in 0.045182 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3423.336351 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_riverSlope.obj
+  artifactKey: Guid(ba3b4d1ed6c33d64b9ae40a8ba3561be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_riverSlope.obj using Guid(ba3b4d1ed6c33d64b9ae40a8ba3561be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f803d8f4dd77523b3a569e1686cc93f') in 0.084049 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_cornerSquare.obj
+  artifactKey: Guid(fa9540a4686ffaa4d8a8bbd2a51ce93a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_cornerSquare.obj using Guid(fa9540a4686ffaa4d8a8bbd2a51ce93a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04129c76b41e5631de5be826d4053a0f') in 0.203401 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Resources/Models/OBJ format/woodStructure.obj
+  artifactKey: Guid(9da01869354f5d94abb8de442ee0ebeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/woodStructure.obj using Guid(9da01869354f5d94abb8de442ee0ebeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '379ed6d7d34e89b1cd0516293277efda') in 0.041667 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_topB.obj
+  artifactKey: Guid(8779d47479c1d9e4fbba6b01dc9bbef4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_topB.obj using Guid(8779d47479c1d9e4fbba6b01dc9bbef4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd46d2c0324d57f305d99969208c965c8') in 0.046310 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_straightHillLarge.obj
+  artifactKey: Guid(7a7ee9df630228249bbc68ed6bfb1ccf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_straightHillLarge.obj using Guid(7a7ee9df630228249bbc68ed6bfb1ccf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7935cc7bf2b36f6823ece192aa9bf06') in 0.057707 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_treeDouble.obj
+  artifactKey: Guid(bc8ce642080c92644bd455103fa960c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_treeDouble.obj using Guid(bc8ce642080c92644bd455103fa960c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dada1eb9cb90abf886e4000f4e7a8a0') in 0.065579 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_riverSlopeLarge.obj
+  artifactKey: Guid(9c532a839d07b3e4d85bdbf2be4f3ae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_riverSlopeLarge.obj using Guid(9c532a839d07b3e4d85bdbf2be4f3ae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd21edccef5ba017ae916acd0732e3bec') in 0.048806 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_sampleD.obj
+  artifactKey: Guid(93f478cf60501784b8f1d1eea8efe193) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_sampleD.obj using Guid(93f478cf60501784b8f1d1eea8efe193) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be35c949755ab463e59745a3cd6cfb6a') in 0.067933 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_bottomB.obj
+  artifactKey: Guid(e07b53b26c96efe4981663fb239d911b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_bottomB.obj using Guid(e07b53b26c96efe4981663fb239d911b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb6358d646fbaaa7cb5f169a38036b5f') in 0.038609 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_roofA.obj
+  artifactKey: Guid(4b710301e443b894e85766b5d6d07710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_roofA.obj using Guid(4b710301e443b894e85766b5d6d07710) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cae3eb0a787f661142a7695adfacfad') in 0.042377 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_roofB.obj
+  artifactKey: Guid(94616b09cd5ddde4d8b04f9029188678) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_roofB.obj using Guid(94616b09cd5ddde4d8b04f9029188678) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '370f43bb4f81a2de1c1f0ef5e0d19e70') in 0.041192 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_bump.obj
+  artifactKey: Guid(bc0466b1c614a254390e0891e9ec4a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_bump.obj using Guid(bc0466b1c614a254390e0891e9ec4a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c65fe473b5478421982275510bf4d58') in 0.037486 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Models/OBJ format/woodStructure_high.obj
+  artifactKey: Guid(10bdf5999fe8cfe4ea9a2d5d3fd0800c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/woodStructure_high.obj using Guid(10bdf5999fe8cfe4ea9a2d5d3fd0800c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01c4eaa1a238379bae54dbb8786a9b27') in 0.036194 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_straightHillLarge.obj
+  artifactKey: Guid(cde23e94d7ecb9c43b38bc7bef699130) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_straightHillLarge.obj using Guid(cde23e94d7ecb9c43b38bc7bef699130) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9973065c378a56a63b55cf77346a27c8') in 0.038739 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_woodStructure_high.obj
+  artifactKey: Guid(9d8ceb0933da90748b2668cf53442f15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_woodStructure_high.obj using Guid(9d8ceb0933da90748b2668cf53442f15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '548edb18e5bf4920f30e62c619d7a0bc') in 0.039931 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_cornerInner.obj
+  artifactKey: Guid(98e6832642933794f93d0c8919d2c6a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_cornerInner.obj using Guid(98e6832642933794f93d0c8919d2c6a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '691a86c53c186033e4dacb7b0212c098') in 0.039297 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_spawn.obj
+  artifactKey: Guid(a8576c9ddf94c1f41b2976b4a7dd427a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_spawn.obj using Guid(a8576c9ddf94c1f41b2976b4a7dd427a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3db1d84f917cd78eba2108cb47fb3e9a') in 0.057755 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_slope.obj
+  artifactKey: Guid(1261aeb8a6df6504a86b7e427df72213) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_slope.obj using Guid(1261aeb8a6df6504a86b7e427df72213) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68185b8bda1c408f2aa17043e33304b7') in 0.038237 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_wideStraight.obj
+  artifactKey: Guid(20351e44a6e27b0498ea8c30ab56594a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_wideStraight.obj using Guid(20351e44a6e27b0498ea8c30ab56594a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0a1d18d4a91f7993138d697da348aa1') in 0.046672 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_sampleE.obj
+  artifactKey: Guid(12f47381b67ec074dbd5fcb888c332d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_sampleE.obj using Guid(12f47381b67ec074dbd5fcb888c332d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90f77d271efae706b45ac4d59323b2d8') in 0.044534 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_sampleE.obj
+  artifactKey: Guid(de48e47a57b3a7644960791aecf83976) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_sampleE.obj using Guid(de48e47a57b3a7644960791aecf83976) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb80b5c637a5f754835ab5b0e11a1f97') in 0.042416 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_sampleC.obj
+  artifactKey: Guid(59915023ed9ed364fbebd9703d567a99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_sampleC.obj using Guid(59915023ed9ed364fbebd9703d567a99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dddb950b49e7e9e227d8916987f9e9e4') in 0.043939 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_sampleC.obj
+  artifactKey: Guid(fb73a1462d5aa93419f8570710c0723a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_sampleC.obj using Guid(fb73a1462d5aa93419f8570710c0723a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ce81f987f300502420f6b389f20b056') in 0.043434 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_bottomC.obj
+  artifactKey: Guid(360f2bd56544c124784b1b587e86d79a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_bottomC.obj using Guid(360f2bd56544c124784b1b587e86d79a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5d434156cb746a2072a272feaeb6c72') in 0.035976 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_crossing.obj
+  artifactKey: Guid(bd4818cca579f414e8737486fd13ad87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_crossing.obj using Guid(bd4818cca579f414e8737486fd13ad87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cea9a9aefe8f5937e97be288632f5d0b') in 0.040522 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_roofC.obj
+  artifactKey: Guid(37d177694f3d95d4b87f8691d3481515) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_roofC.obj using Guid(37d177694f3d95d4b87f8691d3481515) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ad3ab5dad4009c6aa35692c4217dcb0') in 0.041360 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_sampleD.obj
+  artifactKey: Guid(92280423274c33b4286d26868c4e96f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_sampleD.obj using Guid(92280423274c33b4286d26868c4e96f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f36ca80ec9ac7ac37344d59760f3517') in 0.043285 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_topC.obj
+  artifactKey: Guid(4cfeef4f0ccf45d4ba2ad6ca65146289) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_topC.obj using Guid(4cfeef4f0ccf45d4ba2ad6ca65146289) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b21ee131c085160a54cb870f244c503') in 0.044909 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_bottomC.obj
+  artifactKey: Guid(f7e5a2a924787894fad77f8c48cfffcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_bottomC.obj using Guid(f7e5a2a924787894fad77f8c48cfffcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09efb8cdcf9f903bfa2c8e3653879226') in 0.039057 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/Resources/Models/OBJ format/weapon_catapult.obj
+  artifactKey: Guid(52f95d183edaf874195a7ef74a4fd739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/weapon_catapult.obj using Guid(52f95d183edaf874195a7ef74a4fd739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '253c81b5e8552be16a748e31748fe76b') in 0.050209 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_split.obj
+  artifactKey: Guid(b8af6ef8e15d2eb4881eec144f265229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_split.obj using Guid(b8af6ef8e15d2eb4881eec144f265229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6065d03f4853d28ac414d42638b0771') in 0.046463 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_middleA.obj
+  artifactKey: Guid(95d2837e0d3a21143afa4e55bf8f093e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_middleA.obj using Guid(95d2837e0d3a21143afa4e55bf8f093e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a9bc1bb0edcf7ee08722f3ae2b1b3a8') in 0.038758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_middleB.obj
+  artifactKey: Guid(f1d0303be9f115c499e5db226051accb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_middleB.obj using Guid(f1d0303be9f115c499e5db226051accb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b2698ddea83e05a02e9d6f0fef3a786') in 0.043682 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_middleC.obj
+  artifactKey: Guid(131920bec1399b04584bd31ca0a10e3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_middleC.obj using Guid(131920bec1399b04584bd31ca0a10e3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc910980d471db9bda4e66308fb4730b') in 0.040870 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_spawn.obj
+  artifactKey: Guid(305a2556e16e0a3458c832ba1bc988bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_spawn.obj using Guid(305a2556e16e0a3458c832ba1bc988bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f47b37831bfc0ef8a1265d9981aeca5') in 0.060617 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_endSpawn.obj
+  artifactKey: Guid(93035a82abf10474bb4f4f8d619c7956) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_endSpawn.obj using Guid(93035a82abf10474bb4f4f8d619c7956) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f133317c344ee585bac5683dac41f2d') in 0.055586 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_sampleA.obj
+  artifactKey: Guid(e7275fbd2c9c31345acb040f3908b6ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_sampleA.obj using Guid(e7275fbd2c9c31345acb040f3908b6ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32fad0e0a9abf11ab5ea576f01921843') in 0.042686 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_crystals.obj
+  artifactKey: Guid(f14b0cc4bf9193946b1d20849f9c241e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_crystals.obj using Guid(f14b0cc4bf9193946b1d20849f9c241e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66c7d9a24cef72541a982a1a8c0e8bbc') in 0.057574 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_topB.obj
+  artifactKey: Guid(b5d5cfd1743aaf0479ff6f4c1cb0db4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_topB.obj using Guid(b5d5cfd1743aaf0479ff6f4c1cb0db4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd691806d451775ef477722fc1adabe70') in 0.045185 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_topA.obj
+  artifactKey: Guid(fd1c7ae4656b6a34691a466c95fdefb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_topA.obj using Guid(fd1c7ae4656b6a34691a466c95fdefb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddcbd07748a25456c3d539fa87856bc6') in 0.044361 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_sampleB.obj
+  artifactKey: Guid(c48731b5505fd1f428a1fc0d9a8fca03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_sampleB.obj using Guid(c48731b5505fd1f428a1fc0d9a8fca03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b09366d4dfcbdb53395a761a49ec8669') in 0.046020 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_roofA.obj
+  artifactKey: Guid(82d599bbd112e9e48b26debade039633) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_roofA.obj using Guid(82d599bbd112e9e48b26debade039633) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92242bf60a732899d2f9d040b9d7a14a') in 0.044232 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_treeQuad.obj
+  artifactKey: Guid(be43698ce82c2e04cb91be01e5a7c8a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_treeQuad.obj using Guid(be43698ce82c2e04cb91be01e5a7c8a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d81abe09bf28425658ef357884f4f3a') in 0.059346 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_rock.obj
+  artifactKey: Guid(af725bd6b3af1de44945dcbe8c796ff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_rock.obj using Guid(af725bd6b3af1de44945dcbe8c796ff6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6de7b6be3457e34444e51737c3344574') in 0.045183 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_straight.obj
+  artifactKey: Guid(737c5424c7539a145be240043de14602) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_straight.obj using Guid(737c5424c7539a145be240043de14602) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edc1992b55d596a5a24b76641c6ab06d') in 0.035080 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_sampleA.obj
+  artifactKey: Guid(09eab5755e026b84186f39e95bc5f0d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_sampleA.obj using Guid(09eab5755e026b84186f39e95bc5f0d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b06273506b03afa17ba54a0bef5dc6aa') in 0.034696 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_riverSlope.obj
+  artifactKey: Guid(f8cbaf23528a5ff46ae4125f0a390974) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_riverSlope.obj using Guid(f8cbaf23528a5ff46ae4125f0a390974) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdb0ca0d13194a8cedd7afe20ebcb70e') in 0.035385 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Resources/Models/OBJ format/towerRound_base.obj
+  artifactKey: Guid(66ca11fabf0f6b0428f9484f2ee87c9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerRound_base.obj using Guid(66ca11fabf0f6b0428f9484f2ee87c9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '379bc7b3d917ff7cc2252a034c9d9881') in 0.032684 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_middleC.obj
+  artifactKey: Guid(85acad05394719e49ba6d6aae3603fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_middleC.obj using Guid(85acad05394719e49ba6d6aae3603fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33065dbe0a7ea17be476a4407c85813b') in 0.039993 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Resources/Models/OBJ format/towerSquare_topC.obj
+  artifactKey: Guid(b9e200d7994d3554cafb4203a5ed04a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/towerSquare_topC.obj using Guid(b9e200d7994d3554cafb4203a5ed04a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a72216043bf503671aa6ced7241a5229') in 0.063887 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_dirtHigh.obj
+  artifactKey: Guid(13ada692701284241a822e832f7bc74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_dirtHigh.obj using Guid(13ada692701284241a822e832f7bc74a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e4a682ceab39d29f3e16d54970989b1') in 0.051641 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Resources/Models/OBJ format/tile_wideSplit.obj
+  artifactKey: Guid(d0a32bd917992ea44ad7849a993ec30a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/tile_wideSplit.obj using Guid(d0a32bd917992ea44ad7849a993ec30a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25d46d3b8140cf2ec784f411eac5c660') in 0.070897 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Models/OBJ format/snow_tile_wideCorner.obj
+  artifactKey: Guid(b59c78c1c0c55de43bf0cc5ccf356350) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Models/OBJ format/snow_tile_wideCorner.obj using Guid(b59c78c1c0c55de43bf0cc5ccf356350) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'debd67a5fd93214c347c00676303f77a') in 0.104166 seconds 
