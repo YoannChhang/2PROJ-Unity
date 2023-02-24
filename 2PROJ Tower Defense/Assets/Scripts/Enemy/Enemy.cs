@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float minDistance = 0.1f;
     public int maxHealth = 10;
     public int damage = 1;
+    public int gold = 5;
 
     private int currentHealth;
     private int currentWaypoint = 0;
