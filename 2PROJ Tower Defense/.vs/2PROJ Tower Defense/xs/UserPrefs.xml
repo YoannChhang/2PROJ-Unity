@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{C54F3BF5-494E-38E1-5769-CA762AD978F2}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/GameNetworkManager.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Network/GameNetworkManager.cs" Line="10" Column="10" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="2PROJ Tower Defense" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Network" expanded="True">
+                  <Node name="GameNetworkManager.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ca4501a7-b50d-43a6-9ca2-1630db7ad02b" />
+</Properties>
