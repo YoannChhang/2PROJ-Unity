@@ -8,6 +8,8 @@ using Unity.Services.Lobbies.Models;
 using TMPro;
 using UnityEngine.UI;
 using System.Runtime.InteropServices.ComTypes;
+using Unity.IO.LowLevel.Unsafe;
+using static UnityEditor.Progress;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject _userInLobbyContainer;
     [SerializeField] private GameObject _connectionModeScreen;
     [SerializeField] private GameObject _lobbyScreen;
+    [SerializeField] private Button _readyButton;
 
     private Lobby hostLobby;
     private Lobby joinedLobby;
@@ -26,9 +29,11 @@ public class LobbyManager : MonoBehaviour
     private float lobbyUpdateTimer;
     private float lobbyPlayerListUpdateTimer;
     private string playerName;
+    private bool readyStatus;
 
     private void Awake()
     {
+        readyStatus = false;
         CloseLobby();
     }
 
@@ -138,6 +143,7 @@ public class LobbyManager : MonoBehaviour
             //UI
             _lobbyCodeDisplay.text = lobby.LobbyCode;
 
+            SetReadyButton();
             OpenLobby();
 
         }
@@ -167,7 +173,7 @@ public class LobbyManager : MonoBehaviour
             _lobbyCodeDisplay.text = lobby.LobbyCode;
 
 
-            PrintPlayers(joinedLobby);
+            SetReadyButton();
             OpenLobby();
         }
         catch (LobbyServiceException e)
@@ -183,7 +189,9 @@ public class LobbyManager : MonoBehaviour
         {
             Data = new Dictionary<string, PlayerDataObject>
             {
-                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                {"PlayerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) },
+                {"ReadyStatus", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, readyStatus.ToString()) },
+
             }
         };
     }
@@ -252,4 +260,57 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
+
+    public async void ToggleReadyStatus()
+    {
+        try
+        {
+            readyStatus = !readyStatus;
+
+            Player player = GetCurrentPlayerInLobby();
+            Debug.Log(player.Data);
+
+
+            UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+            options.Data = new Dictionary<string, PlayerDataObject>() {
+                    {"ReadyStatus", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, readyStatus.ToString()) },
+                };
+
+            Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, player.Id, options);
+
+            SetReadyButton();
+
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.LogError($"ToggleReadyStatus Error : " + e);
+        }
+
+        SetReadyButton();
+    }
+
+    public void SetReadyButton()
+    {
+
+        string readyText = readyStatus ? "Unready" : "Ready";
+        Color readyColor = readyStatus ? Color.green : Color.red;
+        _readyButton.GetComponentInChildren<TMP_Text>().text = readyText;
+        _readyButton.GetComponentInChildren<Image>().color = readyColor;
+
+    }
+
+    private Player GetCurrentPlayerInLobby()
+    {
+        string playerId = AuthenticationService.Instance.PlayerId;
+        foreach (Player player in joinedLobby.Players)
+        {
+            if (player.Id == playerId)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
 }
