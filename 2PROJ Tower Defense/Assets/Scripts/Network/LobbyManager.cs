@@ -23,18 +23,24 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject _lobbyScreen;
     [SerializeField] private Button _readyButton;
 
+    //Storing all info related to lobby
     private Lobby hostLobby;
     private Lobby joinedLobby;
 
+    //timers
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
-    private float lobbyPlayerListUpdateTimer;
+    //private float lobbyPlayerListUpdateTimer;
     private float handleUpdatesTimer;
 
+
+    //Other variables
     private string playerName;
     private bool readyStatus;
+    private int SELECTED_LEVEL = 0;
 
 
+    //Toggles, used to prevent 429
     private bool eventStartGame = false;
     private bool eventReadyToggle = false;
 
@@ -44,7 +50,10 @@ public class LobbyManager : MonoBehaviour
         readyStatus = false;
         CloseLobby();
     }
-
+    void OnEnable()
+    {
+        SELECTED_LEVEL = PlayerPrefs.GetInt("SELECTED_LEVEL");
+    }
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -109,7 +118,7 @@ public class LobbyManager : MonoBehaviour
                     }
                     joinedLobby = null;
 
-                    SceneManager.LoadScene("SampleScene");
+                    SceneManager.LoadScene("GameScene");
 
 
                 }
@@ -131,38 +140,41 @@ public class LobbyManager : MonoBehaviour
                 //When Starting the game
                 if (eventStartGame)
                 {
-                    try
+                    if (SELECTED_LEVEL != 0)
                     {
-                        eventStartGame = false;
-
-                        Debug.Log("StartGame");
-
-                        //Check if all players are ready
-
-                        foreach(Player player in joinedLobby.Players)
+                        try
                         {
-                            if (player.Data["ReadyStatus"].Value == "False")
+                            eventStartGame = false;
+
+                            Debug.Log("StartGame");
+
+                            //Check if all players are ready
+
+                            foreach (Player player in joinedLobby.Players)
                             {
-                                Debug.Log("Could not start game, all players are not ready");
-                                return;
+                                if (player.Data["ReadyStatus"].Value == "False")
+                                {
+                                    Debug.Log("Could not start game, all players are not ready");
+                                    return;
+                                }
                             }
+
+                            string relayCode = await RelayManager.instance.CreateRelay();
+
+                            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                            {
+                                Data = new Dictionary<string, DataObject>{
+                                    { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                                }
+                            });
+
+                            joinedLobby = lobby;
+
                         }
-
-                        string relayCode = await RelayManager.instance.CreateRelay();
-
-                        Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                        catch (LobbyServiceException e)
                         {
-                            Data = new Dictionary<string, DataObject>{
-                                { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
-                            }
-                        });
-
-                        joinedLobby = lobby;
-
-                    }
-                    catch (LobbyServiceException e)
-                    {
-                        Debug.LogError($"StartGame Error : " + e);
+                            Debug.LogError($"StartGame Error : " + e);
+                        }
                     }
                 }
 
