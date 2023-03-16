@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Enemy : MonoBehaviour
+public class Enemy : NetworkBehaviour
 {
     public Waypoints path;
     public float speed = 5f;

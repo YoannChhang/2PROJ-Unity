@@ -17,9 +17,6 @@ using UnityEngine;
 public class RelayManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _joinCodeText;
-    [SerializeField] private TMP_InputField _joinInput;
-    [SerializeField] private GameObject _connectionModeScreen;
-    [SerializeField] private GameObject _lobbyScreen;
 
 
     private UnityTransport _transport;
@@ -74,16 +71,5 @@ public class RelayManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
 
         Debug.Log("Joined Relay");
-    }
-
-    private void OpenLobby()
-    {
-        _connectionModeScreen.SetActive(false);
-        _lobbyScreen.SetActive(true);
-    }
-    private void CloseLobby()
-    {
-        _connectionModeScreen.SetActive(true);
-        _lobbyScreen.SetActive(false);
     }
 }

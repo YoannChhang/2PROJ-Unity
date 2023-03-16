@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Runtime.InteropServices.ComTypes;
 using Unity.IO.LowLevel.Unsafe;
-using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -25,11 +25,19 @@ public class LobbyManager : MonoBehaviour
 
     private Lobby hostLobby;
     private Lobby joinedLobby;
+
     private float heartbeatTimer;
     private float lobbyUpdateTimer;
     private float lobbyPlayerListUpdateTimer;
+    private float handleUpdatesTimer;
+
     private string playerName;
     private bool readyStatus;
+
+
+    private bool eventStartGame = false;
+    private bool eventReadyToggle = false;
+
 
     private void Awake()
     {
@@ -51,13 +59,19 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
+ 
         HandleLobbyHeartbeat();
         HandleLobbyPollForUpdates();
         //HandleLobbyUpdatePlayerList();
 
+        HandleUpdates();
+
     }
+
+    //Lobby heartbeat in order for it not to shutdown
     private async void HandleLobbyHeartbeat()
     {
+       
         if (IsLobbyHost())
         {
             heartbeatTimer -= Time.deltaTime;
@@ -70,6 +84,8 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
+
+    //Every x seconds the player will poll for the updates related to the lobby.
     private async void HandleLobbyPollForUpdates()
     {
         if (joinedLobby != null)
@@ -77,7 +93,7 @@ public class LobbyManager : MonoBehaviour
             lobbyUpdateTimer -= Time.deltaTime;
             if (lobbyUpdateTimer < 0f)
             {
-                float lobbyUpdateTimerMax = 1.1f;
+                float lobbyUpdateTimerMax = 1.3f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
@@ -93,27 +109,99 @@ public class LobbyManager : MonoBehaviour
                     }
                     joinedLobby = null;
 
+                    SceneManager.LoadScene("SampleScene");
+
+
                 }
             }
         }
     }
-    //private async void HandleLobbyUpdatePlayerList()
-    //{
-    //    if (hostLobby == null)
-    //    {
-    //        lobbyPlayerListUpdateTimer -= Time.deltaTime;
-    //        if (lobbyPlayerListUpdateTimer < 0f)
-    //        {
-    //            float lobbyPlayerListUpdateTimerMax = 1.1f;
-    //            lobbyUpdateTimer = lobbyPlayerListUpdateTimerMax;
+    private async void HandleUpdates()
+    {
+        if (joinedLobby != null)
+        {
+            handleUpdatesTimer -= Time.deltaTime;
+            if(handleUpdatesTimer < 0f)
+            {
+                float handleUpdatesTimerMax = 1.3f;
+                handleUpdatesTimer = handleUpdatesTimerMax;
 
-    //            Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
-    //            joinedLobby = lobby;
 
-    //            UpdateLobbyPlayerList();
-    //        }
-    //    }
-    //}
+
+                //When Starting the game
+                if (eventStartGame)
+                {
+                    try
+                    {
+                        eventStartGame = false;
+
+                        Debug.Log("StartGame");
+
+                        //Check if all players are ready
+
+                        foreach(Player player in joinedLobby.Players)
+                        {
+                            if (player.Data["ReadyStatus"].Value == "False")
+                            {
+                                Debug.Log("Could not start game, all players are not ready");
+                                return;
+                            }
+                        }
+
+                        string relayCode = await RelayManager.instance.CreateRelay();
+
+                        Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                        {
+                            Data = new Dictionary<string, DataObject>{
+                                { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                            }
+                        });
+
+                        joinedLobby = lobby;
+
+                    }
+                    catch (LobbyServiceException e)
+                    {
+                        Debug.LogError($"StartGame Error : " + e);
+                    }
+                }
+
+
+                //Player click on ready
+                if (eventReadyToggle)
+                {
+                    try
+                    {
+                        readyStatus = !readyStatus;
+
+                        Player player = GetCurrentPlayerInLobby();
+
+                        UpdatePlayerOptions options = new UpdatePlayerOptions();
+
+                        options.Data = new Dictionary<string, PlayerDataObject>() {
+                            {"ReadyStatus", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, readyStatus.ToString()) },
+                        };
+
+                        Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, player.Id, options);
+
+                        SetReadyButton();
+
+                        eventReadyToggle = false;
+
+                    }
+                    catch (LobbyServiceException e)
+                    {
+                        Debug.LogError($"ToggleReadyStatus Error : " + e);
+                    }
+
+                    SetReadyButton();
+                }
+
+
+            }
+        }
+    }
+   
 
 
     public async void CreateLobby()
@@ -196,14 +284,7 @@ public class LobbyManager : MonoBehaviour
         };
     }
 
-    private void PrintPlayers(Lobby lobby)
-    {
-        Debug.Log($"Players in Lobby {lobby.Name} | {lobby.Name} | " + lobby.Data["SELECTED_LEVEL"]);
-        foreach (Player player in lobby.Players)
-        {
-            Debug.Log(player.Id + " " + player.Data["PlayerName"].Value);
-        }
-    }
+   
 
     private void UpdateLobbyPlayerList()
     {
@@ -213,11 +294,31 @@ public class LobbyManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        //Add all player prefabs
         foreach (Player player in joinedLobby.Players)
         {
             GameObject obj = Instantiate(_userInLobbyPrefab);
             obj.transform.SetParent(_userInLobbyContainer.transform, false);
             obj.GetComponentInChildren<TMP_Text>().text = player.Data["PlayerName"].Value;
+
+            //Ready Status for each players
+            for (int i = 0; i < obj.transform.GetChild(0).transform.childCount; i++)
+            {
+                Transform child = obj.transform.GetChild(0).transform.GetChild(i);
+                if (child.name == "ReadyIcon")
+                {
+                    if (player.Data["ReadyStatus"].Value == "True")
+                    {
+                        child.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+
+                }
+            }
+
         }
     }
 
@@ -235,62 +336,8 @@ public class LobbyManager : MonoBehaviour
     {
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
     }
-    public async void StartGame()
-    {
-        if (IsLobbyHost())
-        {
-            try
-            {
-                Debug.Log("StartGame");
-
-                string relayCode = await RelayManager.instance.CreateRelay();
-
-                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
-                {
-                    Data = new Dictionary<string, DataObject>{
-                        { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
-                    }
-                });
-
-                joinedLobby = lobby;
-            }
-            catch (LobbyServiceException e)
-            {
-                Debug.LogError($"StartGame Error : " + e);
-            }
-        }
-    }
-
-    public async void ToggleReadyStatus()
-    {
-        try
-        {
-            readyStatus = !readyStatus;
-
-            Player player = GetCurrentPlayerInLobby();
-            Debug.Log(player.Data);
-
-
-            UpdatePlayerOptions options = new UpdatePlayerOptions();
-
-            options.Data = new Dictionary<string, PlayerDataObject>() {
-                    {"ReadyStatus", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, readyStatus.ToString()) },
-                };
-
-            Lobby lobby = await LobbyService.Instance.UpdatePlayerAsync(joinedLobby.Id, player.Id, options);
-
-            SetReadyButton();
-
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.LogError($"ToggleReadyStatus Error : " + e);
-        }
-
-        SetReadyButton();
-    }
-
-    public void SetReadyButton()
+    
+    private void SetReadyButton()
     {
 
         string readyText = readyStatus ? "Unready" : "Ready";
@@ -313,4 +360,17 @@ public class LobbyManager : MonoBehaviour
         return null;
     }
 
+
+    public void StartGame()
+    {
+        if (IsLobbyHost())
+        {
+            eventStartGame = true;
+        }
+    }
+
+    public void ToggleReadyStatus()
+    {
+        eventReadyToggle = true;
+    }
 }
