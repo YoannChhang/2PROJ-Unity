@@ -18,6 +18,7 @@ public class Enemy : NetworkBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+    
     }
 
     private void Update()
@@ -37,8 +38,7 @@ public class Enemy : NetworkBehaviour
         }
         else
         {
-            // If the enemy reaches the end of the path, it has reached the player's base
-            // and should deal damage or trigger some other game event
+            
             DealDamageToBase();
             Destroy(gameObject);
         }
@@ -46,7 +46,7 @@ public class Enemy : NetworkBehaviour
 
     private void DealDamageToBase()
     {
-        // Deal damage to the player's base or trigger some other game event
+        
     }
 
     public void TakeDamage(int amount)
