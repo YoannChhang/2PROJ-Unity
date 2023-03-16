@@ -5,8 +5,10 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
 
-    public List<Wave> waves;
-    public int currWave;
+    private List<Wave> waves;
+
+    private Enemy enemyPrefab;
+    private int currWave;
 
     // Start is called before the first frame update
     void Start()
