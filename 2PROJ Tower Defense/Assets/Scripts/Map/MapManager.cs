@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
     public GameObject designGrid;
     public Tilemap paths;
     public Tilemap tilemapPrefab;
+    private TilemapRenderer tilemapRenderer;
     public Grid grid;
 
     public int gridWidth = 40;
@@ -37,6 +38,8 @@ public class MapManager : MonoBehaviour
                 newTile.name = x + "," + y;
                 newTile.transform.SetParent(grid.transform, false);
 
+                tilemapRenderer = newTile.GetComponent<TilemapRenderer>();
+                tilemapRenderer.sortingOrder = x + y;
             }
         }
 
