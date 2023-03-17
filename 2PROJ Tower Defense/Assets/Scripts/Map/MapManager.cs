@@ -56,37 +56,32 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
+
+        //Vector3 cellPos = grid.GetCellCenterWorld(new Vector3Int(0, 0));
+        //Debug.Log("cellPos : " + cellPos.x + " " + cellPos.y);
+
         Vector3 mousePos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(mousePos); // Obtain a ray from the camera that passes through the mouse pointer
+        Debug.Log("mousepos : " + mousePos.x + " " + mousePos.y);
 
-        Plane plane = new Plane(grid.transform.up, grid.transform.position); // Define a plane that intersects the grid
-        float distance;
-        if (plane.Raycast(ray, out distance)) // Intersect the ray with the plane
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+        Debug.Log("worldpos : " + worldPos.x + " " + worldPos.y);
+
+        Vector3Int cellIndex = grid.WorldToCell(worldPos);
+        Debug.Log("cell : " + cellIndex.x + " " + cellIndex.y);
+
+
+        TileBase currTile = getTileInMap(paths, 0, 0);
+
+        foreach (Transform child in grid.transform)
         {
-            Vector3 worldPos = ray.GetPoint(distance); // Obtain the world position of the intersection point
-
-            Vector3Int cellIndex = grid.WorldToCell(worldPos); // Convert the world position to the corresponding cell index in the grid
-            Debug.Log("Mouse position in grid coordinates: " + cellIndex.x + ", " + cellIndex.y);
-
-
-
-            TileBase currTile = getTileInMap(paths, 0, 0);
-
-            foreach (Transform child in grid.transform)
+            if (child.gameObject.name == $"{-cellIndex.x},{-cellIndex.y}")
             {
-                if (child.gameObject.name == $"{cellIndex.x},{cellIndex.y}")
-                {
-                    Tilemap cellTileMap = child.gameObject.GetComponent<Tilemap>();
+                Tilemap cellTileMap = child.gameObject.GetComponent<Tilemap>();
 
-                    cellTileMap.SetTile(new Vector3Int(-cellIndex.x, -cellIndex.y), currTile);
-                }
+                cellTileMap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y), currTile);
             }
-
-
-
-
-
         }
+    
     }
 
 
