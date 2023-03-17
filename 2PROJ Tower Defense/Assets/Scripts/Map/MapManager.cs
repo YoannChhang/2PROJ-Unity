@@ -67,9 +67,11 @@ public class MapManager : MonoBehaviour
         Debug.Log("worldpos : " + worldPos.x + " " + worldPos.y);
 
         Vector3Int cellIndex = grid.WorldToCell(worldPos);
+
+        cellIndex.x += 1;
+        cellIndex.y += 1;
+
         Debug.Log("cell : " + cellIndex.x + " " + cellIndex.y);
-
-
         TileBase currTile = getTileInMap(paths, 0, 0);
 
         foreach (Transform child in grid.transform)
