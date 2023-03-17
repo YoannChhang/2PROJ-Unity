@@ -5,12 +5,13 @@ using UnityEngine.Tilemaps;
 public class MapManager : MonoBehaviour
 {
 
+    public GameObject designGrid;
     public Tilemap paths;
     public Tilemap tilemapPrefab;
     public Grid grid;
 
-    public int gridWidth = 33;
-    public int gridHeight = 39;
+    public int gridWidth = 40;
+    public int gridHeight = 35;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,9 @@ public class MapManager : MonoBehaviour
 
             }
         }
+
+        designGrid.SetActive(false);
+        
     }
 
     TileBase getTileInMap(Tilemap map, int x, int y)
