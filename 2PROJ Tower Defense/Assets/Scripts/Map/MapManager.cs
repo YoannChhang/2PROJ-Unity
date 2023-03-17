@@ -63,12 +63,14 @@ public class MapManager : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         Debug.Log("mousepos : " + mousePos.x + " " + mousePos.y);
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y));
         Debug.Log("worldpos : " + worldPos.x + " " + worldPos.y);
 
         Vector3Int cellIndex = grid.WorldToCell(worldPos);
         Debug.Log("cell : " + cellIndex.x + " " + cellIndex.y);
 
+        cellIndex.x -= 3;
+        cellIndex.y -= 3;
 
         TileBase currTile = getTileInMap(paths, 0, 0);
 
