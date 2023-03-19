@@ -5,14 +5,15 @@ using UnityEngine.Tilemaps;
 public class MapManager : MonoBehaviour
 {
 
-    public GameObject designGrid;
-    public Tilemap paths;
-    public Tilemap tilemapPrefab;
-    private TilemapRenderer tilemapRenderer;
-    public Grid grid;
+    [SerializeField] public GameObject designGrid;
+    [SerializeField] public Tilemap paths;
+    [SerializeField] public Tilemap tilemapPrefab;
+    [SerializeField] public Grid grid;
 
-    public int gridWidth = 40;
-    public int gridHeight = 35;
+    [SerializeField] public int gridWidth = 40;
+    [SerializeField] public int gridHeight = 35;
+
+    private TilemapRenderer tilemapRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -45,50 +46,12 @@ public class MapManager : MonoBehaviour
         
     }
 
-    TileBase getTileInMap(Tilemap map, int x, int y)
+    public static TileBase getTileInMap(Tilemap map, int x, int y)
     {
 
         return map.GetTile(new Vector3Int(x, y));   
 
     }
-
-    private Vector3Int previousCellIndex = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue); // Initialize the previous cell index to a value that is different from any valid index
-
-    void Update()
-    {
-
-        //Vector3 cellPos = grid.GetCellCenterWorld(new Vector3Int(0, 0));
-        //Debug.Log("cellPos : " + cellPos.x + " " + cellPos.y);
-
-        Vector3 mousePos = Input.mousePosition;
-        Debug.Log("mousepos : " + mousePos.x + " " + mousePos.y);
-
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y));
-        Debug.Log("worldpos : " + worldPos.x + " " + worldPos.y);
-
-        Vector3Int cellIndex = grid.WorldToCell(worldPos);
-
-        cellIndex.x += 1;
-        cellIndex.y += 1;
-
-        Debug.Log("cell : " + cellIndex.x + " " + cellIndex.y);
-        TileBase currTile = getTileInMap(paths, 0, 0);
-
-        foreach (Transform child in grid.transform)
-        {
-            if (child.gameObject.name == $"{-cellIndex.x},{-cellIndex.y}")
-            {
-                Tilemap cellTileMap = child.gameObject.GetComponent<Tilemap>();
-
-                cellTileMap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y), currTile);
-            }
-        }
-    
-    }
-
-
-
-
 
 
 

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - paths
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Enemies
     uniqueID: 3667519053
+    locked: 0
+  - name: Towers
+    uniqueID: 2512275121
     locked: 0
   - name: UI
     uniqueID: 3020269529
