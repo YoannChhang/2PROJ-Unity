@@ -5,14 +5,15 @@ using UnityEngine.Tilemaps;
 public class MapManager : MonoBehaviour
 {
 
-    public GameObject designGrid;
-    public Tilemap paths;
-    public Tilemap tilemapPrefab;
-    private TilemapRenderer tilemapRenderer;
-    public Grid grid;
+    [SerializeField] public GameObject designGrid;
+    [SerializeField] public Tilemap paths;
+    [SerializeField] public Tilemap tilemapPrefab;
+    [SerializeField] public Grid grid;
 
-    public int gridWidth = 40;
-    public int gridHeight = 35;
+    [SerializeField] public int gridWidth = 40;
+    [SerializeField] public int gridHeight = 35;
+
+    private TilemapRenderer tilemapRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,6 @@ public class MapManager : MonoBehaviour
         {
             for (int x = 0; x < gridWidth; x++)
             {
-
-                Debug.Log($"{-x} + {-y}");
 
                 Tilemap newTile = Tilemap.Instantiate(tilemapPrefab);
                 TileBase currTile = getTileInMap(paths, -x, -y);
@@ -47,10 +46,15 @@ public class MapManager : MonoBehaviour
         
     }
 
-    TileBase getTileInMap(Tilemap map, int x, int y)
+    public static TileBase getTileInMap(Tilemap map, int x, int y)
     {
 
         return map.GetTile(new Vector3Int(x, y));   
 
     }
+
+
+
+
+
 }

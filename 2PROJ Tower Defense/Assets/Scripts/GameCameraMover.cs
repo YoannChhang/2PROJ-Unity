@@ -98,6 +98,7 @@ public class GameCameraMover : MonoBehaviour
 
         if (cinemachineVirtualCamera)
         {
+            //cinemachineVirtualCamera.m_Lens.OrthographicSize = targetFieldOfView;
             cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(cinemachineVirtualCamera.m_Lens.OrthographicSize, targetFieldOfView, Time.deltaTime * zoomSpeed);
         }
         
