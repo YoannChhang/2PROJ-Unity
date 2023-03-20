@@ -301,10 +301,8 @@ public class LobbyManager : MonoBehaviour
     private void UpdateLobbyPlayerList()
     {
         // Delete all the children of the _userInLobbyContainer
-        foreach (Transform child in _userInLobbyContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        HelperFunctions.remove_all_childs_from_gameobject(_userInLobbyContainer);
+
 
         //Add all player prefabs
         foreach (Player player in joinedLobby.Players)

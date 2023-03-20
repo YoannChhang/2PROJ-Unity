@@ -1,9 +1,18 @@
 ﻿<Properties StartupConfiguration="{C54F3BF5-494E-38E1-5769-CA762AD978F2}|">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="eb4509c4-c5f8-4f29-b7b4-b4068fec4e71" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Map/TowerManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Map/TowerManager.cs" Line="85" Column="81" />
-      <File FileName="Assets/Scripts/Network/LobbyManager.cs" Line="158" Column="41" />
+      <File FileName="Assets/Scripts/Map/TowerManager.cs" Line="139" Column="33" />
+      <File FileName="Assets/Scripts/Network/LobbyManager.cs" />
+      <File FileName="Assets/Scripts/Network/NetworkObjectSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/GameNetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/CustomNetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Map/MapManager.cs" Line="40" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -24,10 +33,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9c77b783-280c-4c7c-a5c5-dc76fe828a79" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
