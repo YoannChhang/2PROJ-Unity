@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity;
+
 public class MapManager : MonoBehaviour
 {
 
@@ -18,11 +20,16 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateMap();
+        RenderMap();
+        designGrid.SetActive(false);
+
     }
 
-    void GenerateMap()
+    public void RenderMap()
     {
+        
+        HelperFunctions.remove_all_childs_from_gameobject(grid.gameObject);
+
 
         for (int y = 0; y < gridHeight; y++)
         {
@@ -37,12 +44,11 @@ public class MapManager : MonoBehaviour
                 newTile.name = x + "," + y;
                 newTile.transform.SetParent(grid.transform, false);
 
-                tilemapRenderer = newTile.GetComponent<TilemapRenderer>();
-                tilemapRenderer.sortingOrder = x + y;
+                newTile.GetComponent<TilemapRenderer>().sortingOrder = x + y;
+
             }
         }
 
-        designGrid.SetActive(false);
         
     }
 

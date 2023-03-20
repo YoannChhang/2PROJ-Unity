@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
@@ -100,19 +101,22 @@ public class TowerManager : NetworkBehaviour
     {
         TileBase currTile = MapManager.getTileInMap(paths, 0, 0);
 
-        if (grid.transform.childCount != SyncedTowers.Count)
-        {
-            Vector3Int index = SyncedTowers[SyncedTowers.Count-1].cellIndex;
 
+        foreach (TowerData tower in SyncedTowers)
+        {
             Tilemap newTile = Instantiate(tilemapPrefab);
-            newTile.SetTile(new Vector3Int(index.x, index.y), currTile); ;
-            newTile.name = -index.x + "," + -index.y;
+            newTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), currTile); ;
+            newTile.name = -tower.cellIndex.x + "," + -tower.cellIndex.y;
             newTile.transform.SetParent(grid.transform, false);
+            newTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
         }
 
-            
-            
+
         
+
+
+
+
     }
 
     //Get index relative to grid using mouse position
@@ -137,6 +141,7 @@ public class TowerManager : NetworkBehaviour
 public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
 {
     public Vector3Int cellIndex;
+
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
