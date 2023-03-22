@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class GameCameraMover : MonoBehaviour
 {
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     [SerializeField] private TMP_Text CameraModeText;
+
+    [SerializeField] private GameObject VisibleMap;
+
 
 
     //Logic Variables
@@ -24,6 +28,12 @@ public class GameCameraMover : MonoBehaviour
     //timeouts
     private float timer = 0f;
     private float timeBetweenCommands = 1f;
+
+    private void Start()
+    {
+        SetScreenDefault();
+
+    }
 
 
     void Update()
@@ -51,6 +61,7 @@ public class GameCameraMover : MonoBehaviour
             CameraEdgeScrolling();
             CameraZoomScrolling();
         }
+
     }
 
     private void CameraEdgeScrolling()
@@ -108,6 +119,59 @@ public class GameCameraMover : MonoBehaviour
     {
         //CameraMode UI
         CameraModeText.gameObject.SetActive(CameraMode);
+
+    }
+
+    private Vector3Int minTilemapPosition;
+    private Vector3Int maxTilemapPosition;
+
+
+    public void SetScreenDefault()
+    {
+
+
+        Camera mainCamera = Camera.main;
+        float cameraSize = mainCamera.orthographicSize;
+        float aspectRatio = (float)Screen.width / Screen.height;
+
+        float cameraWidth = cameraSize * 2.0f * aspectRatio;
+        float cameraHeight = cameraSize * 2.0f;
+
+
+
+        Tilemap[] tilemaps = VisibleMap.GetComponentsInChildren<Tilemap>();
+
+        foreach (Tilemap tilemap in tilemaps)
+        {
+            if (tilemap.cellBounds.min.x < minTilemapPosition.x)
+            {
+                minTilemapPosition.x = tilemap.cellBounds.min.x;
+            }
+            if (tilemap.cellBounds.min.y < minTilemapPosition.y)
+            {
+                minTilemapPosition.y = tilemap.cellBounds.min.y;
+            }
+
+            if (tilemap.cellBounds.max.x > maxTilemapPosition.x)
+            {
+                maxTilemapPosition.x = tilemap.cellBounds.max.x;
+            }
+            if (tilemap.cellBounds.max.y > maxTilemapPosition.y)
+            {
+                maxTilemapPosition.y = tilemap.cellBounds.max.y;
+            }
+        }
+
+        int gridWidth = maxTilemapPosition.x - minTilemapPosition.x + 1;
+        int gridHeight = maxTilemapPosition.y - minTilemapPosition.y + 1;
+
+
+        transform.position = new Vector3(
+            0,
+            -((gridHeight / 2) - (cameraHeight / 2))
+            );
+
+
 
     }
 }
