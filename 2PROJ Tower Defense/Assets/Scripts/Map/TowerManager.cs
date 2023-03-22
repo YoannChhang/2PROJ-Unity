@@ -18,8 +18,12 @@ public class TowerManager : NetworkBehaviour
 {
 
     [SerializeField] public Grid grid;
-    [SerializeField] public Tilemap tilemapPrefab;
+    [SerializeField] public Tilemap baseTilemap;
+    [SerializeField] public Tilemap midTilemap;
+    [SerializeField] public Tilemap weaponTilemap;
+
     [SerializeField] public Tilemap paths;
+    [SerializeField] public Tilemap towers;
 
     private NetworkList<TowerData> SyncedTowers;
 
@@ -99,23 +103,43 @@ public class TowerManager : NetworkBehaviour
 
     private void HandleSyncedDataUpdates()
     {
-        TileBase currTile = MapManager.getTileInMap(paths, 0, 0);
 
+
+        TileBase tile = MapManager.getTileInMap(towers, 0, 0);
+        TileBase mid = MapManager.getTileInMap(towers, 2, 0);
+        TileBase top = MapManager.getTileInMap(towers, 4, 0);
+
+        int nbChildren = grid.transform.childCount;
+
+        for (int i = nbChildren - 1; i >= 0; i--)
+        {
+            DestroyImmediate(grid.transform.GetChild(i).gameObject);
+        }
 
         foreach (TowerData tower in SyncedTowers)
         {
-            Tilemap newTile = Instantiate(tilemapPrefab);
-            newTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), currTile); ;
-            newTile.name = -tower.cellIndex.x + "," + -tower.cellIndex.y;
-            newTile.transform.SetParent(grid.transform, false);
-            newTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
+            GameObject sortObject = new GameObject();
+            sortObject.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+            sortObject.transform.SetParent(grid.transform, false);
+
+            Tilemap baseTile = Instantiate(baseTilemap);
+            baseTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), tile);
+            baseTile.name = "Base";
+            baseTile.transform.SetParent(sortObject.transform, false);
+            baseTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
+
+            Tilemap midTile = Instantiate(midTilemap);
+            midTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), mid);
+            midTile.name = "Mid";
+            midTile.transform.SetParent(sortObject.transform, false);
+            midTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
+
+            Tilemap weaponTile = Instantiate(weaponTilemap);
+            weaponTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), top);
+            weaponTile.name = "Weapon";
+            weaponTile.transform.SetParent(sortObject.transform, false);
+            weaponTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
         }
-
-
-        
-
-
-
 
     }
 
