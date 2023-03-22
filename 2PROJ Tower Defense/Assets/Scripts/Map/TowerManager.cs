@@ -103,10 +103,18 @@ public class TowerManager : NetworkBehaviour
 
     private void HandleSyncedDataUpdates()
     {
+
+
         TileBase tile = MapManager.getTileInMap(towers, 0, 0);
         TileBase mid = MapManager.getTileInMap(towers, 2, 0);
         TileBase top = MapManager.getTileInMap(towers, 4, 0);
 
+        int nbChildren = grid.transform.childCount;
+
+        for (int i = nbChildren - 1; i >= 0; i--)
+        {
+            DestroyImmediate(grid.transform.GetChild(i).gameObject);
+        }
 
         foreach (TowerData tower in SyncedTowers)
         {
