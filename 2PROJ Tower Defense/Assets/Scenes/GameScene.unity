@@ -184,8 +184,8 @@ MonoBehaviour:
   paths: {fileID: 7165501792118187994}
   tilemapPrefab: {fileID: -8821142417424934210, guid: 6db63405a5a4bec40b6e5e11ad1b595c, type: 3}
   grid: {fileID: 39070166}
-  gridWidth: 40
-  gridHeight: 35
+  numberOfTilesX: 40
+  numberOfTilesY: 35
 --- !u!1 &249830554
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1287282066}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6.028167
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -402,7 +402,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.028167
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -63870,6 +63870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineVirtualCamera: {fileID: 350528406}
   CameraModeText: {fileID: 786270579}
+  VisibleMap: {fileID: 39070165}
   CameraMode: 0
 --- !u!4 &1287282066
 Transform:
