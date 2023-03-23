@@ -27,6 +27,7 @@ public class NetworkObjectSpawner : MonoBehaviour
             towerMap.gameObject.name = "TowerMap";
             towerMap.GetComponent<NetworkObject>().Spawn(true);
 
+            
         }
 
     }
