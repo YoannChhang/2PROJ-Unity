@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using System.Runtime.InteropServices.ComTypes;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class LobbyManager : MonoBehaviour
 
 
     //Other variables
-    private string playerName;
+    public string playerName;
     private bool readyStatus;
     private int SELECTED_LEVEL = 0;
 
@@ -60,6 +61,8 @@ public class LobbyManager : MonoBehaviour
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         playerName = "TDPlayer" + UnityEngine.Random.Range(10, 99);
+
+        PlayerPrefs.SetString("PLAYER_NAME", playerName);
         Debug.Log($"Player name {playerName}");
 
 
@@ -68,7 +71,7 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
- 
+
         HandleLobbyHeartbeat();
         HandleLobbyPollForUpdates();
         //HandleLobbyUpdatePlayerList();
@@ -76,6 +79,7 @@ public class LobbyManager : MonoBehaviour
         HandleUpdates();
 
     }
+
 
     //Lobby heartbeat in order for it not to shutdown
     private async void HandleLobbyHeartbeat()
@@ -112,10 +116,7 @@ public class LobbyManager : MonoBehaviour
 
                 if (joinedLobby.Data["GAME_STARTED"].Value != "0")
                 {
-                    if (!IsLobbyHost())
-                    {
-                        RelayManager.instance.JoinRelay(joinedLobby.Data["GAME_STARTED"].Value);
-                    }
+                    
                     joinedLobby = null;
 
                     SceneManager.LoadScene("GameScene");
@@ -159,14 +160,13 @@ public class LobbyManager : MonoBehaviour
                                 }
                             }
 
-                            string relayCode = await RelayManager.instance.CreateRelay();
-
                             Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
                             {
                                 Data = new Dictionary<string, DataObject>{
-                                    { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                                    { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "1") },
                                 }
                             });
+
 
                             joinedLobby = lobby;
 
@@ -222,6 +222,8 @@ public class LobbyManager : MonoBehaviour
         {
             string lobbyName = "MyLobby";
             int maxPlayers = 4;
+            //Relay
+            string relayCode = await RelayManager.instance.CreateRelay();
 
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
@@ -231,6 +233,7 @@ public class LobbyManager : MonoBehaviour
                 {
                     { "SELECTED_LEVEL", new DataObject(DataObject.VisibilityOptions.Public, "1") },
                     { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "0") },
+                    { "RELAY_CODE", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
                 }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions); ;
@@ -242,6 +245,8 @@ public class LobbyManager : MonoBehaviour
 
             //UI
             _lobbyCodeDisplay.text = lobby.LobbyCode;
+
+
 
             SetReadyButton();
             OpenLobby();
@@ -272,9 +277,12 @@ public class LobbyManager : MonoBehaviour
 
             _lobbyCodeDisplay.text = lobby.LobbyCode;
 
+            RelayManager.instance.JoinRelay(joinedLobby.Data["RELAY_CODE"].Value);
+
 
             SetReadyButton();
             OpenLobby();
+
         }
         catch (LobbyServiceException e)
         {
