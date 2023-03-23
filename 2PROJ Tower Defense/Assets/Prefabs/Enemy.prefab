@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4550116801772486283}
   - component: {fileID: -3913350112336300226}
   - component: {fileID: 7811775853634859138}
+  - component: {fileID: -1062998374897087588}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -103,3 +104,19 @@ MonoBehaviour:
   maxHealth: 10
   damage: 1
   gold: 5
+--- !u!114 &-1062998374897087588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7109319495335960681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
