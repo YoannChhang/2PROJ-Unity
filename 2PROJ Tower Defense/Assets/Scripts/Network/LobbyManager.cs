@@ -228,7 +228,7 @@ public class LobbyManager : MonoBehaviour
             handleUpdatesTimer -= Time.deltaTime;
             if (handleUpdatesTimer < 0f)
             {
-                float handleUpdatesTimerMax = 1.3f;
+                float handleUpdatesTimerMax = 2f;
                 handleUpdatesTimer = handleUpdatesTimerMax;
 
 
@@ -394,8 +394,8 @@ public class LobbyManager : MonoBehaviour
                     asc: false,
                     field: QueryOrder.FieldOptions.Created)
             };
-
             QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
+            
 
             HelperFunctions.remove_all_childs_from_gameobject(lobbySelectionItemContainer);
 
