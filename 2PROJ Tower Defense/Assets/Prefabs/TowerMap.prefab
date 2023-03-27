@@ -59,8 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 2175353760177175719}
-  tilemapPrefab: {fileID: -8821142417424934210, guid: 6850886f03d0444db864a4334a4157fd, type: 3}
+  baseTilemap: {fileID: -8821142417424934210, guid: 6850886f03d0444db864a4334a4157fd, type: 3}
+  midTilemap: {fileID: 280632308621450653, guid: 2ae828f6cd4aff44f86893e6e5863981, type: 3}
+  weaponTilemap: {fileID: -7562125970091603924, guid: a42d9b7266e8bbb4cbdf3ee29646da74, type: 3}
   paths: {fileID: 7165501790920665188, guid: 76ca62ea647b64b3e8e9bc91bfd89524, type: 3}
+  towers: {fileID: 5136590537350472297, guid: ea9a1208c584c5243a189b0848a289ee, type: 3}
 --- !u!114 &2175353760177175721
 MonoBehaviour:
   m_ObjectHideFlags: 0

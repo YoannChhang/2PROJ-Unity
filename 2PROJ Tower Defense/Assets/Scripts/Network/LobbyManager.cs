@@ -10,6 +10,8 @@ using UnityEngine.UI;
 using System.Runtime.InteropServices.ComTypes;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using UnityEngine.Events;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -18,14 +20,22 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TMP_Text _lobbyCodeDisplay;
 
     [SerializeField] private GameObject _userInLobbyPrefab;
+    [SerializeField] private GameObject lobbySelectionItemPrefab;
+    [SerializeField] private GameObject lobbySelectionItemContainer;
     [SerializeField] private GameObject _userInLobbyContainer;
+    [SerializeField] private Button _readyButton;
+
+
+    //Screens to toggle
     [SerializeField] private GameObject _connectionModeScreen;
     [SerializeField] private GameObject _lobbyScreen;
-    [SerializeField] private Button _readyButton;
+    [SerializeField] private GameObject selectLobbyScreen;
+    private string currentScreen = "SelectConnectionMode";
 
     //Storing all info related to lobby
     private Lobby hostLobby;
     private Lobby joinedLobby;
+    //private List<> lobbyList;
 
     //timers
     private float heartbeatTimer;
@@ -48,7 +58,7 @@ public class LobbyManager : MonoBehaviour
     private void Awake()
     {
         readyStatus = false;
-        CloseLobby();
+        goto_SelectConnMode();
     }
     void OnEnable()
     {
@@ -60,6 +70,8 @@ public class LobbyManager : MonoBehaviour
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         playerName = "TDPlayer" + UnityEngine.Random.Range(10, 99);
+
+        PlayerPrefs.SetString("PLAYER_NAME", playerName);
         Debug.Log($"Player name {playerName}");
 
 
@@ -68,7 +80,7 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
- 
+
         HandleLobbyHeartbeat();
         HandleLobbyPollForUpdates();
         //HandleLobbyUpdatePlayerList();
@@ -76,6 +88,7 @@ public class LobbyManager : MonoBehaviour
         HandleUpdates();
 
     }
+
 
     //Lobby heartbeat in order for it not to shutdown
     private async void HandleLobbyHeartbeat()
@@ -112,10 +125,7 @@ public class LobbyManager : MonoBehaviour
 
                 if (joinedLobby.Data["GAME_STARTED"].Value != "0")
                 {
-                    if (!IsLobbyHost())
-                    {
-                        RelayManager.instance.JoinRelay(joinedLobby.Data["GAME_STARTED"].Value);
-                    }
+                    
                     joinedLobby = null;
 
                     SceneManager.LoadScene("GameScene");
@@ -159,14 +169,13 @@ public class LobbyManager : MonoBehaviour
                                 }
                             }
 
-                            string relayCode = await RelayManager.instance.CreateRelay();
-
                             Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
                             {
                                 Data = new Dictionary<string, DataObject>{
-                                    { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
+                                    { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "1") },
                                 }
                             });
+
 
                             joinedLobby = lobby;
 
@@ -210,6 +219,25 @@ public class LobbyManager : MonoBehaviour
                 }
 
 
+                
+
+            }
+        }
+        else
+        {
+            handleUpdatesTimer -= Time.deltaTime;
+            if (handleUpdatesTimer < 0f)
+            {
+                float handleUpdatesTimerMax = 2f;
+                handleUpdatesTimer = handleUpdatesTimerMax;
+
+
+                if (currentScreen == "SelectLobby")
+                {
+                    LoadLobbyList();
+
+                }
+                
             }
         }
     }
@@ -221,7 +249,9 @@ public class LobbyManager : MonoBehaviour
         try
         {
             string lobbyName = "MyLobby";
-            int maxPlayers = 4;
+            int maxPlayers = 9;
+            //Relay
+            string relayCode = await RelayManager.instance.CreateRelay();
 
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
             {
@@ -231,6 +261,7 @@ public class LobbyManager : MonoBehaviour
                 {
                     { "SELECTED_LEVEL", new DataObject(DataObject.VisibilityOptions.Public, "1") },
                     { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "0") },
+                    { "RELAY_CODE", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
                 }
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions); ;
@@ -243,8 +274,10 @@ public class LobbyManager : MonoBehaviour
             //UI
             _lobbyCodeDisplay.text = lobby.LobbyCode;
 
+
+
             SetReadyButton();
-            OpenLobby();
+            goto_Lobby();
 
         }
         catch (LobbyServiceException e)
@@ -254,32 +287,38 @@ public class LobbyManager : MonoBehaviour
     }
 
 
-    public async void JoinLobby()
+    public async void JoinLobby(string selectedLobbyId)
     {
         try
         {
-            string inputedLobbyCode = _lobbyCodeInput.text;
 
-            JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
+
+            if (selectedLobbyId == null) return;
+
+            JoinLobbyByIdOptions joinLobbyByIdOptions = new JoinLobbyByIdOptions
             {
                 Player = GetPlayer()
             };
 
-            Lobby lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(inputedLobbyCode, joinLobbyByCodeOptions);
+            Lobby lobby = await Lobbies.Instance.JoinLobbyByIdAsync(selectedLobbyId, joinLobbyByIdOptions);
             joinedLobby = lobby;
 
-            Debug.Log($"Joined the lobby {inputedLobbyCode}");
+            Debug.Log($"Joined the lobby {selectedLobbyId}");
 
             _lobbyCodeDisplay.text = lobby.LobbyCode;
 
+            RelayManager.instance.JoinRelay(joinedLobby.Data["RELAY_CODE"].Value);
+
 
             SetReadyButton();
-            OpenLobby();
+            goto_Lobby();
+
         }
         catch (LobbyServiceException e)
         {
             Debug.LogError(e);
         }
+       
     }
 
 
@@ -332,16 +371,86 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private void OpenLobby()
+    private async void LoadLobbyList()
     {
-        _connectionModeScreen.SetActive(false);
-        _lobbyScreen.SetActive(true);
+        try
+        {
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Count = 25;
+
+            // Filter for open lobbies only
+            options.Filters = new List<QueryFilter>()
+            {
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.AvailableSlots,
+                    op: QueryFilter.OpOptions.GT,
+                    value: "0")
+            };
+
+            //Order by newest lobbies first
+            options.Order = new List<QueryOrder>()
+            {
+                new QueryOrder(
+                    asc: false,
+                    field: QueryOrder.FieldOptions.Created)
+            };
+            QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
+            
+
+            HelperFunctions.remove_all_childs_from_gameobject(lobbySelectionItemContainer);
+
+            foreach (Lobby lobby in lobbies.Results)
+            {
+                GameObject lobbyObj = Instantiate(lobbySelectionItemPrefab, lobbySelectionItemContainer.transform);
+                TMP_Text[] title_and_player_count = lobbyObj.GetComponentsInChildren<TMP_Text>();
+                title_and_player_count[0].text = lobby.Name;
+                title_and_player_count[1].text = $"{lobby.Players.Count}/{lobby.Players.Capacity}";
+                lobbyObj.GetComponentInChildren<Text>().text = lobby.Id;
+                lobbyObj.GetComponentInChildren<Button>().onClick.AddListener(() =>
+                {
+                    JoinLobby(lobby.Id);
+                });
+
+                
+            }
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
     }
-    private void CloseLobby()
+
+    public void goto_SelectLobby()
     {
-        _connectionModeScreen.SetActive(true);
+        currentScreen = "SelectLobby";
+
+        selectLobbyScreen.SetActive(true);
+
         _lobbyScreen.SetActive(false);
+        _connectionModeScreen.SetActive(false);
     }
+    private void goto_Lobby()
+    {
+        currentScreen = "Lobby";
+
+        _lobbyScreen.SetActive(true);
+
+        _connectionModeScreen.SetActive(false);
+        selectLobbyScreen.SetActive(false);
+
+    }
+    private void goto_SelectConnMode()
+    {
+        currentScreen = "SelectConnectionMode";
+        _connectionModeScreen.SetActive(true);
+
+        selectLobbyScreen.SetActive(false);
+        _lobbyScreen.SetActive(false);
+
+    }
+
+
+
     private bool IsLobbyHost()
     {
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;

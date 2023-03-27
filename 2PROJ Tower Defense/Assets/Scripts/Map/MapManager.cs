@@ -12,8 +12,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] public Tilemap tilemapPrefab;
     [SerializeField] public Grid grid;
 
-    [SerializeField] public int gridWidth = 40;
-    [SerializeField] public int gridHeight = 35;
+    [SerializeField] public int numberOfTilesX = 40;
+    [SerializeField] public int numberOfTilesY = 35;
 
     private TilemapRenderer tilemapRenderer;
 
@@ -31,9 +31,9 @@ public class MapManager : MonoBehaviour
         HelperFunctions.remove_all_childs_from_gameobject(grid.gameObject);
 
 
-        for (int y = 0; y < gridHeight; y++)
+        for (int y = 0; y < numberOfTilesY; y++)
         {
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < numberOfTilesX; x++)
             {
 
                 Tilemap newTile = Tilemap.Instantiate(tilemapPrefab);
