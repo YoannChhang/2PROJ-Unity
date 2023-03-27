@@ -36,35 +36,4 @@ public class Waypoints : MonoBehaviour
             Gizmos.DrawSphere(waypoints[i], waypointHandleSize);
         }
     }
-
-    private void OnMouseDown()
-    {
-        Vector3 mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
-
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            if (Vector3.Distance(mousePosition, waypoints[i]) < waypointHandleSize)
-            {
-                selectedWaypoint = i;
-                break;
-            }
-        }
-    }
-
-    private void OnMouseDrag()
-    {
-        if (selectedWaypoint != -1)
-        {
-            Vector3 mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-
-            waypoints[selectedWaypoint] = mousePosition;
-        }
-    }
-
-    private void OnMouseUp()
-    {
-        selectedWaypoint = -1;
-    }
 }
