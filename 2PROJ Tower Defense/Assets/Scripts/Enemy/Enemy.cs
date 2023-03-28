@@ -11,6 +11,7 @@ public class Enemy : NetworkBehaviour
     public int maxHealth = 10;
     public int damage = 1;
     public int gold = 5;
+    public int difficulty = 1;
 
     private int currentHealth;
     private int currentWaypoint = 0;
@@ -42,6 +43,22 @@ public class Enemy : NetworkBehaviour
             DealDamageToBase();
             Destroy(gameObject);
         }
+    }
+
+    public float GetRemainingDistance()
+    {
+        float remainingDistance = 0f;
+        for (int i = currentWaypoint; i < path.waypoints.Length - 1; i++)
+        {
+            remainingDistance += Vector3.Distance(path.waypoints[i], path.waypoints[i + 1]);
+        }
+        remainingDistance += Vector3.Distance(transform.position, path.waypoints[currentWaypoint]);
+        return remainingDistance;
+    }
+
+    public int GetDifficulty()
+    {
+        return difficulty;
     }
 
     private void DealDamageToBase()
