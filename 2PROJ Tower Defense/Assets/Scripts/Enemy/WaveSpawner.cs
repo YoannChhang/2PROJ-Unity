@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    [SerializeField]
+    private Transform enemyPrefab;
+    [SerializeField]
+    private Transform spawnPoint;
 
-    private List<Wave> waves;
+    private float countdown = 2f;
 
-    private Enemy enemyPrefab;
-    private int currWave;
+    [SerializeField]
+    private float timeBetweenWaves = 5f;
 
+    private int waveIndex=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,29 +24,27 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(countdown <=0f){
+            StartCoroutine(SpawnWave());
+            countdown = timeBetweenWaves;
+        }
+
+        countdown -= Time.deltaTime;    
     }
 
-    
-
-}
-
-public class Wave {
-
-    public List<Enemy> wave;
-    public int spawnBuffer;
-
-    // Start is called before the first frame update
-    void Start()
+    IEnumerator SpawnWave()
     {
-        
-    }
+        waveIndex++;
 
-    // Update is called once per frame
-    void Update()
+        for (int i =0; i< waveIndex;i++)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(0.5f);
+        }
+
+    }
+    void SpawnEnemy()
     {
-        
+        Instantiate(enemyPrefab,spawnPoint.position,spawnPoint.rotation);
     }
-
-
 }
