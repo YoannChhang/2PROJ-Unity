@@ -16,15 +16,15 @@ using UnityEngine.UIElements;
 
 public class TowerManager : NetworkBehaviour
 {
+    [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private Grid grid;
+    [SerializeField] private Tilemap baseTilemap;
+    [SerializeField] private Tilemap midTilemap;
+    [SerializeField] private Tilemap weaponTilemap;
 
-    [SerializeField] public Grid grid;
-    [SerializeField] public Tilemap baseTilemap;
-    [SerializeField] public Tilemap midTilemap;
-    [SerializeField] public Tilemap weaponTilemap;
-
-    [SerializeField] public Tilemap paths;
-    [SerializeField] public Tilemap towers;
-
+    [SerializeField] private Tilemap paths;
+    [SerializeField] private Tilemap towers;
+    
     private NetworkList<TowerData> SyncedTowers;
 
     void Awake()
@@ -104,7 +104,6 @@ public class TowerManager : NetworkBehaviour
     private void HandleSyncedDataUpdates()
     {
 
-
         TileBase tile = MapManager.getTileInMap(towers, 0, 0);
         TileBase mid = MapManager.getTileInMap(towers, 2, 0);
         TileBase top = MapManager.getTileInMap(towers, 4, 0);
@@ -121,6 +120,13 @@ public class TowerManager : NetworkBehaviour
             GameObject sortObject = new GameObject();
             sortObject.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
             sortObject.transform.SetParent(grid.transform, false);
+
+            Vector3 cellWorldPos = grid.GetCellCenterWorld(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y));
+            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+
+
+            GameObject TowerLogic = Instantiate(towerPrefab, cellWorldPos, rotation, sortObject.transform);
+            TowerLogic.name = "Logic";
 
             Tilemap baseTile = Instantiate(baseTilemap);
             baseTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), tile);

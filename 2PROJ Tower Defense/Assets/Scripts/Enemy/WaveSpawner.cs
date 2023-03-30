@@ -5,9 +5,9 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField]
-    private Transform enemyPrefab;
+    private GameObject enemyPrefab;
     [SerializeField]
-    private Transform spawnPoint;
+    private Waypoints waypoints;
 
     private float countdown = 2f;
 
@@ -16,23 +16,24 @@ public class WaveSpawner : MonoBehaviour
 
     private int waveIndex=0;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        enemyPrefab.GetComponent<Enemy>().path = waypoints;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(countdown <=0f){
+        if(countdown <=0f)
+        {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
 
-        countdown -= Time.deltaTime;    
+        countdown -= Time.deltaTime;
     }
 
-    IEnumerator SpawnWave()
+    private IEnumerator SpawnWave()
     {
         waveIndex++;
 
@@ -40,11 +41,15 @@ public class WaveSpawner : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(0.5f);
+
         }
 
     }
-    void SpawnEnemy()
+    private void SpawnEnemy()
     {
-        Instantiate(enemyPrefab,spawnPoint.position,spawnPoint.rotation);
+
+        Vector3 pos = waypoints.waypoints[0];
+        GameObject newEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
     }
+
 }

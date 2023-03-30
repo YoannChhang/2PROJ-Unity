@@ -14,7 +14,7 @@ public class Enemy : NetworkBehaviour
     public int difficulty = 1;
 
     private int currentHealth;
-    private int currentWaypoint = 0;
+    private int currentWaypoint = 1;
 
     private void Start()
     {
@@ -50,9 +50,9 @@ public class Enemy : NetworkBehaviour
         float remainingDistance = 0f;
         for (int i = currentWaypoint; i < path.waypoints.Length - 1; i++)
         {
-            remainingDistance += Vector3.Distance(path.waypoints[i], path.waypoints[i + 1]);
+            remainingDistance += HelperFunctions.get_isometric_distance(path.waypoints[i], path.waypoints[i + 1]);
         }
-        remainingDistance += Vector3.Distance(transform.position, path.waypoints[currentWaypoint]);
+        remainingDistance += HelperFunctions.get_isometric_distance(transform.position, path.waypoints[currentWaypoint]);
         return remainingDistance;
     }
 

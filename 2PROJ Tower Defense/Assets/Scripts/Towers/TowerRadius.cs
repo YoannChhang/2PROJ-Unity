@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Unity.Netcode;
-
+using UnityEngine;
 
 public enum TowerTarget
 {
@@ -14,91 +13,90 @@ public enum TowerTarget
     Closest
 }
 
-public class TowerRadius : NetworkBehaviour
+public class TowerRadius : MonoBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
 
     [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private float detectionInterval = 0.5f;
+    [SerializeField] private float detectionInterval = 0.25f;
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private float shootInterval = 2f;
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
+    private bool shooting = false;
 
 
 
     private void Start()
     {
-        if (IsServer)
+
+        Debug.Log("Test");
+
+        if (NetworkManager.Singleton.IsServer)
         {
-            StartCoroutine(DetectEnemiesInRadius());
-            StartCoroutine(SpawnAttacks());
+            InvokeRepeating("DetectEnemiesInRadius", 0f, detectionInterval);
         }
     }
 
-    private IEnumerator DetectEnemiesInRadius()
+    private void DetectEnemiesInRadius()
     {
-        while (true)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //Debug.Log("Enemies : " + enemies.Length);
+        enemiesInRadius.Clear();
+
+        foreach (GameObject enemy in enemies)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
-            foreach (Collider collider in colliders)
+
+            //Debug.Log(GetEnemyDistance(enemy));
+            if (GetEnemyDistance(enemy) <= detectionRadius)
             {
-                if (collider.gameObject.layer == LayerMask.GetMask("Enemy"))
+                if (enemiesInRadius.Contains(enemy) == false)
                 {
-                    if (!enemiesInRadius.Contains(collider.gameObject))
-                    {
-                        enemiesInRadius.Add(collider.gameObject);
-                    }
+                    enemiesInRadius.Add(enemy);
                 }
             }
 
-            yield return new WaitForSeconds(detectionInterval);
+            else
+            {
+                if (enemiesInRadius.Contains(enemy))
+                {
+                    enemiesInRadius.Remove(enemy);
+                }
+            }
+
         }
+
     }
 
     private IEnumerator SpawnAttacks()
     {
-        while (true)
-        {
-            if (enemiesInRadius.Count > 0)
-            {
 
-                Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-                Vector3 attackPos = new Vector3(0f, 0f, 0f);
+        Debug.Log(enemiesInRadius.Count);
 
-                GameObject target = GetTarget(enemiesInRadius);
+        //Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+        //Vector3 attackPos = new Vector3(0f, 0f, 0f);
 
-                GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
-                //newAttack.GetComponent<NAME>.target = target;
-                NetworkObject newAttackNetObject = newAttack.GetComponent<NetworkObject>();
+        GameObject target = GetTarget(enemiesInRadius);
 
-                NetworkObject.Spawn(newAttackNetObject);
+        //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
+        ////newAttack.GetComponent<NAME>.target = target;
+        //NetworkObject newAttackNetObject = newAttack.GetComponent<NetworkObject>();
 
-                yield return new WaitForSeconds(shootInterval);
+        //NetworkObject.Spawn(newAttackNetObject);
 
-            }
-        }
-    }
+        enemiesInRadius.Remove(target);
+        Destroy(target);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (IsServer && other.gameObject.layer == LayerMask.GetMask("Enemy"))
-        {
-            enemiesInRadius.Add(other.gameObject);
-        }
-    }
+        yield return new WaitForSeconds(shootInterval);
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (IsServer && enemiesInRadius.Contains(other.gameObject))
-        {
-            enemiesInRadius.Remove(other.gameObject);
-        }
+        shooting = false;
+
     }
 
     private float GetEnemyDistance(GameObject target)
     {
-        return Vector3.Distance(transform.position, target.transform.position);
+        return HelperFunctions.get_isometric_distance(transform.position, target.transform.position);
     }
+
 
     private GameObject GetTarget(List<GameObject> targets)
     {
@@ -122,7 +120,6 @@ public class TowerRadius : NetworkBehaviour
 
         return target;
     }
-
     private GameObject GetFirstEnemy(List<GameObject> targets)
     {
         GameObject FirstTarget = targets[0];
@@ -138,7 +135,6 @@ public class TowerRadius : NetworkBehaviour
         return FirstTarget;
 
     }
-
     private GameObject GetLastEnemy(List<GameObject> targets)
     {
         GameObject LastTarget = targets[0];
@@ -151,7 +147,6 @@ public class TowerRadius : NetworkBehaviour
         }
         return LastTarget;
     }
-
     private GameObject GetStrongEnemy(List<GameObject> targets)
     {
         GameObject StrongTarget = targets[0];
@@ -164,7 +159,6 @@ public class TowerRadius : NetworkBehaviour
         }
         return StrongTarget;
     }
-
     private GameObject GetWeakEnemy(List<GameObject> targets)
     {
         GameObject WeakTarget = targets[0];
@@ -177,32 +171,45 @@ public class TowerRadius : NetworkBehaviour
         }
         return WeakTarget;
     }
-
     private GameObject GetCloseEnemy(List<GameObject> targets)
     {
         GameObject CloseTarget = targets[0];
+        float currDistance = HelperFunctions.get_isometric_distance(transform.position, CloseTarget.transform.position);
         for (int i = 1; i < targets.Count; i++)
         {
-            if (GetEnemyDistance(CloseTarget) > GetEnemyDistance(targets[i]))
+
+            float newDistance = GetEnemyDistance(targets[i]);
+
+            if (currDistance > newDistance)
             {
                 CloseTarget = targets[i];
+                currDistance = newDistance;
             }
         }
         return CloseTarget;
     }
 
+
     private void Update()
     {
-        if (enemiesInRadius.Count > 0)
+
+        if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
         {
             // There are enemies in the detection radius, do something
-            Debug.Log("Enemy detected!");
+            
+            if (!shooting)
+            {
+                shooting = true;
+                StartCoroutine(SpawnAttacks());
+            }
+
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.Euler(-45f, 0f, 0f), Vector3.one);
+        Gizmos.DrawWireSphere(Vector3.zero, detectionRadius);
     }
+
 }
