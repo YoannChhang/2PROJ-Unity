@@ -15,6 +15,13 @@ public class WaveSpawner : MonoBehaviour
     private float timeBetweenWaves = 5f;
 
     private int waveIndex=0;
+    int[][] myArray = new int[][] {
+        new int[] {1, 1, 1},
+        new int[] {1,1},
+    };
+
+
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -35,21 +42,24 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        waveIndex++;
-
-        for (int i =0; i< waveIndex;i++)
-        {
-            SpawnEnemy();
-            yield return new WaitForSeconds(0.5f);
-
-        }
-
-    }
-    private void SpawnEnemy()
-    {
-
         Vector3 pos = waypoints.waypoints[0];
-        GameObject newEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        for (int i=0;i<myArray[waveIndex].Length;i++)
+        {
+            switch(myArray[waveIndex][i])
+            {
+                case 1:
+                    Instantiate(enemyPrefab, pos, Quaternion.identity);
+                    break;
+                default:
+                    Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
+                    break;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+        waveIndex++;
+        yield return new WaitForSeconds(0.5f);
+        
     }
-
+        
 }
+        
