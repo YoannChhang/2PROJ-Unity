@@ -16,9 +16,6 @@ using UnityEngine.Events;
 public class LobbyManager : MonoBehaviour
 {
 
-    [SerializeField] private TMP_InputField _lobbyCodeInput;
-    [SerializeField] private TMP_Text _lobbyCodeDisplay;
-
     [SerializeField] private GameObject _userInLobbyPrefab;
     [SerializeField] private GameObject lobbySelectionItemPrefab;
     [SerializeField] private GameObject lobbySelectionItemContainer;
@@ -269,10 +266,8 @@ public class LobbyManager : MonoBehaviour
             hostLobby = lobby;
             joinedLobby = hostLobby;
 
-            Debug.Log($"Created the lobby {lobby.Id} | {lobby.LobbyCode}");
+            Debug.Log($"Created the lobby {lobby.Id}");
 
-            //UI
-            _lobbyCodeDisplay.text = lobby.LobbyCode;
 
 
 
@@ -305,7 +300,6 @@ public class LobbyManager : MonoBehaviour
 
             Debug.Log($"Joined the lobby {selectedLobbyId}");
 
-            _lobbyCodeDisplay.text = lobby.LobbyCode;
 
             RelayManager.instance.JoinRelay(joinedLobby.Data["RELAY_CODE"].Value);
 
@@ -342,20 +336,21 @@ public class LobbyManager : MonoBehaviour
         // Delete all the children of the _userInLobbyContainer
         HelperFunctions.remove_all_childs_from_gameobject(_userInLobbyContainer);
 
-
         //Add all player prefabs
         foreach (Player player in joinedLobby.Players)
         {
+
             GameObject obj = Instantiate(_userInLobbyPrefab);
             obj.transform.SetParent(_userInLobbyContainer.transform, false);
             obj.GetComponentInChildren<TMP_Text>().text = player.Data["PlayerName"].Value;
 
             //Ready Status for each players
-            for (int i = 0; i < obj.transform.GetChild(0).transform.childCount; i++)
+            for (int i = 0; i < obj.transform.childCount; i++)
             {
-                Transform child = obj.transform.GetChild(0).transform.GetChild(i);
+                Transform child = obj.transform.GetChild(i);
                 if (child.name == "ReadyIcon")
                 {
+                    Debug.Log(player.Data["ReadyStatus"].Value);
                     if (player.Data["ReadyStatus"].Value == "True")
                     {
                         child.gameObject.SetActive(true);
@@ -461,8 +456,10 @@ public class LobbyManager : MonoBehaviour
 
         string readyText = readyStatus ? "Unready" : "Ready";
         Color readyColor = readyStatus ? Color.green : Color.red;
+
         _readyButton.GetComponentInChildren<TMP_Text>().text = readyText;
         _readyButton.GetComponentInChildren<Image>().color = readyColor;
+
 
     }
 

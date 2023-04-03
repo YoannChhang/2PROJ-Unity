@@ -16,9 +16,6 @@ using UnityEngine;
 
 public class RelayManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _joinCodeText;
-
-
     private UnityTransport _transport;
     private const int MaxPlayers = 4;
 
@@ -49,7 +46,7 @@ public class RelayManager : MonoBehaviour
     {
 
         Allocation a = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
-        _joinCodeText.text = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
+        string joinCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
 
         _transport.SetRelayServerData(new RelayServerData(a, "dtls"));
 
@@ -58,7 +55,7 @@ public class RelayManager : MonoBehaviour
         Debug.Log("Created Relay");
 
 
-        return _joinCodeText.text;
+        return joinCode;
     }
 
     public async void JoinRelay(string relayCode)
