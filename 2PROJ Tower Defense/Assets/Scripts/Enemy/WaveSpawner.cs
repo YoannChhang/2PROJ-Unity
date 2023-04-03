@@ -16,8 +16,8 @@ public class WaveSpawner : MonoBehaviour
 
     private int waveIndex=0;
     int[][] myArray = new int[][] {
-        new int[] {1, 1, 1},
-        new int[] {1,1},
+        new int[] {1},
+        new int[] {1},
     };
 
 

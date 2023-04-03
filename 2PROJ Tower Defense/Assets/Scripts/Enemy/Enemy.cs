@@ -69,7 +69,7 @@ public class Enemy : NetworkBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-
+        Debug.Log("SSSSSEEESSSS HHHHPPP"+ currentHealth);
         if (currentHealth <= 0)
         {
             Destroy(gameObject);

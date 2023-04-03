@@ -84,7 +84,8 @@ public class TowerLogic : MonoBehaviour
         //NetworkObject.Spawn(newAttackNetObject);
 
         enemiesInRadius.Remove(target);
-        Destroy(target);
+        //Destroy(target);
+        DealDamageToEnemy(target);
 
         yield return new WaitForSeconds(shootInterval);
 
@@ -206,6 +207,17 @@ public class TowerLogic : MonoBehaviour
         }
     }
 
+    void DealDamageToEnemy(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null){
+            e.TakeDamage(1);
+        }else{
+            Debug.LogError("No script ennemy");
+        }
+        
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.Euler(-45f, 0f, 0f), Vector3.one);
