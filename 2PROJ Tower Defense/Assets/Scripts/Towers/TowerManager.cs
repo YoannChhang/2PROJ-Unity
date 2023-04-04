@@ -40,18 +40,18 @@ public class TowerManager : NetworkBehaviour
 
     private void Update()
     {
-        if (!this.NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
-        {
-            try
-            {
-                this.NetworkObject.Spawn();
-                Debug.Log("Spawned");
-            }
-            catch
-            {
+        //if (!this.NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
+        //{
+        //    try
+        //    {
+        //        this.NetworkObject.Spawn();
+        //        Debug.Log("Spawned");
+        //    }
+        //    catch
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         if (gameObject.name != "TowerMap")
         {

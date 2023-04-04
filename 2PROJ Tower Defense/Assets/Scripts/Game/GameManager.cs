@@ -10,9 +10,8 @@ using System;
 public class GameManager : NetworkBehaviour
 {
 
-    private NetworkVariable<bool> isPaused = new NetworkVariable<bool>(false);
-    private NetworkVariable<bool> isOver = new NetworkVariable<bool>(false);
-
+    private bool isPaused = false;
+    private bool isOver = false;
     [SerializeField] private GameObject pauseMenuPrefab;
     [SerializeField] private GameObject winMenuPrefab;
     [SerializeField] private GameObject loseMenuPrefab;
@@ -21,57 +20,57 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject parent = GameObject.Find("UI");
-        Debug.Log(parent);
+        //GameObject parent = GameObject.Find("UI");
+        //Debug.Log(parent);
 
-        GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
-        pauseMenu.gameObject.name = "PauseMenu";
+        //GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        //pauseMenu.gameObject.name = "PauseMenu";
 
-        GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity,parent.transform);
-        winMenu.gameObject.name = "WinMenu";
+        //GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity,parent.transform);
+        //winMenu.gameObject.name = "WinMenu";
 
-        GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
-        loseMenu.gameObject.name = "LoseMenu";
+        //GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        //loseMenu.gameObject.name = "LoseMenu";
 
-        pauseMenu.SetActive(false);
-        winMenu.SetActive(false);
-        loseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
+        //winMenu.SetActive(false);
+        //loseMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (NetworkManager.Singleton != null)
-        {
-            if (!NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
-            {
-                try
-                {
-                    this.NetworkObject.Spawn();
-                }
-                catch
-                {
-                }
-            }
-        }
+        //if (NetworkManager.Singleton != null)
+        //{
+        //    if (!NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
+        //    {
+        //        try
+        //        {
+        //            this.NetworkObject.Spawn();
+        //        }
+        //        catch
+        //        {
+        //        }
+        //    }
+        //}
        
         if (gameObject.name != "GameManager")
         {
             gameObject.name = "GameManager";
         }
 
-        if (!isOver.Value)
+        if (!isOver)
         {
 
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                Debug.Log(!isPaused.Value);
-                if (!isPaused.Value)
+                Debug.Log(!isPaused);
+                if (!isPaused)
                 {
                     Debug.Log("Test");
                     GamePausedServerRpc();
 
-                } else if (isPaused.Value)
+                } else if (isPaused)
                 {
                     Debug.Log("Test2");
 
@@ -92,12 +91,35 @@ public class GameManager : NetworkBehaviour
 
         
     }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        GameObject parent = GameObject.Find("UI");
+        Debug.Log(parent);
+
+        GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        pauseMenu.gameObject.name = "PauseMenu";
+
+        GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        winMenu.gameObject.name = "WinMenu";
+
+        GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        loseMenu.gameObject.name = "LoseMenu";
+
+        pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
+        loseMenu.SetActive(false);
+
+    }
+
     [ClientRpc]
     private void GameOverClientRpc()
     {
         GameObject loseMenu = GameObject.Find("UI").transform.Find("LoseMenu").gameObject;
 
-        isOver.Value = true;
+        isOver = true;
         loseMenu.SetActive(true);
 
         if (!NetworkManager.Singleton.IsServer)
@@ -122,7 +144,7 @@ public class GameManager : NetworkBehaviour
     {
         GameObject winMenu = GameObject.Find("UI").transform.Find("WinMenu").gameObject;
 
-        isOver.Value = true;
+        isOver = true;
         winMenu.SetActive(true);
 
         if (!NetworkManager.Singleton.IsServer)
@@ -149,7 +171,7 @@ public class GameManager : NetworkBehaviour
 
         GameObject pauseMenu = GameObject.Find("UI").transform.Find("PauseMenu").gameObject;
 
-        isPaused.Value = true;
+        isPaused = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -170,7 +192,7 @@ public class GameManager : NetworkBehaviour
 
         GameObject pauseMenu = GameObject.Find("UI").transform.Find("PauseMenu").gameObject;
 
-        isPaused.Value = false;
+        isPaused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -187,7 +209,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void returnToMenuClientRpc()
     {
-        isOver.Value = false;
+        isOver = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartMenu");
     }
@@ -202,7 +224,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void retryClientRpc()
     { 
-        isOver.Value = false;
+        isOver = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -220,7 +242,7 @@ public class GameManager : NetworkBehaviour
 
         GameObject winMenu = GameObject.Find("UI").transform.Find("WinMenu").gameObject;
 
-        isOver.Value = false;
+        isOver = false;
         winMenu.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -232,9 +254,9 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    public bool IsPaused() { return isPaused.Value; }
+    public bool IsPaused() { return isPaused; }
 
-    public bool IsOver() { return isOver.Value; }
+    public bool IsOver() { return isOver; }
 
     private void DisableChildButton(GameObject parent, string buttonName)
     {

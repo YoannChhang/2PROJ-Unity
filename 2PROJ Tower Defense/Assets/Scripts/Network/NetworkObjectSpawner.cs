@@ -26,9 +26,11 @@ public class NetworkObjectSpawner : MonoBehaviour
         {
             GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
             gameManager.gameObject.name = "GameManager";
+            gameManager.GetComponent<NetworkObject>().Spawn();
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
             towerMap.gameObject.name = "TowerMap";
+            towerMap.GetComponent<NetworkObject>().Spawn();
         }
 
     }
