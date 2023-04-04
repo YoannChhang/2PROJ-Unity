@@ -9,6 +9,7 @@ public class NetworkObjectSpawner : MonoBehaviour
 
 
     [SerializeField] public GameObject towerMapPrefab;
+    [SerializeField] public GameObject gameManagerPrefab;
 
 
     void Start()
@@ -23,11 +24,11 @@ public class NetworkObjectSpawner : MonoBehaviour
         }
         if (NetworkManager.Singleton.IsServer)
         {
+            GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
+            gameManager.gameObject.name = "GameManager";
+
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
             towerMap.gameObject.name = "TowerMap";
-            towerMap.GetComponent<NetworkObject>().Spawn(true);
-
-            
         }
 
     }

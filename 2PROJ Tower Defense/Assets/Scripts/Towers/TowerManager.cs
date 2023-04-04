@@ -16,6 +16,7 @@ using UnityEngine.UIElements;
 
 public class TowerManager : NetworkBehaviour
 {
+    private GameObject game;
     [SerializeField] private GameObject towerPrefab;
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap baseTilemap;
@@ -32,6 +33,11 @@ public class TowerManager : NetworkBehaviour
         SyncedTowers = new NetworkList<TowerData>();
     }
 
+    void Start()
+    {
+        
+    }
+
     private void Update()
     {
         if (!this.NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
@@ -39,6 +45,7 @@ public class TowerManager : NetworkBehaviour
             try
             {
                 this.NetworkObject.Spawn();
+                Debug.Log("Spawned");
             }
             catch
             {
@@ -46,21 +53,38 @@ public class TowerManager : NetworkBehaviour
             }
         }
 
+        if (gameObject.name != "TowerMap")
+        {
+            gameObject.name = "TowerMap";
+        }
 
+        if (game == null)
+        {
+            game = GameObject.Find("GameManager");
+        }
 
-        if (Input.GetMouseButtonDown(0))
+        else
+        
         {
 
+            if (!game.GetComponent<GameManager>().IsPaused() || !game.GetComponent<GameManager>().IsOver())
+            {
 
-            Vector3Int cellIndex = getCellIndexFromMouse();
-
-            var newTower = new TowerData();
-            newTower.cellIndex = cellIndex;
-            AddTowerServerRpc(newTower);
-
+                if (Input.GetMouseButtonDown(0))
+                {
 
 
+                    Vector3Int cellIndex = getCellIndexFromMouse();
+
+                    var newTower = new TowerData();
+                    newTower.cellIndex = cellIndex;
+                    AddTowerServerRpc(newTower);
+
+
+                }
+            }
         }
+
     }
 
     //When NetworkSpawns
