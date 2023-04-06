@@ -27,7 +27,13 @@ public class PlayerManager : NetworkBehaviour
 
         }
     }
-    
+
+    //private void Update()
+    //{
+
+    //    Debug.Log(SyncedPlayers.Count);
+    //}
+
 
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayerServerRpc(PlayerData playerData)
