@@ -24,7 +24,8 @@ public class InterfaceManager : MonoBehaviour
         GoldText.GetComponentInChildren<TMP_Text>().text = "Gold : 243";
         if (NetworkManager.Singleton)
         {
-            PlayerText.GetComponentInChildren<TMP_Text>().text = $"Players : {NetworkManager.Singleton.ConnectedClientsList.Count}";
+            PlayerText.GetComponentInChildren<TMP_Text>().text =
+                $"Players : {GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SyncedPlayers.Count}";
         }
 
     }

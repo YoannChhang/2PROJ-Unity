@@ -210,7 +210,16 @@ public class TowerManager : NetworkBehaviour
 public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
 {
     public Vector3Int cellIndex;
+    public int level;
 
+    public TowerData(
+        Vector3Int cellIndex,
+        int level = 0
+        )
+    {
+        this.cellIndex = cellIndex;
+        this.level = level;
+    }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
@@ -218,16 +227,19 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
         {
             var reader = serializer.GetFastBufferReader();
             reader.ReadValueSafe(out cellIndex);
+            reader.ReadValueSafe(out level);
         }
         else
         {
             var writer = serializer.GetFastBufferWriter();
             writer.WriteValueSafe(cellIndex);
+            writer.WriteValueSafe(level);
+
         }
     }
     public bool Equals(TowerData other)
     {
-        return cellIndex == other.cellIndex;
+        return cellIndex == other.cellIndex && level == other.level;
     }
 
 }
