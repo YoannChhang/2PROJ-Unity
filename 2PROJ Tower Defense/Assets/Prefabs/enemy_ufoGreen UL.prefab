@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 6242309248404895601}
   - component: {fileID: 6242309248404895597}
   m_Layer: 0
-  m_Name: enemy_ufoGreen
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,8 +424,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5848938197269988425}
-  - component: {fileID: 6242309249049863076}
   - component: {fileID: 6242309249049863081}
+  - component: {fileID: 6242309249049863076}
+  - component: {fileID: 7924140403298001647}
   m_Layer: 6
   m_Name: enemy_ufoGreen UL
   m_TagString: Enemy
@@ -450,6 +451,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6242309249049863081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512287394422431475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac64da877e1441a41b9590c21162ff40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbar: {fileID: 1520908755}
 --- !u!114 &6242309249049863076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +480,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &6242309249049863081
+--- !u!114 &7924140403298001647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -475,15 +489,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6512287394422431475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac64da877e1441a41b9590c21162ff40, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: {fileID: 0}
-  speed: 1
-  minDistance: 0.1
-  maxHealth: 10
-  damage: 1
-  gold: 5
-  difficulty: 1
-  healthbar: {fileID: 1520908755}
-  test: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1

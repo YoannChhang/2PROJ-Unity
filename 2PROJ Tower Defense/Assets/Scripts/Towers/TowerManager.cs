@@ -93,13 +93,28 @@ public class TowerManager : NetworkBehaviour
         base.OnNetworkSpawn();
 
         //Add eventlisteners
-        if (IsClient)
+        if (NetworkManager.Singleton.IsClient)
         {
             SyncedTowers.OnListChanged += OnClientListChanged;
         }
-        if (IsServer)
+        if (NetworkManager.Singleton.IsServer)
         {
             SyncedTowers.OnListChanged += OnServerListChanged;
+
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        if (NetworkManager.Singleton.IsClient)
+        {
+            SyncedTowers.OnListChanged -= OnClientListChanged;
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            SyncedTowers.OnListChanged -= OnServerListChanged;
 
         }
     }

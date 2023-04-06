@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -14,24 +15,23 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private float timeBetweenWaves = 5f;
 
+    private Vector3 pos;
     private int waveIndex=0;
     int[][] myArray = new int[][] {
         new int[] {1},
         new int[] {1},
     };
 
-
-    
     // Start is called before the first frame update
     private void Start()
     {
-        enemyPrefab.GetComponent<Enemy>().path = waypoints;
+        pos = waypoints.waypoints[0];
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(countdown <=0f)
+        if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
         {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
@@ -40,25 +40,42 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
     }
 
+    public void SetPath(Waypoints path)
+    {
+        waypoints = path;
+    }
+
+    public Waypoints GetPath()
+    {
+        return waypoints;
+    }
+
     private IEnumerator SpawnWave()
     {
-        Vector3 pos = waypoints.waypoints[0];
         for (int i=0;i<myArray[waveIndex].Length;i++)
         {
-            switch(myArray[waveIndex][i])
-            {
-                case 1:
-                    Instantiate(enemyPrefab, pos, Quaternion.identity);
-                    break;
-                default:
-                    Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
-                    break;
-            }
+            
+            SpawnEnemy(enemyPrefab, waveIndex, i, myArray[waveIndex][i]);
+
+            //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
+                   
+            
             yield return new WaitForSeconds(0.5f);
         }
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
         
+    }
+
+    private void SpawnEnemy(GameObject prefab, int wave, int numInWave, int enemyType)
+    {
+
+        // Use enemyType to identify the correct type of the enemy.
+
+        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
+        enemy.name = "Enemy " + wave + " " + numInWave;
+        enemy.GetComponent<Enemy>().SetPath(waypoints);
+        enemy.GetComponent<NetworkObject>().Spawn();
     }
         
 }

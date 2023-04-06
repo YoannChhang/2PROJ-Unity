@@ -19,8 +19,11 @@ public class TowerLogic : MonoBehaviour
 
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private float detectionInterval = 0.25f;
+
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private float shootInterval = 2f;
+    private int attackDamage = 5;
+
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
     private bool shooting = false;
 
@@ -29,13 +32,28 @@ public class TowerLogic : MonoBehaviour
     private void Start()
     {
 
-        Debug.Log("Test");
-
         if (NetworkManager.Singleton.IsServer)
         {
             InvokeRepeating("DetectEnemiesInRadius", 0f, detectionInterval);
         }
     }
+    private void Update()
+    {
+
+        if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
+        {
+            // There are enemies in the detection radius, do something
+            
+            if (!shooting)
+            {
+                shooting = true;
+                StartCoroutine(SpawnAttacks());
+            }
+
+        }
+    }
+
+    #region AttackTarget
 
     private void DetectEnemiesInRadius()
     {
@@ -70,21 +88,14 @@ public class TowerLogic : MonoBehaviour
     private IEnumerator SpawnAttacks()
     {
 
-        Debug.Log(enemiesInRadius.Count);
+        GameObject target = GetTarget(enemiesInRadius);
 
         //Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
         //Vector3 attackPos = new Vector3(0f, 0f, 0f);
-
-        GameObject target = GetTarget(enemiesInRadius);
-
         //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
-        ////newAttack.GetComponent<NAME>.target = target;
-        //NetworkObject newAttackNetObject = newAttack.GetComponent<NetworkObject>();
+        //newAttack.GetComponent<NAME>().target = target;
+        //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
 
-        //NetworkObject.Spawn(newAttackNetObject);
-
-        enemiesInRadius.Remove(target);
-        //Destroy(target);
         DealDamageToEnemy(target);
 
         yield return new WaitForSeconds(shootInterval);
@@ -93,12 +104,22 @@ public class TowerLogic : MonoBehaviour
 
     }
 
-    private float GetEnemyDistance(GameObject target)
+    void DealDamageToEnemy(GameObject enemy)
     {
-        return HelperFunctions.get_isometric_distance(transform.position, target.transform.position);
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null){
+
+            e.TakeDamageServerRpc(attackDamage);
+
+        } else {
+            Debug.LogError("No script ennemy");
+        }
+        
     }
 
+    #endregion
 
+    #region GetTarget
     private GameObject GetTarget(List<GameObject> targets)
     {
 
@@ -121,6 +142,11 @@ public class TowerLogic : MonoBehaviour
 
         return target;
     }
+    private float GetEnemyDistance(GameObject target)
+    {
+        return HelperFunctions.get_isometric_distance(transform.position, target.transform.position);
+    }
+
     private GameObject GetFirstEnemy(List<GameObject> targets)
     {
         GameObject FirstTarget = targets[0];
@@ -190,33 +216,10 @@ public class TowerLogic : MonoBehaviour
         return CloseTarget;
     }
 
+    #endregion
 
-    private void Update()
-    {
 
-        if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
-        {
-            // There are enemies in the detection radius, do something
-            
-            if (!shooting)
-            {
-                shooting = true;
-                StartCoroutine(SpawnAttacks());
-            }
 
-        }
-    }
-
-    void DealDamageToEnemy(GameObject enemy)
-    {
-        Enemy e = enemy.GetComponent<Enemy>();
-        if (e != null){
-            e.TakeDamage(1);
-        }else{
-            Debug.LogError("No script ennemy");
-        }
-        
-    }
     
     private void OnDrawGizmos()
     {

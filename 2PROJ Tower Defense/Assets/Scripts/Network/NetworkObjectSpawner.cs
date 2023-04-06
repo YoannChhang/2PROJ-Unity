@@ -8,8 +8,10 @@ public class NetworkObjectSpawner : MonoBehaviour
 {
 
 
-    [SerializeField] public GameObject towerMapPrefab;
-    [SerializeField] public GameObject gameManagerPrefab;
+    [SerializeField] private GameObject towerMapPrefab;
+    [SerializeField] private GameObject gameManagerPrefab;
+    [SerializeField] private GameObject basePrefab;
+    [SerializeField] private GameObject spawnerPrefab;
 
 
     void Start()
@@ -31,8 +33,22 @@ public class NetworkObjectSpawner : MonoBehaviour
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
             towerMap.gameObject.name = "TowerMap";
             towerMap.GetComponent<NetworkObject>().Spawn();
-        }
 
+            GameObject baseTower = Instantiate(basePrefab, Vector3.zero, Quaternion.identity);
+            baseTower.gameObject.name = "Base";
+            baseTower.GetComponent<Base>().SetGame(GameObject.Find("GameManager").GetComponent<GameManager>());
+            baseTower.GetComponent<NetworkObject>().Spawn();
+
+            
+            GameObject spawner1 = Instantiate(spawnerPrefab, Vector3.zero, Quaternion.identity);
+            spawner1.gameObject.name = "Spawner UpperLeft";
+            spawner1.gameObject.GetComponent<WaveSpawner>().SetPath(GameObject.Find("Waypoints Upper Left").GetComponent<Waypoints>());
+
+            
+            GameObject spawner2 = Instantiate(spawnerPrefab, Vector3.zero, Quaternion.identity);
+            spawner2.gameObject.name = "Spawner UpperRight";
+            spawner2.gameObject.GetComponent<WaveSpawner>().SetPath(GameObject.Find("Waypoints Upper Right").GetComponent<Waypoints>());
+        }
     }
 }
     
