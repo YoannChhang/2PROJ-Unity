@@ -23,6 +23,7 @@ public class ChatManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         GameObject.Find("ChatManager").GetComponent<ChatManager>().SendMessageServerRpc($"{PlayerPrefs.GetString("PLAYER_NAME")} joined the lobby", "Game");
 
     }

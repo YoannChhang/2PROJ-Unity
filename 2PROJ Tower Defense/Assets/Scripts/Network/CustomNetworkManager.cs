@@ -7,6 +7,8 @@ public class CustomNetworkManager : NetworkManager
 {
     public static NetworkManager instance;
 
+    
+
     private void Awake()
     {
         if (instance == null)
@@ -18,5 +20,8 @@ public class CustomNetworkManager : NetworkManager
         {
             Destroy(gameObject);
         }
+
     }
+
+
 }

@@ -12,6 +12,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using UnityEngine.Events;
+using Unity.Collections;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -71,6 +72,8 @@ public class LobbyManager : MonoBehaviour
 
         PlayerPrefs.SetString("PLAYER_NAME", playerName);
         Debug.Log($"Player name {playerName}");
+
+
 
 
 
@@ -268,6 +271,11 @@ public class LobbyManager : MonoBehaviour
             joinedLobby = hostLobby;
 
             lobbyTitleText.GetComponentInChildren<TMP_Text>().text = lobbyName;
+
+
+            var playerData = new PlayerData();
+            playerData.name = playerName;
+            GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().AddPlayerServerRpc(playerData);
             
 
             Debug.Log($"Created the lobby {lobby.Id}");
@@ -306,8 +314,10 @@ public class LobbyManager : MonoBehaviour
 
 
             RelayManager.instance.JoinRelay(joinedLobby.Data["RELAY_CODE"].Value);
+
             lobbyTitleText.GetComponentInChildren<TMP_Text>().text = joinedLobby.Name;
 
+            
 
 
             SetReadyButton();
