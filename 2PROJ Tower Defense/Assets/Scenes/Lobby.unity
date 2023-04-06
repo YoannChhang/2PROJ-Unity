@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 645804213}
   m_HandleRect: {fileID: 645804212}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5608,6 +5608,11 @@ MonoBehaviour:
     NetworkPrefabs:
     - Override: 0
       Prefab: {fileID: 2175353760177175716, guid: 496b33e63a13e4598b7dbeefb5ac9917, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 2483076946168418834, guid: 8b8794d2fca8c4044953e978a82925eb, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
