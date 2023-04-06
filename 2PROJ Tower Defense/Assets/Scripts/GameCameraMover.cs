@@ -11,6 +11,7 @@ public class GameCameraMover : MonoBehaviour
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     [SerializeField] private TMP_Text CameraModeText;
+    [SerializeField] private GameObject Interface;
 
     [SerializeField] private GameObject VisibleMap;
 
@@ -119,6 +120,8 @@ public class GameCameraMover : MonoBehaviour
     {
         //CameraMode UI
         CameraModeText.gameObject.SetActive(CameraMode);
+        Interface.gameObject.SetActive(!CameraMode);
+
 
     }
 

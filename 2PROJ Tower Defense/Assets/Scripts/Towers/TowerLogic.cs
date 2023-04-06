@@ -228,3 +228,12 @@ public class TowerLogic : MonoBehaviour
     }
 
 }
+
+
+public enum TowerType
+{
+    Arrow,
+    Mage,
+    Rocket,
+    Soldier
+}

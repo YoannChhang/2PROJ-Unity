@@ -28,22 +28,7 @@ public class CustomNetworkManager : NetworkManager
 
     
 
-    public void Update()
-    {
-        if (IsServer)
-        {
-            Debug.Log("Connected = " +NetworkManager.Singleton.ConnectedClientsList.Count);
-            try
-            {
-                Debug.Log("Lobby = " + GameObject.Find("LobbyManager").GetComponentInChildren<LobbyManager>().joinedLobby.Players.Count);
-            }
-            catch
-            {
-
-            }
-
-        }
-    }
+    
 
 
 }
