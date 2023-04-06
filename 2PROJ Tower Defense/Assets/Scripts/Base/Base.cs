@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Base : MonoBehaviour
+public class Base : NetworkBehaviour
 {
 
-    private int health = 100;
+    private NetworkVariable<int> health;
+    private GameManager game;
+
+    private void Awake()
+    {
+        health = new NetworkVariable<int>(10);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +26,40 @@ public class Base : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public GameManager GetGame() 
     {
-        health -= damage;
-        if (health <= 0)
+        return game;
+    }
+
+    public void SetGame(GameManager game)
+    {
+        this.game = game;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        health.OnValueChanged += OnDamageTaken;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        health.OnValueChanged -= OnDamageTaken;
+    }
+
+    public void OnDamageTaken(int prev, int curr)
+    {
+        
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(int damage)
+    {
+        health.Value -= damage;
+        if (health.Value <= 0)
         {
-            
+            game.GameOverServerRpc();
         }
     }
 }

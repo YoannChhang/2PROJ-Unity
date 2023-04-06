@@ -1,49 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
+using Unity.Netcode.Components;
 
 public class Enemy : NetworkBehaviour
 {
-    public Waypoints path;
-    public float speed = 5f;
-    public float minDistance = 0.1f;
-    public float maxHealth = 10;
-    public int damage = 1;
-    public int gold = 5;
-    public int difficulty = 1;
-    
-    public Image healthbar;
-    private float currentHealth;
+    private GameObject target;
+
+    private Waypoints path;
     private int currentWaypoint = 1;
+
+    private float speed = 1f;
+    private float minDistance = 0.1f;
+    private int damage = 10;
+    private int gold = 5;
+    private int difficulty = 1;
+
+    private float maxHealth = 20;
+    private NetworkVariable<float> currentHealth;
+    [SerializeField] private Image healthbar;
+
+    private void Awake()
+    {
+        target = GameObject.Find("Base");
+        currentHealth = new NetworkVariable<float>(maxHealth);
+    }
 
     private void Start()
     {
-        currentHealth = maxHealth;
-    
+    }
+
+    public void SetPath(Waypoints path)
+    {
+        this.path = path;
+    }
+
+    public Waypoints GetWaypoints()
+    {
+        return path;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        currentHealth.OnValueChanged += OnDamageTaken;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        currentHealth.OnValueChanged -= OnDamageTaken;
+    }
+
+    public void OnDamageTaken(float prev, float curr)
+    {
+        healthbar.fillAmount = curr / maxHealth;
+
+        //gameObject.transform.Find("Sprite").GetComponent<Light>().color = Color.red;
+        //Thread.Sleep(500); doesn't work
+        //gameObject.transform.Find("Sprite").GetComponent<Light>().color = Color.white;
+
     }
 
     private void Update()
     {
-        if (currentWaypoint < path.waypoints.Length)
+        if (NetworkManager.Singleton.IsServer)
         {
-            Vector3 targetPosition = path.waypoints[currentWaypoint];
 
-            if (Vector3.Distance(transform.position, targetPosition) < minDistance)
+            if (currentWaypoint < path.waypoints.Length)
             {
-                currentWaypoint++;
+                Vector3 targetPosition = path.waypoints[currentWaypoint];
+
+                if (Vector3.Distance(transform.position, targetPosition) < minDistance)
+                {
+                    currentWaypoint++;
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+                }
             }
             else
             {
-                transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
-            }
-        }
-        else
-        {
             
-            DealDamageToBase();
-            Destroy(gameObject);
+                DealDamageToBase();
+
+            }
+
         }
     }
 
@@ -65,17 +111,20 @@ public class Enemy : NetworkBehaviour
 
     private void DealDamageToBase()
     {
-        
+        target.GetComponent<Base>().TakeDamageServerRpc(damage);
+        gameObject.GetComponent<NetworkObject>().Despawn();
     }
 
-    public void TakeDamage(int amount)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(int amount)
     {
-        currentHealth -= amount;
-        Debug.Log("SSSSSEEESSSS HHHHPPP"+ currentHealth);
-        healthbar.fillAmount =  currentHealth / maxHealth;
-        if (currentHealth <= 0)
+        currentHealth.Value -= amount;
+
+        Debug.Log("Health : "+ currentHealth.Value);
+
+        if (currentHealth.Value <= 0)
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<NetworkObject>().Despawn();
         }
     }
 }
