@@ -1,7 +1,10 @@
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -21,6 +24,25 @@ public class CustomNetworkManager : NetworkManager
             Destroy(gameObject);
         }
 
+    }
+
+    
+
+    public void Update()
+    {
+        if (IsServer)
+        {
+            Debug.Log("Connected = " +NetworkManager.Singleton.ConnectedClientsList.Count);
+            try
+            {
+                Debug.Log("Lobby = " + GameObject.Find("LobbyManager").GetComponentInChildren<LobbyManager>().joinedLobby.Players.Count);
+            }
+            catch
+            {
+
+            }
+
+        }
     }
 
 

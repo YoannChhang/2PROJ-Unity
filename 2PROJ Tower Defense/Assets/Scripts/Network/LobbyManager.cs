@@ -33,7 +33,7 @@ public class LobbyManager : MonoBehaviour
 
     //Storing all info related to lobby
     private Lobby hostLobby;
-    private Lobby joinedLobby;
+    public Lobby joinedLobby;
     //private List<> lobbyList;
 
     //timers
@@ -73,7 +73,9 @@ public class LobbyManager : MonoBehaviour
         PlayerPrefs.SetString("PLAYER_NAME", playerName);
         Debug.Log($"Player name {playerName}");
 
+        //GameObject.Find("Return").GetComponentInChildren<Button>().onClick.AddListener(Disconnect);
 
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnect;
 
 
 
@@ -88,13 +90,16 @@ public class LobbyManager : MonoBehaviour
 
         HandleUpdates();
 
+
+
+
     }
 
 
     //Lobby heartbeat in order for it not to shutdown
     private async void HandleLobbyHeartbeat()
     {
-       
+        
         if (IsLobbyHost())
         {
             heartbeatTimer -= Time.deltaTime;
@@ -103,7 +108,14 @@ public class LobbyManager : MonoBehaviour
                 float heartbeatTimerMax = 15;
                 heartbeatTimer = heartbeatTimerMax;
 
-                await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+                try
+                {
+                    await LobbyService.Instance.SendHeartbeatPingAsync(hostLobby.Id);
+                }
+                catch
+                {
+                    Debug.Log("Error with SendHeartbeatPingAsync");
+                }
             }
         }
     }
@@ -111,6 +123,7 @@ public class LobbyManager : MonoBehaviour
     //Every x seconds the player will poll for the updates related to the lobby.
     private async void HandleLobbyPollForUpdates()
     {
+
         if (joinedLobby != null)
         {
             lobbyUpdateTimer -= Time.deltaTime;
@@ -122,7 +135,15 @@ public class LobbyManager : MonoBehaviour
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
                 joinedLobby = lobby;
 
-                UpdateLobbyPlayerList();
+                try
+                {
+                    UpdateLobbyPlayerList();
+
+                }
+                catch
+                {
+                    Debug.Log("Error with UpdateLobbyPlayerList");
+                }
 
                 if (joinedLobby.Data["GAME_STARTED"].Value != "0")
                 {
@@ -349,6 +370,7 @@ public class LobbyManager : MonoBehaviour
 
     private void UpdateLobbyPlayerList()
     {
+        
         // Delete all the children of the _userInLobbyContainer
         HelperFunctions.remove_all_childs_from_gameobject(_userInLobbyContainer);
 
@@ -450,7 +472,7 @@ public class LobbyManager : MonoBehaviour
         selectLobbyScreen.SetActive(false);
 
     }
-    private void goto_SelectConnMode()
+    public void goto_SelectConnMode()
     {
         currentScreen = "SelectConnectionMode";
         _connectionModeScreen.SetActive(true);
@@ -504,5 +526,49 @@ public class LobbyManager : MonoBehaviour
     public void ToggleReadyStatus()
     {
         eventReadyToggle = true;
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public async void DisconnectUserServerRpc(string playerId)
+    {
+        await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, playerId);
+    }
+
+
+    public void Disconnect()
+    {
+        string id = null;
+        foreach (Player p in joinedLobby.Players)
+        {
+            if (p.Data["PlayerName"].Value == playerName)
+            {
+                id = p.Id;
+            }
+
+        }
+        string saveLobbyId = joinedLobby.Id;
+        joinedLobby = null;
+        LobbyService.Instance.RemovePlayerAsync(saveLobbyId, id);
+        NetworkManager.Singleton.Shutdown();
+
+        goto_SelectConnMode();
+
+    }
+
+    public void OnClientDisconnect(ulong clientId)
+    {
+        string id = null;
+        foreach (Player p in joinedLobby.Players)
+        {
+            if (p.Data["PlayerName"].Value == playerName)
+            {
+                id = p.Id;
+            }
+
+        }
+        //Debug.Log("Disconnection of " + id);
+        //DisconnectUserServerRpc(id);
+        
     }
 }

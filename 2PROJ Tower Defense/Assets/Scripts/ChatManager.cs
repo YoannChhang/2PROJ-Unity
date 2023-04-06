@@ -15,6 +15,7 @@ public class ChatManager : NetworkBehaviour
     public TMP_InputField textInput;
 
     public List<GameObject> chatMessages;
+    private bool isServer;
 
     void Awake()
     {
@@ -26,6 +27,18 @@ public class ChatManager : NetworkBehaviour
         base.OnNetworkSpawn();
         GameObject.Find("ChatManager").GetComponent<ChatManager>().SendMessageServerRpc($"{PlayerPrefs.GetString("PLAYER_NAME")} joined the lobby", "Game");
 
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        try
+        {
+            base.OnNetworkDespawn();
+        }
+        catch
+        {
+
+        }
     }
 
     public void Update()
@@ -90,6 +103,7 @@ public class ChatManager : NetworkBehaviour
     }
 
 }
+
 
 
 
