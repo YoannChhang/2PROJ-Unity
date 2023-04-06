@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 public class Enemy : NetworkBehaviour
 {
     public Waypoints path;
     public float speed = 5f;
     public float minDistance = 0.1f;
-    public int maxHealth = 10;
+    public float maxHealth = 10;
     public int damage = 1;
     public int gold = 5;
     public int difficulty = 1;
-
-    private int currentHealth;
+    
+    public Image healthbar;
+    private float currentHealth;
     private int currentWaypoint = 1;
 
     private void Start()
@@ -69,7 +71,8 @@ public class Enemy : NetworkBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-
+        Debug.Log("SSSSSEEESSSS HHHHPPP"+ currentHealth);
+        healthbar.fillAmount =  currentHealth / maxHealth;
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
