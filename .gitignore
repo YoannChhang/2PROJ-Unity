@@ -43,3 +43,6 @@ Thumbs.db
 
 build.app/
 build_*/
+
+main.app
+main.exe

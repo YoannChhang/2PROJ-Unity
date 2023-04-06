@@ -21,6 +21,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject lobbySelectionItemContainer;
     [SerializeField] private GameObject _userInLobbyContainer;
     [SerializeField] private Button _readyButton;
+    [SerializeField] private GameObject lobbyTitleText;
 
 
     //Screens to toggle
@@ -66,7 +67,7 @@ public class LobbyManager : MonoBehaviour
         await UnityServices.InitializeAsync();
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        playerName = "TDPlayer" + UnityEngine.Random.Range(10, 99);
+        playerName = "Player" + UnityEngine.Random.Range(10, 99);
 
         PlayerPrefs.SetString("PLAYER_NAME", playerName);
         Debug.Log($"Player name {playerName}");
@@ -245,7 +246,7 @@ public class LobbyManager : MonoBehaviour
     {
         try
         {
-            string lobbyName = "MyLobby";
+            string lobbyName = $"{playerName}'s Lobby";
             int maxPlayers = 9;
             //Relay
             string relayCode = await RelayManager.instance.CreateRelay();
@@ -265,6 +266,9 @@ public class LobbyManager : MonoBehaviour
 
             hostLobby = lobby;
             joinedLobby = hostLobby;
+
+            lobbyTitleText.GetComponentInChildren<TMP_Text>().text = lobbyName;
+            
 
             Debug.Log($"Created the lobby {lobby.Id}");
 
@@ -302,6 +306,8 @@ public class LobbyManager : MonoBehaviour
 
 
             RelayManager.instance.JoinRelay(joinedLobby.Data["RELAY_CODE"].Value);
+            lobbyTitleText.GetComponentInChildren<TMP_Text>().text = joinedLobby.Name;
+
 
 
             SetReadyButton();
@@ -350,7 +356,7 @@ public class LobbyManager : MonoBehaviour
                 Transform child = obj.transform.GetChild(i);
                 if (child.name == "ReadyIcon")
                 {
-                    Debug.Log(player.Data["ReadyStatus"].Value);
+                    //Debug.Log(player.Data["ReadyStatus"].Value);
                     if (player.Data["ReadyStatus"].Value == "True")
                     {
                         child.gameObject.SetActive(true);
