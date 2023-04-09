@@ -112,7 +112,7 @@ public class Enemy : NetworkBehaviour
     private void DealDamageToBase()
     {
         target.GetComponent<Base>().TakeDamageServerRpc(damage);
-        gameObject.GetComponent<NetworkObject>().Despawn();
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -124,7 +124,8 @@ public class Enemy : NetworkBehaviour
 
         if (currentHealth.Value <= 0)
         {
-            gameObject.GetComponent<NetworkObject>().Despawn();
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
     }
+    
 }

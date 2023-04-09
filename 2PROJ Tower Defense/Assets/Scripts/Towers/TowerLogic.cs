@@ -95,8 +95,11 @@ public class TowerLogic : MonoBehaviour
         //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
         //newAttack.GetComponent<NAME>().target = target;
         //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
-
-        DealDamageToEnemy(target);
+        
+        if (target.GetComponent<NetworkObject>().IsSpawned)
+        { 
+            DealDamageToEnemy(target);
+        }
 
         yield return new WaitForSeconds(shootInterval);
 
@@ -107,13 +110,9 @@ public class TowerLogic : MonoBehaviour
     void DealDamageToEnemy(GameObject enemy)
     {
         Enemy e = enemy.GetComponent<Enemy>();
-        if (e != null){
 
-            e.TakeDamageServerRpc(attackDamage);
+        e.TakeDamageServerRpc(attackDamage);
 
-        } else {
-            Debug.LogError("No script ennemy");
-        }
         
     }
 
