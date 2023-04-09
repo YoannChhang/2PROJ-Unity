@@ -96,17 +96,31 @@ public class GameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        void setRectTransformForUI(GameObject menu)
+        {
+            RectTransform rectTransform = menu.GetComponent<RectTransform>();
+            rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0, 0);
+            rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 0);
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        }
+
         GameObject parent = GameObject.Find("UI");
         Debug.Log(parent);
 
-        GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        GameObject pauseMenu = Instantiate(pauseMenuPrefab, default, Quaternion.identity, parent.transform);
         pauseMenu.gameObject.name = "PauseMenu";
+        setRectTransformForUI(pauseMenu);
 
         GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
         winMenu.gameObject.name = "WinMenu";
+        setRectTransformForUI(winMenu);
 
         GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
         loseMenu.gameObject.name = "LoseMenu";
+        setRectTransformForUI(loseMenu);
+
 
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
