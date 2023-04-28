@@ -17,6 +17,8 @@ using UnityEngine.UIElements;
 public class TowerManager : NetworkBehaviour
 {
     private GameObject game;
+    [SerializeField] private HoverMouse hoverManager;
+
     [SerializeField] private GameObject towerPrefab;
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap baseTilemap;
@@ -25,7 +27,7 @@ public class TowerManager : NetworkBehaviour
 
     [SerializeField] private Tilemap paths;
     [SerializeField] private Tilemap towers;
-    
+
     private NetworkList<TowerData> SyncedTowers;
 
     void Awake()
@@ -70,11 +72,11 @@ public class TowerManager : NetworkBehaviour
             if (!game.GetComponent<GameManager>().IsPaused() || !game.GetComponent<GameManager>().IsOver())
             {
 
-                if (Input.GetMouseButtonDown(0))
+                Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
+                bool available = hoverManager.checkTileAvailability(cellIndex);
+
+                if (Input.GetMouseButtonDown(0) && available)
                 {
-
-
-                    Vector3Int cellIndex = getCellIndexFromMouse();
 
                     var newTower = new TowerData();
                     newTower.cellIndex = cellIndex;
@@ -185,22 +187,6 @@ public class TowerManager : NetworkBehaviour
             weaponTile.transform.SetParent(sortObject.transform, false);
             weaponTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
         }
-
-    }
-
-    //Get index relative to grid using mouse position
-    private Vector3Int getCellIndexFromMouse()
-    {
-        Vector3 mousePos = Input.mousePosition;
-
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
-
-        Vector3Int cellIndex = grid.WorldToCell(worldPos);
-
-        cellIndex.x += 1;
-        cellIndex.y += 1;
-
-        return cellIndex;
 
     }
 }

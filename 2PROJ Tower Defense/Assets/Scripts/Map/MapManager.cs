@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Unity;
+using UnityEditor.U2D.Path.GUIFramework;
 
 public class MapManager : MonoBehaviour
 {
 
-    [SerializeField] public GameObject designGrid;
-    [SerializeField] public Tilemap paths;
-    [SerializeField] public Tilemap tilemapPrefab;
-    [SerializeField] public Grid grid;
+    [SerializeField] private GameObject designGrid;
+    [SerializeField] private Tilemap paths;
+    [SerializeField] private Tilemap tilemapPrefab;
+    [SerializeField] private Grid grid;
 
-    [SerializeField] public int numberOfTilesX = 40;
-    [SerializeField] public int numberOfTilesY = 35;
-
-    private TilemapRenderer tilemapRenderer;
+    [SerializeField] private int numberOfTilesX = 40;
+    [SerializeField] private int numberOfTilesY = 35;
 
     // Start is called before the first frame update
     void Start()
     {
         RenderMap();
         designGrid.SetActive(false);
-
     }
 
     public void RenderMap()
@@ -48,7 +46,6 @@ public class MapManager : MonoBehaviour
 
             }
         }
-
         
     }
 
@@ -58,9 +55,5 @@ public class MapManager : MonoBehaviour
         return map.GetTile(new Vector3Int(x, y));   
 
     }
-
-
-
-
 
 }

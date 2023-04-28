@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e592cd826bac4d29bfcf095fd89de04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverManager: {fileID: -9160810930997535356, guid: 2e334f46b98205048a4cbd2e440804c6, type: 3}
   towerPrefab: {fileID: 6930177028462422865, guid: be1fbfb2658b2ed488f7eb18d1bb75e3, type: 3}
   grid: {fileID: 2175353760177175719}
   baseTilemap: {fileID: -8821142417424934210, guid: 6850886f03d0444db864a4334a4157fd, type: 3}
