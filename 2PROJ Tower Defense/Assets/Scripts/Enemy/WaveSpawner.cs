@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private Waypoints waypoints;
 
-    private float countdown = 2f;
+    private float countdown = 5f;
 
     [SerializeField]
     private float timeBetweenWaves = 5f;
@@ -36,7 +36,7 @@ public class WaveSpawner : MonoBehaviour
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
-
+        NoEnemiesLeft();
         countdown -= Time.deltaTime;
     }
 
@@ -78,5 +78,14 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
+    private void NoEnemiesLeft()
+    {
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if(enemyCount == 0)
+        {
+            Debug.Log("Plus aucun ennemis sur la map");
+        }
+    }
+
 }
         
