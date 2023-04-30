@@ -66,6 +66,10 @@ MonoBehaviour:
   weaponTilemap: {fileID: -7562125970091603924, guid: a42d9b7266e8bbb4cbdf3ee29646da74, type: 3}
   paths: {fileID: 7165501790920665188, guid: 76ca62ea647b64b3e8e9bc91bfd89524, type: 3}
   towers: {fileID: 5136590537350472297, guid: ea9a1208c584c5243a189b0848a289ee, type: 3}
+  towersList:
+  - {fileID: 5799954978555504850, guid: 31b946b2e3a380049afe4477614a53f7, type: 3}
+  weaponsList:
+  - {fileID: 1682728804951146550, guid: 340ffca6621412748ba0bfbf40160d6e, type: 3}
 --- !u!114 &2175353760177175721
 MonoBehaviour:
   m_ObjectHideFlags: 0
