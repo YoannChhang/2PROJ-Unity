@@ -102,6 +102,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7064086325267229336, guid: 693eeb382e0025d4cbde45520c9a09af, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7064086325267229336, guid: 693eeb382e0025d4cbde45520c9a09af, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 693eeb382e0025d4cbde45520c9a09af, type: 3}
       propertyPath: m_Name
       value: towerRound_middleA
@@ -164,6 +172,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6987193761570914360, guid: 0abac0af44b000d48af7a5a0c16cab81, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6987193761570914360, guid: 0abac0af44b000d48af7a5a0c16cab81, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0abac0af44b000d48af7a5a0c16cab81, type: 3}
       propertyPath: m_Name
       value: towerRound_bottomA
@@ -224,6 +240,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd1c7ae4656b6a34691a466c95fdefb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -914690696479252634, guid: fd1c7ae4656b6a34691a466c95fdefb6, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -914690696479252634, guid: fd1c7ae4656b6a34691a466c95fdefb6, type: 3}
+      propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd1c7ae4656b6a34691a466c95fdefb6, type: 3}

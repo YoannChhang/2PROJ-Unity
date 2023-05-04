@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Unity;
-using UnityEditor.U2D.Path.GUIFramework;
 
 public class MapManager : MonoBehaviour
 {
