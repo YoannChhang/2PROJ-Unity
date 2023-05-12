@@ -20,7 +20,7 @@ public class GameCameraMover : MonoBehaviour
     //Logic Variables
 
     private float targetFieldOfView = 6f;
-    private float MaxFieldOfView = 15f;
+    private float MaxFieldOfView = 13f;
     private float MinFieldOfView = 2f;
     private float zoomSpeed = 2f;
 
@@ -49,27 +49,32 @@ public class GameCameraMover : MonoBehaviour
 
         int edgeScrollSize = 30;
 
-        if (Input.mousePosition.x < edgeScrollSize)
+
+        Debug.Log(transform.position);
+
+        if (Input.mousePosition.x < edgeScrollSize && transform.position.x > -13)
         {
             inputDir.x = -1f ;
         }
-        if (Input.mousePosition.y < edgeScrollSize)
+        if (Input.mousePosition.y < edgeScrollSize && transform.position.y > -16)
         {
             inputDir.y = -1f;
         }
 
-        if (Input.mousePosition.x > Screen.width - edgeScrollSize)
+        if (Input.mousePosition.x > Screen.width - edgeScrollSize && transform.position.x < 13)
         {
 
             inputDir.x = +1f;
         }
-        if (Input.mousePosition.y > Screen.height - edgeScrollSize)
+        if (Input.mousePosition.y > Screen.height - edgeScrollSize && transform.position.y < -4)
         {
             inputDir.y = +1f;
         }
         //Vector3 moveDir = transform.forward * inputDir.y + transform.right * inputDir.x;
 
         float moveSpeed = 10f;
+
+
         transform.position += inputDir * moveSpeed * Time.deltaTime;
     }
 
