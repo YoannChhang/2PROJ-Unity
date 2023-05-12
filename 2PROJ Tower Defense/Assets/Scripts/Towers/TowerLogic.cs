@@ -97,7 +97,8 @@ public class TowerLogic : MonoBehaviour
         //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
         
         if (target.GetComponent<NetworkObject>().IsSpawned)
-        { 
+        {
+            //DISPLAY
             DealDamageToEnemy(target);
         }
 

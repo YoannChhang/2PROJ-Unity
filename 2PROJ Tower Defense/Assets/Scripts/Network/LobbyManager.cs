@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using UnityEngine.Events;
 using Unity.Collections;
+using System.Threading.Tasks;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class LobbyManager : MonoBehaviour
     //Other variables
     private string playerName;
     private bool readyStatus;
-    private int SELECTED_LEVEL = 0;
+    private string SELECTED_MODE = "0";
 
 
     //Toggles, used to prevent 429
@@ -61,7 +62,7 @@ public class LobbyManager : MonoBehaviour
     }
     void OnEnable()
     {
-        SELECTED_LEVEL = PlayerPrefs.GetInt("SELECTED_LEVEL");
+        SELECTED_MODE = PlayerPrefs.GetString("SELECTED_MODE");
     }
     private async void Start()
     {
@@ -121,7 +122,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     //Every x seconds the player will poll for the updates related to the lobby.
-    private async void HandleLobbyPollForUpdates()
+    private async Task HandleLobbyPollForUpdates()
     {
 
         if (joinedLobby != null)
@@ -129,30 +130,38 @@ public class LobbyManager : MonoBehaviour
             lobbyUpdateTimer -= Time.deltaTime;
             if (lobbyUpdateTimer < 0f)
             {
-                float lobbyUpdateTimerMax = 1.3f;
+                
+                float lobbyUpdateTimerMax = 1.5f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
-
-                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
-                joinedLobby = lobby;
 
                 try
                 {
-                    UpdateLobbyPlayerList();
+                    Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
+                    joinedLobby = lobby;
 
+                    try
+                    {
+                        UpdateLobbyPlayerList();
+
+                    }
+                    catch
+                    {
+                        Debug.Log("Error with UpdateLobbyPlayerList");
+                    }
+
+                    if (joinedLobby.Data["GAME_STARTED"].Value != "0")
+                    {
+
+                        joinedLobby = null;
+
+                        SceneManager.LoadScene("GameScene");
+
+
+                    }
                 }
-                catch
+                catch 
                 {
-                    Debug.Log("Error with UpdateLobbyPlayerList");
-                }
-
-                if (joinedLobby.Data["GAME_STARTED"].Value != "0")
-                {
-                    
-                    joinedLobby = null;
-
-                    SceneManager.LoadScene("GameScene");
-
-
+                    Debug.Log($"PollForUpdate Error : ");
                 }
             }
         }
@@ -172,7 +181,8 @@ public class LobbyManager : MonoBehaviour
                 //When Starting the game
                 if (eventStartGame)
                 {
-                    if (SELECTED_LEVEL != 0)
+                    //Mode 1
+                    if (SELECTED_MODE == "0")
                     {
                         try
                         {
@@ -281,7 +291,7 @@ public class LobbyManager : MonoBehaviour
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    { "SELECTED_LEVEL", new DataObject(DataObject.VisibilityOptions.Public, "1") },
+                    { "SELECTED_MODE", new DataObject(DataObject.VisibilityOptions.Public, PlayerPrefs.GetString("SELECTED_MODE")) },
                     { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "0") },
                     { "RELAY_CODE", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
                 }
@@ -299,7 +309,7 @@ public class LobbyManager : MonoBehaviour
             GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().AddPlayerServerRpc(playerData);
             
 
-            Debug.Log($"Created the lobby {lobby.Id}");
+            Debug.Log($"Created the lobby {lobby.Id}, mode : {lobby.Data.GetValueOrDefault("SELECTED_MODE").Value}");
 
 
 
@@ -434,15 +444,18 @@ public class LobbyManager : MonoBehaviour
 
             foreach (Lobby lobby in lobbies.Results)
             {
-                GameObject lobbyObj = Instantiate(lobbySelectionItemPrefab, lobbySelectionItemContainer.transform);
-                TMP_Text[] title_and_player_count = lobbyObj.GetComponentsInChildren<TMP_Text>();
-                title_and_player_count[0].text = lobby.Name;
-                title_and_player_count[1].text = $"{lobby.Players.Count}/{lobby.Players.Capacity}";
-                lobbyObj.GetComponentInChildren<Text>().text = lobby.Id;
-                lobbyObj.GetComponentInChildren<Button>().onClick.AddListener(() =>
+                if (lobby.Data.GetValueOrDefault("SELECTED_MODE").Value == PlayerPrefs.GetString("SELECTED_MODE"))
                 {
-                    JoinLobby(lobby.Id);
-                });
+                    GameObject lobbyObj = Instantiate(lobbySelectionItemPrefab, lobbySelectionItemContainer.transform);
+                    TMP_Text[] title_and_player_count = lobbyObj.GetComponentsInChildren<TMP_Text>();
+                    title_and_player_count[0].text = lobby.Name;
+                    title_and_player_count[1].text = $"{lobby.Players.Count}/{lobby.Players.Capacity}";
+                    lobbyObj.GetComponentInChildren<Text>().text = lobby.Id;
+                    lobbyObj.GetComponentInChildren<Button>().onClick.AddListener(() =>
+                    {
+                        JoinLobby(lobby.Id);
+                    });
+                }
 
                 
             }

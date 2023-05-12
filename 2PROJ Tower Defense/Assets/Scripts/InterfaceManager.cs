@@ -20,7 +20,7 @@ public class InterfaceManager : MonoBehaviour
     void Update()
     {
         
-        LevelNameText.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("SELECTED_LEVEL", "Level 1");
+        LevelNameText.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("SELECTED_MODE", "Level 1");
         GoldText.GetComponentInChildren<TMP_Text>().text = "Gold : 243";
         if (NetworkManager.Singleton)
         {
