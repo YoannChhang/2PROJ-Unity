@@ -9,9 +9,11 @@ using System;
 public class InterfaceManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject LevelNameText;
-    [SerializeField] private GameObject GoldText;
-    [SerializeField] private GameObject PlayerText;
+    [SerializeField] private GameObject WaveText;
+    [SerializeField] private GameObject MonstersLeft;
+    [SerializeField] private GameObject PlayerUIRightPrefab;
+    [SerializeField] private GameObject PlayerListGrid;
+
 
     //Get using GameObject.Find("InterfaceManager").GetComponentInChildren<InterfaceManager>.SelectedTowerType
     public TowerType SelectedTowerType = TowerType.Arrow;
@@ -19,21 +21,71 @@ public class InterfaceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        LevelNameText.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.GetString("SELECTED_MODE", "Level 1");
-        GoldText.GetComponentInChildren<TMP_Text>().text = "Gold : 243";
-        if (NetworkManager.Singleton)
+
+        //TODO WaveNumber
+
+
+        try {
+            WaveText.GetComponent<TMP_Text>().text = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().waveIndex.ToString();
+        }catch(Exception e)
         {
-            PlayerText.GetComponentInChildren<TMP_Text>().text =
-                $"Players : {GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SyncedPlayers.Count}";
+            WaveText.GetComponent<TMP_Text>().text = "Wave : ?";
+            //Console.Log("Error in finding wave : " + e);
         }
+
+        //TODO MonstersLeft
+
+
+        UpdatePlayerList();
 
     }
 
+
+   
     //Get using GameObject.Find("InterfaceManager").GetComponentInChildren<InterfaceManager>.SelectedTowerType
     public void SelectTower(string towerType)
     {
         SelectedTowerType = (TowerType)Enum.Parse(typeof(TowerType), towerType);
         Debug.Log($"Selected > {SelectedTowerType}");
+    }
+
+    public void UpdatePlayerList()
+    {
+
+        try
+        {
+
+            // Delete all the children of the PlayerListGrid
+            HelperFunctions.remove_all_childs_from_gameobject(PlayerListGrid);
+
+            //Add all player prefabs
+            foreach (PlayerData player in GameObject.Find("PlayerManager").GetComponent<PlayerManager>().SyncedPlayers )
+            {
+
+                GameObject obj = Instantiate(PlayerUIRightPrefab);
+                obj.transform.SetParent(PlayerListGrid.transform, false);
+                //Player Name
+                string playername = player.name.ToString();
+                if (playername == PlayerPrefs.GetString("PLAYER_NAME"))
+                {
+                    obj.GetComponentsInChildren<TMP_Text>()[0].text = "> " + playername;
+                }
+                else
+                {
+                    obj.GetComponentsInChildren<TMP_Text>()[0].text = playername;
+
+                }
+
+                //Player Gold
+                obj.GetComponentsInChildren<TMP_Text>()[1].text = player.money.ToString();
+
+
+            }
+
+        }
+        catch
+        {
+
+        }
     }
 }

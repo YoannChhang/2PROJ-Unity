@@ -4,11 +4,17 @@ using System.Collections;
 using Unity.Netcode;
 using System.Collections.Generic;
 using Unity.Collections;
+using TMPro;
+using Unity.Services.Lobbies.Models;
 
 public class PlayerManager : NetworkBehaviour
 {
 
     public NetworkList<PlayerData> SyncedPlayers;
+
+    
+
+
 
     void Awake()
     {
@@ -28,11 +34,6 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-    //private void Update()
-    //{
-
-    //    Debug.Log(SyncedPlayers.Count);
-    //}
 
 
     [ServerRpc(RequireOwnership = false)]
@@ -41,6 +42,7 @@ public class PlayerManager : NetworkBehaviour
         SyncedPlayers.Add(playerData);
     }
 
+    
     
 
 }

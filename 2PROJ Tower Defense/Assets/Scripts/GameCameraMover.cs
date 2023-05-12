@@ -50,8 +50,6 @@ public class GameCameraMover : MonoBehaviour
         int edgeScrollSize = 30;
 
 
-        Debug.Log(transform.position);
-
         if (Input.mousePosition.x < edgeScrollSize && transform.position.x > -13)
         {
             inputDir.x = -1f ;
