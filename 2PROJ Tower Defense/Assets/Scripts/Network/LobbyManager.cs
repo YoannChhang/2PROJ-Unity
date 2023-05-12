@@ -291,7 +291,7 @@ public class LobbyManager : MonoBehaviour
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
-                    { "SELECTED_MODE", new DataObject(DataObject.VisibilityOptions.Public, PlayerPrefs.GetString("SELECTED_MODE")) },
+                    { "SELECTED_MODE", new DataObject(DataObject.VisibilityOptions.Public, SELECTED_MODE) },
                     { "GAME_STARTED", new DataObject(DataObject.VisibilityOptions.Member, "0") },
                     { "RELAY_CODE", new DataObject(DataObject.VisibilityOptions.Member, relayCode) },
                 }
@@ -444,7 +444,7 @@ public class LobbyManager : MonoBehaviour
 
             foreach (Lobby lobby in lobbies.Results)
             {
-                if (lobby.Data.GetValueOrDefault("SELECTED_MODE").Value == PlayerPrefs.GetString("SELECTED_MODE"))
+                if (lobby.Data.GetValueOrDefault("SELECTED_MODE").Value == SELECTED_MODE)
                 {
                     GameObject lobbyObj = Instantiate(lobbySelectionItemPrefab, lobbySelectionItemContainer.transform);
                     TMP_Text[] title_and_player_count = lobbyObj.GetComponentsInChildren<TMP_Text>();

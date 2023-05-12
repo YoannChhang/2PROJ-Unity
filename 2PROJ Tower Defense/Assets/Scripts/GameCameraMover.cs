@@ -18,7 +18,6 @@ public class GameCameraMover : MonoBehaviour
 
 
     //Logic Variables
-    public bool CameraMode = false;
 
     private float targetFieldOfView = 6f;
     private float MaxFieldOfView = 15f;
@@ -26,9 +25,6 @@ public class GameCameraMover : MonoBehaviour
     private float zoomSpeed = 2f;
 
 
-    //timeouts
-    private float timer = 0f;
-    private float timeBetweenCommands = 1f;
 
     private void Start()
     {
@@ -39,29 +35,11 @@ public class GameCameraMover : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
 
 
-        //check inputs
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (timer >= timeBetweenCommands)
-            {
-                timer = 0f;
+        CameraEdgeScrolling();
+        CameraZoomScrolling();
 
-                CameraMode = !CameraMode;
-                ToggleCameraMode();
-            }
-
-        }
-
-
-        
-        if (CameraMode)
-        {
-            CameraEdgeScrolling();
-            CameraZoomScrolling();
-        }
 
     }
 
@@ -69,11 +47,11 @@ public class GameCameraMover : MonoBehaviour
     {
         Vector3 inputDir = new Vector3(0, 0, 0);
 
-        int edgeScrollSize = 50;
+        int edgeScrollSize = 30;
 
         if (Input.mousePosition.x < edgeScrollSize)
         {
-            inputDir.x = -1f;
+            inputDir.x = -1f ;
         }
         if (Input.mousePosition.y < edgeScrollSize)
         {
@@ -116,14 +94,7 @@ public class GameCameraMover : MonoBehaviour
         
     }
 
-    public void ToggleCameraMode()
-    {
-        //CameraMode UI
-        CameraModeText.gameObject.SetActive(CameraMode);
-        Interface.gameObject.SetActive(!CameraMode);
-
-
-    }
+ 
 
     private Vector3Int minTilemapPosition;
     private Vector3Int maxTilemapPosition;
