@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using TMPro;
 using Unity.Services.Lobbies.Models;
+using System;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -29,6 +30,7 @@ public class PlayerManager : NetworkBehaviour
         {
             var playerData = new PlayerData();
             playerData.name = PlayerPrefs.GetString("PLAYER_NAME");
+            playerData.money = 150;
             GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().AddPlayerServerRpc(playerData);
 
         }
@@ -42,7 +44,50 @@ public class PlayerManager : NetworkBehaviour
         SyncedPlayers.Add(playerData);
     }
 
-    
+    [ServerRpc(RequireOwnership = false)]
+    public void SetMoneyAllServerRpc(int amount)
+    {
+        for (int i = 0; i < SyncedPlayers.Count; i++)
+        {
+            PlayerData playerData = SyncedPlayers[i];
+            playerData.money = amount;
+            SyncedPlayers[i] = playerData;
+        }
+    }
+
+    /// <summary>
+    /// Sets the attribute of a specific player
+    /// available : money
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
+    public void SetPlayerAttributeServerRpc(FixedString32Bytes name, int money)
+    {
+        
+        for (int i = 0; i < SyncedPlayers.Count; i++)
+        {
+            if (SyncedPlayers[i].name == name)
+            {
+                PlayerData playerData = SyncedPlayers[i];
+                playerData.money = (int)money;
+                SyncedPlayers[i] = playerData;
+                break;
+            }
+        }
+    }
+
+
+    public Nullable<PlayerData> GetCurrentPlayerData()
+    {
+        foreach(PlayerData playerData in SyncedPlayers)
+        {
+            if (playerData.name == PlayerPrefs.GetString("PLAYER_NAME"))
+            {
+                return playerData;
+            }
+        }
+        return default(PlayerData?);
+    }
+
     
 
 }
@@ -54,9 +99,10 @@ public struct PlayerData : INetworkSerializable, System.IEquatable<PlayerData>
 
     public PlayerData(
         FixedString32Bytes name,
-        int money = 0)
+        int money)
     {
         this.name = name;
+
         this.money = money;
     }
 
