@@ -26,11 +26,12 @@ public class InterfaceManager : MonoBehaviour
 
 
         try {
-            WaveText.GetComponent<TMP_Text>().text = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().waveIndex.ToString();
-        }catch(Exception e)
+            WaveText.GetComponent<TMP_Text>().text = "Wave : "+ GameObject.FindObjectOfType<WaveSpawner>().waveIndex.ToString();
+        }
+        catch (Exception e)
         {
             WaveText.GetComponent<TMP_Text>().text = "Wave : ?";
-            //Console.Log("Error in finding wave : " + e);
+
         }
 
         //TODO MonstersLeft
@@ -88,4 +89,5 @@ public class InterfaceManager : MonoBehaviour
 
         }
     }
+
 }
