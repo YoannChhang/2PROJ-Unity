@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
@@ -9,10 +10,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-
-
-
-
 
 public class TowerManager : NetworkBehaviour
 {
@@ -52,18 +49,6 @@ public class TowerManager : NetworkBehaviour
 
     private void Update()
     {
-        //if (!this.NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
-        //{
-        //    try
-        //    {
-        //        this.NetworkObject.Spawn();
-        //        Debug.Log("Spawned");
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //}
 
         if (gameObject.name != "TowerMap")
         {
@@ -155,6 +140,29 @@ public class TowerManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void RemoveTowerServerRpc(TowerData removedTower)
     {
+
+        string name = "Tower " + -removedTower.cellIndex.x + "," + -removedTower.cellIndex.y;
+        GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
+
+        if (existingTower != null)
+        {
+            var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+            if (weapon != null)
+            {
+                weapon.transform.SetParent(null);
+                weapon.GetComponent<NetworkObject>().Despawn(true);
+            }
+            existingTower.transform.SetParent(null);
+            existingTower.GetComponent<NetworkObject>().Despawn(true);
+        }
+
+        // Check if the tower is in the dictionary
+        if (towerData.ContainsValue(removedTower))
+        { 
+            // If so, remove it from the dictionary
+            towerData.Remove(removedTower.cellIndex);
+        }
+
         SyncedTowers.Remove(removedTower);
     }
     
@@ -200,6 +208,13 @@ public class TowerManager : NetworkBehaviour
 
         if (existingTower != null)
         {
+            var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+            if (weapon != null)
+            {
+                weapon.transform.SetParent(null);
+                weapon.GetComponent<NetworkObject>().Despawn(true);
+            }
+            existingTower.transform.SetParent(null);
             existingTower.GetComponent<NetworkObject>().Despawn(true);
         }
 
@@ -220,7 +235,7 @@ public class TowerManager : NetworkBehaviour
         Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);
         GameObject newWeapon = Instantiate(weaponPrefab, weaponRelativePos, Quaternion.identity, newTower.transform);
         newWeapon.GetComponent<NetworkObject>().Spawn(true);
-        newWeapon.name = "weapon";
+        newWeapon.name = "Weapon";
         newWeapon.transform.SetParent(newTower.transform, false);
     }
 
@@ -262,50 +277,73 @@ public class TowerManager : NetworkBehaviour
         }
     }
 
-    //private void HandleSyncedDataUpdates()
-    //{
+    public void cleanTowers()
+    {
+        // Create a new NativeList to hold the towers to remove
+        using (var towersToRemove = new NativeList<TowerData>(Allocator.Temp))
+        {
+            // Find and add all towers to remove to the NativeList
+            foreach (Transform child in towers.transform)
+            {
+                if (child.CompareTag("Tower"))
+                {
+                    var towerPos = grid.WorldToCell(child.position);
+                    if (towerData.ContainsKey(towerPos))
+                    {
+                        var tower = towerData[towerPos];
+                        towersToRemove.Add(tower);
+                    }
+                }
+            }
 
-    //    int nbChildren = grid.transform.childCount;
+            // Remove all towers from the SyncedTowers list
+            foreach (var tower in towersToRemove)
+            {
+                SyncedTowers.Remove(tower);
 
-    //    for (int i = nbChildren - 1; i >= 0; i--)
-    //    {
-    //        DestroyImmediate(grid.transform.GetChild(i).gameObject);
-    //    }
+                string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+                GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
 
-    //    foreach (TowerData tower in SyncedTowers)
-    //    {
-    //        GameObject sortObject = new GameObject();
-    //        sortObject.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-    //        sortObject.transform.SetParent(grid.transform, false);
+                if (existingTower != null)
+                {
+                    var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+                    if (weapon != null)
+                    {
+                        weapon.transform.SetParent(null);
+                        weapon.GetComponent<NetworkObject>().Despawn(true);
+                    }
+                    existingTower.transform.SetParent(null);
+                    existingTower.GetComponent<NetworkObject>().Despawn(true);
+                }
 
-    //        Vector3 cellWorldPos = grid.GetCellCenterWorld(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y));
-    //        Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+                // Remove the tower from the dictionary
+                towerData.Remove(tower.cellIndex);
+            }
+        }
+    }
 
 
-    //        GameObject TowerLogic = Instantiate(towerPrefab, cellWorldPos, rotation, sortObject.transform);
-    //        TowerLogic.name = "Logic";
+    private void OnDestroy()
+    {
+        if (NetworkManager.Singleton == null)
+        {
+            return;
+        }
 
-    //        Tilemap baseTile = Instantiate(baseTilemap);
-    //        baseTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), tile);
-    //        baseTile.name = "Base";
-    //        baseTile.transform.SetParent(sortObject.transform, false);
-    //        baseTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
+        if (NetworkManager.Singleton.IsClient)
+        {
+            SyncedTowers.OnListChanged -= OnClientListChanged;
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            SyncedTowers.OnListChanged -= OnServerListChanged;
+        }
 
-    //        Tilemap midTile = Instantiate(midTilemap);
-    //        midTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), mid);
-    //        midTile.name = "Mid";
-    //        midTile.transform.SetParent(sortObject.transform, false);
-    //        midTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
-
-    //        Tilemap weaponTile = Instantiate(weaponTilemap);
-    //        weaponTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), top);
-    //        weaponTile.name = "Weapon";
-    //        weaponTile.transform.SetParent(sortObject.transform, false);
-    //        weaponTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
-    //    }
-
-    //}
+        cleanTowers();
+        GetComponent<NetworkObject>().Despawn(true);
+    }
 }
+
 
 
 //Tower Data Structure, store anything related to the tower here
