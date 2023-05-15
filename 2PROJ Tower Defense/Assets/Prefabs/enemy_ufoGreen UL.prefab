@@ -463,6 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64da877e1441a41b9590c21162ff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageParticles: {fileID: 8838991625010518273, guid: 981dd653fb8de42448f1ac328bd3857e, type: 3}
   healthbar: {fileID: 1520908755}
 --- !u!114 &6242309249049863076
 MonoBehaviour:

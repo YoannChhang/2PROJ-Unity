@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private float timeBetweenWaves = 5f;
 
+    public static bool test = false;
     private Vector3 pos;
     private int waveIndex=0;
     int[][] myArray = new int[][] {
@@ -31,13 +32,18 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // {
+        //     StartCoroutine(SpawnWave());
+        //     countdown = timeBetweenWaves;
+        // }
+        // //NoEnemiesLeft();
+        // countdown -= Time.deltaTime;
+        if (test== true && waveIndex < myArray.Length)
         {
             StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            test=false;
         }
-        NoEnemiesLeft();
-        countdown -= Time.deltaTime;
     }
 
     public void SetPath(Waypoints path)
@@ -78,14 +84,14 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
-    private void NoEnemiesLeft()
-    {
-        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if(enemyCount == 0)
-        {
-            Debug.Log("Plus aucun ennemis sur la map");
-        }
-    }
+    // private void NoEnemiesLeft()
+    // {
+    //     int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+    //     if(enemyCount == 0)
+    //     {
+    //         Debug.Log("Plus aucun ennemis sur la map");
+    //     }
+    // }
 
 }
         
