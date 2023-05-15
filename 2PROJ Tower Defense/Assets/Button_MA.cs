@@ -16,6 +16,13 @@ public class Button_MA : MonoBehaviour
     // Update is called once per frame
     void OnClick()
     {
-        WaveSpawner.boolAuto=true;
+        if (WaveSpawner.boolAuto)
+        {
+            WaveSpawner.boolAuto=false;
+        }else
+        {
+            WaveSpawner.boolAuto=true;
+        }
+        
     }
 }
