@@ -97,7 +97,8 @@ public class TowerLogic : MonoBehaviour
         //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
         
         if (target.GetComponent<NetworkObject>().IsSpawned)
-        { 
+        {
+            //DISPLAY
             DealDamageToEnemy(target);
         }
 
@@ -235,4 +236,77 @@ public enum TowerType
     Mage,
     Rocket,
     Soldier
+}
+
+public static class TowerTypeExtension
+{
+    public static TowerProperty GetProperty(this TowerType towerType)
+    {
+        switch (towerType)
+        {
+            case TowerType.Arrow:
+                return new ArrowProperty();
+
+            case TowerType.Mage:
+                return new MageProperty();
+
+            case TowerType.Rocket:
+                return new RocketProperty();
+
+            case TowerType.Soldier:
+                return new SoldierProperty();
+
+            default:
+                return null;
+        }
+    }
+}
+
+public abstract class TowerProperty
+{
+    public TowerType Type { get; protected set; }
+    public int Level { get; protected set; }
+    public int Damage { get; protected set; }
+    public int[] Cost { get; protected set; }
+
+    public TowerProperty(int level = 0)
+    {
+        Level = level;
+    }
+}
+public class ArrowProperty : TowerProperty
+{
+    public ArrowProperty() 
+    {
+        Type = TowerType.Arrow;
+        Damage = 1;
+        Cost = new int[3] { 120, 160, 200 };
+    }
+}
+public class MageProperty : TowerProperty
+{
+    public MageProperty()
+    {
+        Type = TowerType.Mage;
+        Damage = 1;
+        Cost = new int[3] { 180, 220, 280 };
+    }
+}
+public class RocketProperty : TowerProperty
+{
+    public RocketProperty()
+    {
+        Type = TowerType.Rocket;
+        Damage = 1;
+        Cost = new int[3] { 220, 280, 300 };
+    }
+}
+public class SoldierProperty : TowerProperty
+{
+    public SoldierProperty()
+    {
+        Type = TowerType.Soldier;
+        Damage = 1;
+        Cost = new int[3] { 100, 140, 200 };
+    }
 }

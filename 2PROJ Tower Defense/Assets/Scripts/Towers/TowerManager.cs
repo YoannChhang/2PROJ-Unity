@@ -40,6 +40,10 @@ public class TowerManager : NetworkBehaviour
         SyncedTowers = new NetworkList<TowerData>();
         towerData = new Dictionary<Vector3Int, TowerData>();
 
+
+        //TODO : To be removed, this is so when game start you have money but this should be correctly implemented in WaveManager
+        GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(150);
+        
     }
 
     void Start()
@@ -73,12 +77,38 @@ public class TowerManager : NetworkBehaviour
                 if (Input.GetMouseButtonDown(0) && available)
                 {
 
-                    var newTower = new TowerData();
-                    newTower.cellIndex = cellIndex;
-                    newTower.type = 0;
+                    ///Checks before placing tower
+
+                    //Get Tower Info
+                    TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
+                    TowerProperty tp = SelectedTower.GetProperty();
+
+                    //Get Current Money
+                    PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+                    PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+
+                    //If balance >= 0 when purchasing tower/upgrade
+                    if (player.money - tp.Cost[tp.Level] >= 0)
+                    {
 
 
-                    AddTowerServerRpc(newTower);
+                        var newTower = new TowerData();
+                        newTower.cellIndex = cellIndex;
+                        AddTowerServerRpc(newTower);
+
+
+
+                        //Remove player money
+                        playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
+
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough money to place tower");
+                    }
+
+
 
 
                 }

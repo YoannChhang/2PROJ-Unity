@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelSelection : MonoBehaviour
+public class ModeSelection : MonoBehaviour
 {
-    public static int SELECTED_LEVEL = 0;
+    public static string SELECTED_MODE = "0";
 
 
     //When clicking on a level
-    public void OnLevelClick(int level)
+    public void OnModeClick(string level)
     {
 
         //TODO : Open a UI with level info and then starting the game.
 
-        SELECTED_LEVEL = level;
+        SELECTED_MODE = level;
 
         SceneManager.LoadScene("Lobby");
     }
     void OnDisable()
     {
-        PlayerPrefs.SetInt("SELECTED_LEVEL", SELECTED_LEVEL);
+        //Debug.Log("Setting SELECTED_MODE :" + SELECTED_MODE);
+        PlayerPrefs.SetString("SELECTED_MODE", SELECTED_MODE);
     }
 
     //When clicking on return button

@@ -16,7 +16,7 @@ public class WaveSpawner : MonoBehaviour
     private float timeBetweenWaves = 5f;
 
     private Vector3 pos;
-    private int waveIndex=0;
+    public int waveIndex=0;
     int[][] myArray = new int[][] {
         new int[] {1},
         new int[] {1},

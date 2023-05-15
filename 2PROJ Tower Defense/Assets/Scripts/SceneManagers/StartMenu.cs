@@ -7,7 +7,7 @@ public class StartMenu : MonoBehaviour
 {
     public void OnStartClick()
     {
-        SceneManager.LoadScene("LevelSelection");
+        SceneManager.LoadScene("ModeSelection");
     }
 
 
