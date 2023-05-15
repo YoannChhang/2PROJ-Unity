@@ -10,17 +10,19 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private Waypoints waypoints;
 
-    private float countdown = 5f;
+    private float countdown = 2f;
 
     [SerializeField]
-    private float timeBetweenWaves = 5f;
+    private float timeBetweenWaves = 2f;
 
-    public static bool test = false;
+    public static bool boolStart = false;
+    public static bool boolAuto = false;
     private Vector3 pos;
     private int waveIndex=0;
+    private bool isWaveGenerating = false;
     int[][] myArray = new int[][] {
-        new int[] {1},
-        new int[] {1},
+        new int[] {1,1},
+        new int[] {1,1},
     };
 
     // Start is called before the first frame update
@@ -39,11 +41,21 @@ public class WaveSpawner : MonoBehaviour
         // }
         // //NoEnemiesLeft();
         // countdown -= Time.deltaTime;
-        if (test== true && waveIndex < myArray.Length)
+        if (countdown <= 0f && waveIndex < myArray.Length)
         {
-            StartCoroutine(SpawnWave());
-            test=false;
+            if (boolStart)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                boolStart = false;
+            }
+            else if (boolAuto)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+            }
         }
+        countdown -= Time.deltaTime;
     }
 
     public void SetPath(Waypoints path)
@@ -58,7 +70,14 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        for (int i=0;i<myArray[waveIndex].Length;i++)
+        if (isWaveGenerating)
+        {
+            yield break; 
+        }
+        isWaveGenerating = true;
+
+        int enemyCount = boolAuto ? 1 : myArray[waveIndex].Length;
+        for (int i = 0; i < enemyCount; i++)
         {
             
             SpawnEnemy(enemyPrefab, waveIndex, i, myArray[waveIndex][i]);
@@ -70,14 +89,13 @@ public class WaveSpawner : MonoBehaviour
         }
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
-        
+        isWaveGenerating = false;
     }
 
     private void SpawnEnemy(GameObject prefab, int wave, int numInWave, int enemyType)
     {
-
         // Use enemyType to identify the correct type of the enemy.
-
+        Debug.Log("VOICI LE POS AVANT   /////////"+ waypoints.waypoints[0]);
         GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         enemy.name = "Enemy " + wave + " " + numInWave;
         enemy.GetComponent<Enemy>().SetPath(waypoints);

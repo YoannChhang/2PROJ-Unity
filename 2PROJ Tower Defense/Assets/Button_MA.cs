@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonWave : MonoBehaviour
+public class Button_MA : MonoBehaviour
 {
     private Button button;
     // Start is called before the first frame update
@@ -16,6 +16,6 @@ public class ButtonWave : MonoBehaviour
     // Update is called once per frame
     void OnClick()
     {
-        WaveSpawner.test=true;  
+        WaveSpawner.boolAuto=true;
     }
 }
