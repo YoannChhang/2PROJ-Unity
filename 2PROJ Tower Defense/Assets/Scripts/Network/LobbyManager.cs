@@ -289,6 +289,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void CreateLobby()
     {
+        FindObjectOfType<SoundManager>().PlaySound("click");
+
         try
         {
             string lobbyName = $"{playerName}'s Lobby";
@@ -337,6 +339,8 @@ public class LobbyManager : MonoBehaviour
 
     public async void JoinLobby(string selectedLobbyId)
     {
+        FindObjectOfType<SoundManager>().PlaySound("click");
+
         try
         {
 
@@ -426,6 +430,7 @@ public class LobbyManager : MonoBehaviour
 
     private async void LoadLobbyList()
     {
+
         try
         {
             QueryLobbiesOptions options = new QueryLobbiesOptions();
@@ -542,14 +547,25 @@ public class LobbyManager : MonoBehaviour
 
     public void StartGame()
     {
+
         if (IsLobbyHost())
         {
             eventStartGame = true;
+            FindObjectOfType<SoundManager>().PlaySound("click");
+
+        }
+        else
+        {
+            FindObjectOfType<SoundManager>().PlaySound("click_wrong");
+
         }
     }
 
     public void ToggleReadyStatus()
     {
+        Debug.Log(FindObjectOfType<SoundManager>());
+        FindObjectOfType<SoundManager>().PlaySound("click");
+
         eventReadyToggle = true;
     }
 
@@ -571,6 +587,8 @@ public class LobbyManager : MonoBehaviour
 
     public void Disconnect()
     {
+        FindObjectOfType<SoundManager>().PlaySound("click");
+
         string id = null;
         foreach (Player p in joinedLobby.Players)
         {

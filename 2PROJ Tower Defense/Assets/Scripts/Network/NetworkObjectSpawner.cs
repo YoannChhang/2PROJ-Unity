@@ -18,6 +18,13 @@ public class NetworkObjectSpawner : MonoBehaviour
 
     void Start()
     {
+        if (FindObjectOfType<SoundManager>() == null)
+        {
+            GameObject soundManager = Instantiate(soundManagerPrefab, Vector3.zero, Quaternion.identity);
+            soundManager.name = "SoundManager";
+        }
+        
+
         //TO RUN GAME QUICKER WHEN DEV
         if (NetworkManager.Singleton == null)
         {
