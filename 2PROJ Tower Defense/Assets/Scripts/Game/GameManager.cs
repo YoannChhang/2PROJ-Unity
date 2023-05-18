@@ -231,6 +231,7 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void returnToMenuServerRpc()
     {
+        destroyTowers();
         returnToMenuClientRpc();
     }
 
@@ -246,6 +247,7 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void retryServerRpc()
     {
+        destroyTowers();
         retryClientRpc();
     }
 
@@ -288,5 +290,13 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void destroyTowers()
+    {
+        //Find all objects with the "Tower" tag
+        GameObject towers = GameObject.Find("TowerMap").gameObject;
+
+        // Loop through all the towers and destroy them on the network
+        Destroy(towers);
+    }
 
 }

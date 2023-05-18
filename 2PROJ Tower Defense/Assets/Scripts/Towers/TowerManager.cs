@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
@@ -9,10 +10,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-
-
-
-
 
 public class TowerManager : NetworkBehaviour
 {
@@ -28,11 +25,21 @@ public class TowerManager : NetworkBehaviour
     [SerializeField] private Tilemap paths;
     [SerializeField] private Tilemap towers;
 
+    [SerializeField] private List<GameObject> towersList;
+    [SerializeField] private List<GameObject> weaponsList;
+
+    private Dictionary<Vector3Int, TowerData> towerData;
     private NetworkList<TowerData> SyncedTowers;
+    private static NetworkVariable<int> lastTowerId;
+
+
 
     void Awake()
     {
+        lastTowerId = new NetworkVariable<int>(0);
         SyncedTowers = new NetworkList<TowerData>();
+        towerData = new Dictionary<Vector3Int, TowerData>();
+
 
         //TODO : To be removed, this is so when game start you have money but this should be correctly implemented in WaveManager
         GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(150);
@@ -46,18 +53,6 @@ public class TowerManager : NetworkBehaviour
 
     private void Update()
     {
-        //if (!this.NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
-        //{
-        //    try
-        //    {
-        //        this.NetworkObject.Spawn();
-        //        Debug.Log("Spawned");
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //}
 
         if (gameObject.name != "TowerMap")
         {
@@ -73,7 +68,7 @@ public class TowerManager : NetworkBehaviour
         
         {
 
-            if (!game.GetComponent<GameManager>().IsPaused() || !game.GetComponent<GameManager>().IsOver())
+            if (!game.GetComponent<GameManager>().IsPaused() && !game.GetComponent<GameManager>().IsOver())
             {
 
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
@@ -159,85 +154,250 @@ public class TowerManager : NetworkBehaviour
     void AddTowerServerRpc(TowerData newTower)
     {
         // Add the new tower to the SyncedTowers list
+        newTower.id = ++lastTowerId.Value;
         SyncedTowers.Add(newTower);
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    void UpdateTowerServerRpc(TowerData currTower, TowerData changeTower)
+    {
+
+        SyncedTowers.Remove(currTower);
+        SyncedTowers.Add(changeTower);
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void RemoveTowerServerRpc(TowerData removedTower)
+    {
+
+        string name = "Tower " + -removedTower.cellIndex.x + "," + -removedTower.cellIndex.y;
+        GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
+
+        if (existingTower != null)
+        {
+            var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+            if (weapon != null)
+            {
+                weapon.transform.SetParent(null);
+                weapon.GetComponent<NetworkObject>().Despawn(true);
+            }
+            existingTower.transform.SetParent(null);
+            existingTower.GetComponent<NetworkObject>().Despawn(true);
+        }
+
+        // Check if the tower is in the dictionary
+        if (towerData.ContainsValue(removedTower))
+        { 
+            // If so, remove it from the dictionary
+            towerData.Remove(removedTower.cellIndex);
+        }
+
+        SyncedTowers.Remove(removedTower);
+    }
     
 
     void OnServerListChanged(NetworkListEvent<TowerData> changeEvent)
     {
-        HandleSyncedDataUpdates();
+        UpdateDictionary();
+        //HandleSyncedDataUpdates();
     }
 
     void OnClientListChanged(NetworkListEvent<TowerData> changeEvent)
     {
-        HandleSyncedDataUpdates();
+        UpdateDictionary();
+        //HandleSyncedDataUpdates();
+    }
+
+    void UpdateDictionary()
+    {
+
+        foreach(TowerData tower in SyncedTowers)
+        {
+            // Check if the tower is in the dictionary
+            if (!towerData.ContainsValue(tower))
+            {
+                // If not, add / update the tower data to the dictionary with the cell index as the key
+                towerData[tower.cellIndex] = tower;
+                UpdateDisplayTower(tower);
+            }
+        }
+
+    }
+
+    void UpdateDisplayTower(TowerData tower)
+    {
+
+        // TODO Get Tower prefab then display it with network control and ballista rotation.
+
+        GameObject towerPrefab = GetTowerPrefab(tower.towerLevel, tower.baseLevel);
+        GameObject weaponPrefab = GetWeaponPrefab(tower.type);
+
+        string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+        GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
+
+        if (existingTower != null)
+        {
+            var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+            if (weapon != null)
+            {
+                weapon.transform.SetParent(null);
+                weapon.GetComponent<NetworkObject>().Despawn(true);
+            }
+            existingTower.transform.SetParent(null);
+            existingTower.GetComponent<NetworkObject>().Despawn(true);
+        }
+
+
+        // Spawns Tower
+        Vector3Int correctIndex = tower.cellIndex;
+        correctIndex.x += 1;
+        correctIndex.y -= 1;
+
+        Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
+        Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+        GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
+        newTower.GetComponent<NetworkObject>().Spawn(true);
+        newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+        newTower.transform.SetParent(grid.transform, false);
+
+        // Spawns Weapon
+        Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);
+        GameObject newWeapon = Instantiate(weaponPrefab, weaponRelativePos, Quaternion.identity, newTower.transform);
+        newWeapon.GetComponent<NetworkObject>().Spawn(true);
+        newWeapon.name = "Weapon";
+        newWeapon.transform.SetParent(newTower.transform, false);
+    }
+
+    GameObject GetTowerPrefab(int towerLevel, int baseLevel)
+    {
+        int index = (int)GetTowerIndex(towerLevel, baseLevel);
+
+        return towersList[index];
+    }
+
+    int? GetTowerIndex(int towerLevel, int baseLevel)
+    {
+        switch (towerLevel, baseLevel)
+        {
+            case (0, 0):
+                return 0;
+
+            default:
+                return null;
+        }
+    }
+
+    GameObject GetWeaponPrefab(int type)
+    {
+        int index = (int)GetWeaponIndex(type);
+
+        return weaponsList[index];
+    }
+        
+    int? GetWeaponIndex(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return 0;
+
+            default:
+                return null;
+        }
+    }
+
+    public void cleanTowers()
+    {
+        // Create a new NativeList to hold the towers to remove
+        using (var towersToRemove = new NativeList<TowerData>(Allocator.Temp))
+        {
+            // Find and add all towers to remove to the NativeList
+            foreach (Transform child in towers.transform)
+            {
+                if (child.CompareTag("Tower"))
+                {
+                    var towerPos = grid.WorldToCell(child.position);
+                    if (towerData.ContainsKey(towerPos))
+                    {
+                        var tower = towerData[towerPos];
+                        towersToRemove.Add(tower);
+                    }
+                }
+            }
+
+            // Remove all towers from the SyncedTowers list
+            foreach (var tower in towersToRemove)
+            {
+                SyncedTowers.Remove(tower);
+
+                string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+                GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
+
+                if (existingTower != null)
+                {
+                    var weapon = existingTower.transform.Find("Weapon")?.gameObject;
+                    if (weapon != null)
+                    {
+                        weapon.transform.SetParent(null);
+                        weapon.GetComponent<NetworkObject>().Despawn(true);
+                    }
+                    existingTower.transform.SetParent(null);
+                    existingTower.GetComponent<NetworkObject>().Despawn(true);
+                }
+
+                // Remove the tower from the dictionary
+                towerData.Remove(tower.cellIndex);
+            }
+        }
     }
 
 
-    private void HandleSyncedDataUpdates()
+    private void OnDestroy()
     {
-
-        TileBase tile = MapManager.getTileInMap(towers, 0, 0);
-        TileBase mid = MapManager.getTileInMap(towers, 2, 0);
-        TileBase top = MapManager.getTileInMap(towers, 4, 0);
-
-        int nbChildren = grid.transform.childCount;
-
-        for (int i = nbChildren - 1; i >= 0; i--)
+        if (NetworkManager.Singleton == null)
         {
-            DestroyImmediate(grid.transform.GetChild(i).gameObject);
+            return;
         }
 
-        foreach (TowerData tower in SyncedTowers)
+        if (NetworkManager.Singleton.IsClient)
         {
-            GameObject sortObject = new GameObject();
-            sortObject.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-            sortObject.transform.SetParent(grid.transform, false);
-
-            Vector3 cellWorldPos = grid.GetCellCenterWorld(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y));
-            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-
-
-            GameObject TowerLogic = Instantiate(towerPrefab, cellWorldPos, rotation, sortObject.transform);
-            TowerLogic.name = "Logic";
-
-            Tilemap baseTile = Instantiate(baseTilemap);
-            baseTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), tile);
-            baseTile.name = "Base";
-            baseTile.transform.SetParent(sortObject.transform, false);
-            baseTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
-
-            Tilemap midTile = Instantiate(midTilemap);
-            midTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), mid);
-            midTile.name = "Mid";
-            midTile.transform.SetParent(sortObject.transform, false);
-            midTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
-
-            Tilemap weaponTile = Instantiate(weaponTilemap);
-            weaponTile.SetTile(new Vector3Int(tower.cellIndex.x, tower.cellIndex.y), top);
-            weaponTile.name = "Weapon";
-            weaponTile.transform.SetParent(sortObject.transform, false);
-            weaponTile.GetComponent<TilemapRenderer>().sortingOrder = -tower.cellIndex.x + -tower.cellIndex.y;
+            SyncedTowers.OnListChanged -= OnClientListChanged;
+        }
+        if (NetworkManager.Singleton.IsServer)
+        {
+            SyncedTowers.OnListChanged -= OnServerListChanged;
         }
 
+        cleanTowers();
+        GetComponent<NetworkObject>().Despawn(true);
     }
 }
 
 
+
 //Tower Data Structure, store anything related to the tower here
 public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
-{
+{   
+    public int id;
+    public int type;
     public Vector3Int cellIndex;
-    public int level;
+    public int baseLevel;
+    public int towerLevel;
 
     public TowerData(
+        int id,
+        int type,
         Vector3Int cellIndex,
-        int level = 0
+        int baseLevel = 0,
+        int towerLevel = 0
         )
     {
+        this.id = id;
+        this.type = type;
         this.cellIndex = cellIndex;
-        this.level = level;
+        this.baseLevel = baseLevel;
+        this.towerLevel = towerLevel;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -245,20 +405,32 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
         if (serializer.IsReader)
         {
             var reader = serializer.GetFastBufferReader();
+
+            reader.ReadValueSafe(out id);
+            reader.ReadValueSafe(out type);
             reader.ReadValueSafe(out cellIndex);
-            reader.ReadValueSafe(out level);
+            reader.ReadValueSafe(out baseLevel);
+            reader.ReadValueSafe(out towerLevel);
         }
         else
         {
             var writer = serializer.GetFastBufferWriter();
+            writer.WriteValueSafe(id);
+            writer.WriteValueSafe(type);
             writer.WriteValueSafe(cellIndex);
-            writer.WriteValueSafe(level);
+            writer.WriteValueSafe(baseLevel);
+            writer.WriteValueSafe(towerLevel);
 
         }
     }
     public bool Equals(TowerData other)
     {
-        return cellIndex == other.cellIndex && level == other.level;
+        return (id == other.id 
+                && type == other.type 
+                && cellIndex == other.cellIndex 
+                && baseLevel == other.baseLevel 
+                && towerLevel == other.towerLevel
+               );
     }
 
 }

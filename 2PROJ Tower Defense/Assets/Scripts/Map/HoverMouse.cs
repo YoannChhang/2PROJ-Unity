@@ -46,7 +46,7 @@ public class HoverMouse : MonoBehaviour
     private void UpdateHover(Vector3Int cellIndex, Tilemap tilemap, TileBase currTile, bool available)
     {
 
-        if (hovering != cellIndex)
+        if (hovering != cellIndex && hoveredMap != null)
         {
 
             if (hovering != null)
@@ -114,7 +114,7 @@ public class HoverMouse : MonoBehaviour
 
         Tilemap tilemap = buffer.GetComponent<Tilemap>();
 
-        if (tilemap == null)
+        if (tilemap == null || tilemap.Equals(null))
         {
             //Debug.LogError("Could not find Tilemap component on GameObject with name: " + gameObjectName);
             return null;

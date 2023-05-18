@@ -7,6 +7,7 @@ TagManager:
   - paths
   - Enemy
   - Base
+  - Towers
   layers:
   - Default
   - TransparentFX

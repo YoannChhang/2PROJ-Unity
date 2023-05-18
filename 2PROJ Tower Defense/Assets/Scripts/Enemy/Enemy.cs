@@ -13,8 +13,8 @@ public class Enemy : NetworkBehaviour
     private Waypoints path;
     private int currentWaypoint = 1;
 
-    private float speed = 1f;
-    private float minDistance = 0.1f;
+    private float speed = 5f;
+    private float minDistance = 0.2f;
     private int damage = 10;
     private int gold = 5;
     private int difficulty = 1;
@@ -74,13 +74,15 @@ public class Enemy : NetworkBehaviour
             {
                 Vector3 targetPosition = path.waypoints[currentWaypoint];
 
-                if (Vector3.Distance(transform.position, targetPosition) < minDistance)
+                if (Vector3.Distance(transform.position, targetPosition) <= minDistance)
                 {
                     currentWaypoint++;
                 }
                 else
                 {
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+                    //transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                    
                 }
             }
             else
