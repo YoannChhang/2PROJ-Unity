@@ -799,19 +799,35 @@ PrefabInstance:
     m_TransformParent: {fileID: 84558658}
     m_Modifications:
     - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 48414381}
     - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnModeClick
       objectReference: {fileID: 0}
     - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ModeSelection, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: ModeSelection, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6106563622327274036, guid: 5550f5e80232a42f6b602407cb2785e9, type: 3}

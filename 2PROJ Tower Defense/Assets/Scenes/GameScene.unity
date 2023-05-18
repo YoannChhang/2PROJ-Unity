@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: gameManagerPrefab
       value: 
       objectReference: {fileID: 2483076946168418834, guid: 8b8794d2fca8c4044953e978a82925eb, type: 3}
+    - target: {fileID: -375346840567984430, guid: 37a1af6678d2b49408cf1fbc44649562, type: 3}
+      propertyPath: soundManagerPrefab
+      value: 
+      objectReference: {fileID: 433016451097302847, guid: f053b45999079495981e381edb35adb3, type: 3}
     - target: {fileID: 198914658381451600, guid: 37a1af6678d2b49408cf1fbc44649562, type: 3}
       propertyPath: m_RootOrder
       value: 11

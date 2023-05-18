@@ -12,10 +12,18 @@ public class NetworkObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject basePrefab;
     [SerializeField] private GameObject spawnerPrefab;
+    [SerializeField] private GameObject soundManagerPrefab;
 
 
     void Start()
     {
+        if (FindObjectOfType<SoundManager>() == null)
+        {
+            GameObject soundManager = Instantiate(soundManagerPrefab, Vector3.zero, Quaternion.identity);
+            soundManager.name = "SoundManager";
+        }
+        
+
         //TO RUN GAME QUICKER WHEN DEV
         if (NetworkManager.Singleton == null)
         {
@@ -48,6 +56,8 @@ public class NetworkObjectSpawner : MonoBehaviour
             GameObject spawner2 = Instantiate(spawnerPrefab, Vector3.zero, Quaternion.identity);
             spawner2.gameObject.name = "Spawner UpperRight";
             spawner2.gameObject.GetComponent<WaveSpawner>().SetPath(GameObject.Find("Waypoints Upper Right").GetComponent<Waypoints>());
+
+            
         }
     }
 }
