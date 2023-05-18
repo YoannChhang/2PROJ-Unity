@@ -1,13 +1,18 @@
 ﻿<Properties StartupConfiguration="{C54F3BF5-494E-38E1-5769-CA762AD978F2}|">
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/NetworkObjectSpawner.cs">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6893b801-0811-46dc-88ea-5b48a573ff3e" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Network/PlayerManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameCameraMover.cs" Line="35" Column="1" />
-      <File FileName="Assets/Scripts/Map/MapManager.cs" Line="35" Column="10" />
-      <File FileName="Assets/Scripts/Network/NetworkObjectSpawner.cs" Line="19" Column="42" />
+      <File FileName="Assets/Scripts/Game/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Network/PlayerManager.cs" Line="42" Column="58" />
+      <File FileName="Assets/Scripts/Network/LobbyManager.cs" Line="586" Column="6" />
+      <File FileName="Assets/Scripts/Enemy/WaveSpawner.cs" Line="79" Column="6" />
+      <File FileName="Assets/Scripts/InterfaceManager.cs" Line="19" Column="22" />
+      <File FileName="Assets/Scripts/Towers/TowerManager.cs" Line="95" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,9 +21,11 @@
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="Enemy" expanded="True" />
+                <Node name="Game" expanded="True" />
                 <Node name="Map" expanded="True" />
                 <Node name="Network" expanded="True" />
                 <Node name="SceneManagers" expanded="True" />
+                <Node name="Towers" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -26,7 +33,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2c8ab2ff-421e-46f7-acd4-f2e18dca739d" />
 </Properties>
