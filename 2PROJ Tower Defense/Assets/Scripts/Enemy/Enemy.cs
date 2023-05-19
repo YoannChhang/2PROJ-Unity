@@ -19,7 +19,8 @@ public class Enemy : NetworkBehaviour
     private int gold = 5;
     private int difficulty = 1;
 
-    private float maxHealth = 20;
+    public GameObject deathParticles;
+    private float maxHealth = 1;
     private NetworkVariable<float> currentHealth;
     [SerializeField] private Image healthbar;
 
@@ -126,8 +127,11 @@ public class Enemy : NetworkBehaviour
 
         if (currentHealth.Value <= 0)
         {
+            GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
+            Destroy(deathParticles,1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
     }
+
     
 }
