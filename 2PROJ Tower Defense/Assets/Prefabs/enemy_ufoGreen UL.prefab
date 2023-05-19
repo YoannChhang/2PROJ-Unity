@@ -463,7 +463,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64da877e1441a41b9590c21162ff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  damage: 10
+  gold: 5
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
+  maxHealth: 10
   healthbar: {fileID: 1520908755}
 --- !u!114 &6242309249049863076
 MonoBehaviour:

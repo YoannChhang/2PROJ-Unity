@@ -13,14 +13,16 @@ public class Enemy : NetworkBehaviour
     private Waypoints path;
     private int currentWaypoint = 1;
 
-    private float speed = 5f;
+    public float speed ;
     private float minDistance = 0.2f;
-    private int damage = 10;
-    private int gold = 5;
+    public int damage ;
+    public int gold ;
     private int difficulty = 1;
 
     public GameObject deathParticles;
-    private float maxHealth = 1;
+
+
+    public float maxHealth;
     private NetworkVariable<float> currentHealth;
     [SerializeField] private Image healthbar;
 
