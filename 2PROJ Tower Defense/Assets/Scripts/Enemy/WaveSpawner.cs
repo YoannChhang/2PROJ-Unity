@@ -8,6 +8,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab;
     [SerializeField]
+    private GameObject enemyPrefab2;
+    [SerializeField]
     private Waypoints waypoints;
 
     private float countdown = 5f;
@@ -18,8 +20,8 @@ public class WaveSpawner : MonoBehaviour
     private Vector3 pos;
     public int waveIndex=0;
     int[][] myArray = new int[][] {
-        new int[] {1},
-        new int[] {1},
+        new int[] {1,2},
+        new int[] {1,2},
     };
 
     // Start is called before the first frame update
@@ -36,7 +38,7 @@ public class WaveSpawner : MonoBehaviour
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
-        NoEnemiesLeft();
+        //NoEnemiesLeft();
         countdown -= Time.deltaTime;
     }
 
@@ -55,7 +57,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i=0;i<myArray[waveIndex].Length;i++)
         {
             
-            SpawnEnemy(enemyPrefab, waveIndex, i, myArray[waveIndex][i]);
+            SpawnEnemy(waveIndex, i, myArray[waveIndex][i]);
 
             //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
                    
@@ -67,25 +69,39 @@ public class WaveSpawner : MonoBehaviour
         
     }
 
-    private void SpawnEnemy(GameObject prefab, int wave, int numInWave, int enemyType)
+    private void SpawnEnemy(int wave, int numInWave, int enemyType)
     {
-
+        
+        GameObject enemy;
+        if (enemyType == 1)
+        {
+            enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        }
+        else if (enemyType == 2)
+        {
+            enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Invalid enemy type: " + enemyType);
+            return;
+        }
         // Use enemyType to identify the correct type of the enemy.
 
-        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
+        //GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         enemy.name = "Enemy " + wave + " " + numInWave;
         enemy.GetComponent<Enemy>().SetPath(waypoints);
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
-    private void NoEnemiesLeft()
-    {
-        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if(enemyCount == 0)
-        {
-            //Debug.Log("Plus aucun ennemis sur la map");
-        }
-    }
+    // private void NoEnemiesLeft()
+    // {
+    //     int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+    //     if(enemyCount == 0)
+    //     {
+    //         Debug.Log("Plus aucun ennemis sur la map");
+    //     }
+    // }
 
 }
         
