@@ -241,14 +241,15 @@ public class GameManager : NetworkBehaviour
     { 
         isOver = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     [ServerRpc(RequireOwnership = false)]
     public void retryServerRpc()
     {
-        destroyTowers();
         retryClientRpc();
+        destroyTowers();
+        //NetworkManager.Singleton.SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+
     }
 
 
@@ -296,7 +297,11 @@ public class GameManager : NetworkBehaviour
         GameObject towers = GameObject.Find("TowerMap").gameObject;
 
         // Loop through all the towers and destroy them on the network
-        Destroy(towers);
+        towers.GetComponent<TowerManager>().cleanTowers();
+        // wait for the towers to be destroyed
+        System.Threading.Thread.Sleep(1000);
+
+        towers.GetComponent<NetworkObject>().Despawn(true);
     }
 
 }

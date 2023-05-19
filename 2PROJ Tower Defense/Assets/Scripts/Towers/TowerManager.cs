@@ -43,7 +43,11 @@ public class TowerManager : NetworkBehaviour
 
         //TODO : To be removed, this is so when game start you have money but this should be correctly implemented in WaveManager
         GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(150);
-        
+
+        if (gameObject.name != "TowerMap")
+        {
+            gameObject.name = "TowerMap";
+        }
     }
 
     void Start()
@@ -53,11 +57,6 @@ public class TowerManager : NetworkBehaviour
 
     private void Update()
     {
-
-        if (gameObject.name != "TowerMap")
-        {
-            gameObject.name = "TowerMap";
-        }
 
         if (game == null)
         {
@@ -77,39 +76,45 @@ public class TowerManager : NetworkBehaviour
                 if (Input.GetMouseButtonDown(0) && available)
                 {
 
-                    ///Checks before placing tower
-
-                    //Get Tower Info
-                    TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
-                    TowerProperty tp = SelectedTower.GetProperty();
-
-                    //Get Current Money
-                    PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
-
-                    PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
-
-                    //If balance >= 0 when purchasing tower/upgrade
-                    if (player.money - tp.Cost[tp.Level] >= 0)
+                    if (towerData.ContainsKey(cellIndex))
                     {
-
-
-                        var newTower = new TowerData();
-                        newTower.cellIndex = cellIndex;
-                        AddTowerServerRpc(newTower);
-
-
-
-                        //Remove player money
-                        playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
-
+                        Debug.Log("Tower already placed here");
+                        SyncedTowers.Remove(towerData[cellIndex]);
                     }
                     else
                     {
-                        Debug.Log("Not enough money to place tower");
+
+                        ///Checks before placing tower
+
+                        //Get Tower Info
+                        TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
+                        TowerProperty tp = SelectedTower.GetProperty();
+
+                        //Get Current Money
+                        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+                        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+
+                        //If balance >= 0 when purchasing tower/upgrade
+                        if (player.money - tp.Cost[tp.Level] >= 0)
+                        {
+
+
+                            var newTower = new TowerData();
+                            newTower.cellIndex = cellIndex;
+                            AddTowerServerRpc(newTower);
+
+
+
+                            //Remove player money
+                            playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
+
+                        }
+                        else
+                        {
+                            Debug.Log("Not enough money to place tower");
+                        }
                     }
-
-
-
 
                 }
             }
@@ -166,35 +171,6 @@ public class TowerManager : NetworkBehaviour
         SyncedTowers.Add(changeTower);
 
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    void RemoveTowerServerRpc(TowerData removedTower)
-    {
-
-        string name = "Tower " + -removedTower.cellIndex.x + "," + -removedTower.cellIndex.y;
-        GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
-
-        if (existingTower != null)
-        {
-            var weapon = existingTower.transform.Find("Weapon")?.gameObject;
-            if (weapon != null)
-            {
-                weapon.transform.SetParent(null);
-                weapon.GetComponent<NetworkObject>().Despawn(true);
-            }
-            existingTower.transform.SetParent(null);
-            existingTower.GetComponent<NetworkObject>().Despawn(true);
-        }
-
-        // Check if the tower is in the dictionary
-        if (towerData.ContainsValue(removedTower))
-        { 
-            // If so, remove it from the dictionary
-            towerData.Remove(removedTower.cellIndex);
-        }
-
-        SyncedTowers.Remove(removedTower);
-    }
     
 
     void OnServerListChanged(NetworkListEvent<TowerData> changeEvent)
@@ -212,16 +188,35 @@ public class TowerManager : NetworkBehaviour
     void UpdateDictionary()
     {
 
-        foreach(TowerData tower in SyncedTowers)
+        
+        var towersToRemove = new List<Vector3Int>();
+
+        foreach (var data in towerData.Values)
         {
-            // Check if the tower is in the dictionary
+            if (!SyncedTowers.Contains(data))
+            {
+                towersToRemove.Add(data.cellIndex);
+                UpdateDisplayTower(data);
+            }
+        }
+
+        foreach (var towerPos in towersToRemove)
+        {
+            towerData.Remove(towerPos);
+        }
+
+        towersToRemove.Clear();
+
+        foreach (var tower in SyncedTowers)
+        {
             if (!towerData.ContainsValue(tower))
             {
-                // If not, add / update the tower data to the dictionary with the cell index as the key
                 towerData[tower.cellIndex] = tower;
                 UpdateDisplayTower(tower);
             }
         }
+        
+
 
     }
 
@@ -241,32 +236,37 @@ public class TowerManager : NetworkBehaviour
             var weapon = existingTower.transform.Find("Weapon")?.gameObject;
             if (weapon != null)
             {
-                weapon.transform.SetParent(null);
+                //weapon.transform.SetParent(null);
                 weapon.GetComponent<NetworkObject>().Despawn(true);
             }
-            existingTower.transform.SetParent(null);
+            //existingTower.transform.SetParent(null);
             existingTower.GetComponent<NetworkObject>().Despawn(true);
         }
 
+        if (SyncedTowers.Contains(tower))
+        {
 
-        // Spawns Tower
-        Vector3Int correctIndex = tower.cellIndex;
-        correctIndex.x += 1;
-        correctIndex.y -= 1;
+            // Spawns Tower
+            Vector3Int correctIndex = tower.cellIndex;
+            correctIndex.x += 1;
+            correctIndex.y -= 1;
 
-        Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
-        Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-        GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
-        newTower.GetComponent<NetworkObject>().Spawn(true);
-        newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-        newTower.transform.SetParent(grid.transform, false);
+            Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
+            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+            GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
+            newTower.GetComponent<NetworkObject>().Spawn(true);
+            newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+            newTower.transform.SetParent(grid.transform, false);
 
-        // Spawns Weapon
-        Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);
-        GameObject newWeapon = Instantiate(weaponPrefab, weaponRelativePos, Quaternion.identity, newTower.transform);
-        newWeapon.GetComponent<NetworkObject>().Spawn(true);
-        newWeapon.name = "Weapon";
-        newWeapon.transform.SetParent(newTower.transform, false);
+            // Spawns Weapon
+            Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);
+            GameObject newWeapon = Instantiate(weaponPrefab, weaponRelativePos, Quaternion.identity, newTower.transform);
+            newWeapon.GetComponent<NetworkObject>().Spawn(true);
+            newWeapon.name = "Weapon";
+            newWeapon.transform.SetParent(newTower.transform, false);
+
+        }
+
     }
 
     GameObject GetTowerPrefab(int towerLevel, int baseLevel)
@@ -309,68 +309,31 @@ public class TowerManager : NetworkBehaviour
 
     public void cleanTowers()
     {
-        // Create a new NativeList to hold the towers to remove
-        using (var towersToRemove = new NativeList<TowerData>(Allocator.Temp))
-        {
-            // Find and add all towers to remove to the NativeList
-            foreach (Transform child in towers.transform)
-            {
-                if (child.CompareTag("Tower"))
-                {
-                    var towerPos = grid.WorldToCell(child.position);
-                    if (towerData.ContainsKey(towerPos))
-                    {
-                        var tower = towerData[towerPos];
-                        towersToRemove.Add(tower);
-                    }
-                }
-            }
+        
+        // Find and add all towers to remove to the NativeList
+        SyncedTowers.Clear();
 
-            // Remove all towers from the SyncedTowers list
-            foreach (var tower in towersToRemove)
-            {
-                SyncedTowers.Remove(tower);
-
-                string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-                GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
-
-                if (existingTower != null)
-                {
-                    var weapon = existingTower.transform.Find("Weapon")?.gameObject;
-                    if (weapon != null)
-                    {
-                        weapon.transform.SetParent(null);
-                        weapon.GetComponent<NetworkObject>().Despawn(true);
-                    }
-                    existingTower.transform.SetParent(null);
-                    existingTower.GetComponent<NetworkObject>().Despawn(true);
-                }
-
-                // Remove the tower from the dictionary
-                towerData.Remove(tower.cellIndex);
-            }
-        }
     }
 
 
     private void OnDestroy()
     {
-        if (NetworkManager.Singleton == null)
-        {
-            return;
-        }
+        //if (NetworkManager.Singleton == null)
+        //{
+        //    return;
+        //}
 
-        if (NetworkManager.Singleton.IsClient)
-        {
-            SyncedTowers.OnListChanged -= OnClientListChanged;
-        }
-        if (NetworkManager.Singleton.IsServer)
-        {
-            SyncedTowers.OnListChanged -= OnServerListChanged;
-        }
+        //if (NetworkManager.Singleton.IsClient)
+        //{
+        //    SyncedTowers.OnListChanged -= OnClientListChanged;
+        //}
+        //if (NetworkManager.Singleton.IsServer)
+        //{
+        //    SyncedTowers.OnListChanged -= OnServerListChanged;
+        //}
 
-        cleanTowers();
-        GetComponent<NetworkObject>().Despawn(true);
+        //cleanTowers();
+        //GetComponent<NetworkObject>().Despawn(true);
     }
 }
 

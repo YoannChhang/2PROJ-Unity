@@ -83,7 +83,7 @@ public class WaveSpawner : MonoBehaviour
         int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if(enemyCount == 0)
         {
-            Debug.Log("Plus aucun ennemis sur la map");
+            //Debug.Log("Plus aucun ennemis sur la map");
         }
     }
 
