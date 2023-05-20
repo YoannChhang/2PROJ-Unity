@@ -89,6 +89,7 @@ public class TowerManager : NetworkBehaviour
                         //Get Tower Info
                         TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
                         TowerProperty tp = SelectedTower.GetProperty();
+                        Debug.Log(SelectedTower.ToString());
 
                         //Get Current Money
                         PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
@@ -102,12 +103,13 @@ public class TowerManager : NetworkBehaviour
 
                             var newTower = new TowerData();
                             newTower.cellIndex = cellIndex;
+                            newTower.type = SelectedTower;
                             AddTowerServerRpc(newTower);
 
 
 
                             //Remove player money
-                            playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
+                            //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
 
                         }
                         else
@@ -288,19 +290,25 @@ public class TowerManager : NetworkBehaviour
         }
     }
 
-    GameObject GetWeaponPrefab(int type)
+    GameObject GetWeaponPrefab(TowerType type)
     {
         int index = (int)GetWeaponIndex(type);
 
         return weaponsList[index];
     }
         
-    int? GetWeaponIndex(int type)
+    int? GetWeaponIndex(TowerType type)
     {
         switch (type)
         {
-            case 0:
+            case TowerType.Arrow:
                 return 0;
+
+            case TowerType.Cannon:
+                return 1;
+
+            case TowerType.Twin:
+                return 2;
 
             default:
                 return null;
@@ -343,14 +351,14 @@ public class TowerManager : NetworkBehaviour
 public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
 {   
     public int id;
-    public int type;
+    public TowerType type;
     public Vector3Int cellIndex;
     public int baseLevel;
     public int towerLevel;
 
     public TowerData(
         int id,
-        int type,
+        TowerType type,
         Vector3Int cellIndex,
         int baseLevel = 0,
         int towerLevel = 0

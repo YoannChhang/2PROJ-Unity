@@ -225,7 +225,7 @@ public class GameManager : NetworkBehaviour
     {
         isOver = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartMenu");
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -233,6 +233,7 @@ public class GameManager : NetworkBehaviour
     {
         destroyTowers();
         returnToMenuClientRpc();
+        NetworkManager.Singleton.SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
     }
 
 
@@ -248,7 +249,7 @@ public class GameManager : NetworkBehaviour
     {
         retryClientRpc();
         destroyTowers();
-        //NetworkManager.Singleton.SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
 
     }
 

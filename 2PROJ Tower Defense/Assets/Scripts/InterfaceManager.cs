@@ -16,7 +16,7 @@ public class InterfaceManager : MonoBehaviour
 
 
     //Get using GameObject.Find("InterfaceManager").GetComponentInChildren<InterfaceManager>.SelectedTowerType
-    public TowerType SelectedTowerType = TowerType.Arrow;
+    public TowerType SelectedTowerType = TowerType.Twin;
 
     // Update is called once per frame
     void Update()

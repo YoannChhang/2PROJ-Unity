@@ -233,9 +233,9 @@ public class TowerLogic : MonoBehaviour
 public enum TowerType
 {
     Arrow,
+    Cannon,
+    Twin,
     Mage,
-    Rocket,
-    Soldier
 }
 
 public static class TowerTypeExtension
@@ -250,11 +250,11 @@ public static class TowerTypeExtension
             case TowerType.Mage:
                 return new MageProperty();
 
-            case TowerType.Rocket:
-                return new RocketProperty();
+            case TowerType.Cannon:
+                return new CannonProperty();
 
-            case TowerType.Soldier:
-                return new SoldierProperty();
+            case TowerType.Twin:
+                return new TwinProperty();
 
             default:
                 return null;
@@ -292,20 +292,20 @@ public class MageProperty : TowerProperty
         Cost = new int[3] { 180, 220, 280 };
     }
 }
-public class RocketProperty : TowerProperty
+public class CannonProperty : TowerProperty
 {
-    public RocketProperty()
+    public CannonProperty()
     {
-        Type = TowerType.Rocket;
+        Type = TowerType.Cannon;
         Damage = 1;
-        Cost = new int[3] { 220, 280, 300 };
+        Cost = new int[3] { 20, 280, 300 };
     }
 }
-public class SoldierProperty : TowerProperty
+public class TwinProperty : TowerProperty
 {
-    public SoldierProperty()
+    public TwinProperty()
     {
-        Type = TowerType.Soldier;
+        Type = TowerType.Twin;
         Damage = 1;
         Cost = new int[3] { 100, 140, 200 };
     }
