@@ -22,8 +22,8 @@ public class WaveSpawner : MonoBehaviour
     private Vector3 pos;
     public int waveIndex=0;
     int[][] myArray = new int[][] {
-        new int[] {1,2,3},
-        new int[] {1,2,3},
+        new int[] {1,3},
+        new int[] {3},
     };
 
     // Start is called before the first frame update
