@@ -10,6 +10,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab2;
     [SerializeField]
+    private GameObject enemyPrefab3;
+    [SerializeField]
     private Waypoints waypoints;
 
     private float countdown = 5f;
@@ -20,8 +22,8 @@ public class WaveSpawner : MonoBehaviour
     private Vector3 pos;
     public int waveIndex=0;
     int[][] myArray = new int[][] {
-        new int[] {1,2},
-        new int[] {1,2},
+        new int[] {1,3},
+        new int[] {3},
     };
 
     // Start is called before the first frame update
@@ -80,6 +82,10 @@ public class WaveSpawner : MonoBehaviour
         else if (enemyType == 2)
         {
             enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
+        }
+        else if (enemyType ==3)
+        {
+            enemy = Instantiate(enemyPrefab3, pos, Quaternion.identity);
         }
         else
         {
