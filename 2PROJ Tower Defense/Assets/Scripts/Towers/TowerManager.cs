@@ -17,6 +17,8 @@ public class TowerManager : NetworkBehaviour
     [SerializeField] private HoverMouse hoverManager;
 
     [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private GameObject towerOptionsPrefab;
+
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap baseTilemap;
     [SerializeField] private Tilemap midTilemap;
@@ -31,6 +33,8 @@ public class TowerManager : NetworkBehaviour
     private Dictionary<Vector3Int, TowerData> towerData;
     private NetworkList<TowerData> SyncedTowers;
     private static NetworkVariable<int> lastTowerId;
+
+    private bool isSelected = false;
 
 
 
@@ -73,55 +77,69 @@ public class TowerManager : NetworkBehaviour
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
                 bool available = hoverManager.checkTileAvailability(cellIndex);
 
-                if (Input.GetMouseButtonDown(0) && available)
+                if (!isSelected)
                 {
 
-                    if (towerData.ContainsKey(cellIndex))
-                    {
-                        Debug.Log("Tower already placed here");
-                        SyncedTowers.Remove(towerData[cellIndex]);
-                    }
-                    else
+                    if (Input.GetMouseButtonDown(0) && available)
                     {
 
-                        ///Checks before placing tower
-
-                        //Get Tower Info
-                        TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
-                        TowerProperty tp = SelectedTower.GetProperty();
-                        Debug.Log(SelectedTower.ToString());
-
-                        //Get Current Money
-                        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
-
-                        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
-
-                        //If balance >= 0 when purchasing tower/upgrade
-                        if (player.money - tp.Cost[tp.Level] >= 0)
+                        if (towerData.ContainsKey(cellIndex))
                         {
-
-
-                            var newTower = new TowerData();
-                            newTower.cellIndex = cellIndex;
-                            newTower.type = SelectedTower;
-                            AddTowerServerRpc(newTower);
-
-
-
-                            //Remove player money
-                            //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost[tp.Level]);
-
+                            changeSelected();
+                            GameObject towerOptions = Instantiate(towerOptionsPrefab);
+                            TowerUpgrade towerUpgrade = towerOptions.GetComponent<TowerUpgrade>();
+                            towerUpgrade.currTower = towerData[cellIndex];
+                            //towerUpgrade.UpdateText();    
                         }
                         else
                         {
-                            Debug.Log("Not enough money to place tower");
-                        }
-                    }
 
-                }
+                            ///Checks before placing tower
+
+                            //Get Tower Info
+                            TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
+                            TowerProperty tp = SelectedTower.GetProperty();
+                            Debug.Log(SelectedTower.ToString());
+
+                            //Get Current Money
+                            PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+                            PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+
+                            //If balance >= 0 when purchasing tower/upgrade
+                            if (player.money - tp.Cost >= 0)
+                            {
+
+
+                                var newTower = new TowerData();
+                                newTower.cellIndex = cellIndex;
+                                newTower.type = SelectedTower;
+                                AddTowerServerRpc(newTower);
+
+
+
+                                //Remove player money
+                                //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
+
+                            }
+                            else
+                            {
+                                Debug.Log("Not enough money to place tower");
+                            }
+                        }
+
+                    }
+            
+                } 
+
             }
         }
 
+    }
+
+    public void changeSelected()
+    {
+        isSelected = !isSelected;
     }
 
     //When NetworkSpawns
@@ -166,7 +184,7 @@ public class TowerManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void UpdateTowerServerRpc(TowerData currTower, TowerData changeTower)
+    public void UpdateTowerServerRpc(TowerData currTower, TowerData changeTower)
     {
 
         SyncedTowers.Remove(currTower);
@@ -225,11 +243,6 @@ public class TowerManager : NetworkBehaviour
     void UpdateDisplayTower(TowerData tower)
     {
 
-        // TODO Get Tower prefab then display it with network control and ballista rotation.
-
-        GameObject towerPrefab = GetTowerPrefab(tower.towerLevel, tower.baseLevel);
-        GameObject weaponPrefab = GetWeaponPrefab(tower.type);
-
         string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
         GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
 
@@ -247,6 +260,11 @@ public class TowerManager : NetworkBehaviour
 
         if (SyncedTowers.Contains(tower))
         {
+
+            // TODO Get Tower prefab then display it with network control and ballista rotation.
+
+            GameObject towerPrefab = GetTowerPrefab(tower.topLevel, tower.baseLevel);
+            GameObject weaponPrefab = GetWeaponPrefab(tower.type);
 
             // Spawns Tower
             Vector3Int correctIndex = tower.cellIndex;
@@ -280,10 +298,34 @@ public class TowerManager : NetworkBehaviour
 
     int? GetTowerIndex(int towerLevel, int baseLevel)
     {
-        switch (towerLevel, baseLevel)
+        switch (baseLevel, towerLevel)
         {
             case (0, 0):
                 return 0;
+
+            case (0, 1):
+                return 1;
+
+            case (0, 2):
+                return 2;
+
+            case (1, 0):
+                return 3;
+
+            case (1, 1):
+                return 4;
+
+            case (1, 2):
+                return 5;
+
+            case (2, 0):
+                return 6;
+
+            case (2, 1):
+                return 7;
+
+            case (2, 2):
+                return 8;
 
             default:
                 return null;
@@ -354,21 +396,24 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
     public TowerType type;
     public Vector3Int cellIndex;
     public int baseLevel;
-    public int towerLevel;
+    public int topLevel;
+    public int weaponLevel;
 
     public TowerData(
         int id,
         TowerType type,
         Vector3Int cellIndex,
         int baseLevel = 0,
-        int towerLevel = 0
+        int topLevel = 0,
+        int weaponLevel = 0
         )
     {
         this.id = id;
         this.type = type;
         this.cellIndex = cellIndex;
         this.baseLevel = baseLevel;
-        this.towerLevel = towerLevel;
+        this.topLevel = topLevel;
+        this.weaponLevel = weaponLevel;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -381,7 +426,8 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
             reader.ReadValueSafe(out type);
             reader.ReadValueSafe(out cellIndex);
             reader.ReadValueSafe(out baseLevel);
-            reader.ReadValueSafe(out towerLevel);
+            reader.ReadValueSafe(out topLevel);
+            reader.ReadValueSafe(out weaponLevel);
         }
         else
         {
@@ -390,7 +436,8 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
             writer.WriteValueSafe(type);
             writer.WriteValueSafe(cellIndex);
             writer.WriteValueSafe(baseLevel);
-            writer.WriteValueSafe(towerLevel);
+            writer.WriteValueSafe(topLevel);
+            writer.WriteValueSafe(weaponLevel);
 
         }
     }
@@ -400,7 +447,8 @@ public struct TowerData : INetworkSerializable, System.IEquatable<TowerData>
                 && type == other.type 
                 && cellIndex == other.cellIndex 
                 && baseLevel == other.baseLevel 
-                && towerLevel == other.towerLevel
+                && topLevel == other.topLevel
+                && weaponLevel == other.weaponLevel
                );
     }
 

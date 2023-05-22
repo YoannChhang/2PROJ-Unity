@@ -13,6 +13,14 @@ public enum TowerTarget
     Closest
 }
 
+public enum TowerType
+{
+    Arrow,
+    Cannon,
+    Twin,
+    Mage,
+}
+
 public class TowerLogic : MonoBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
@@ -217,9 +225,6 @@ public class TowerLogic : MonoBehaviour
     }
 
     #endregion
-
-
-
     
     private void OnDrawGizmos()
     {
@@ -229,14 +234,6 @@ public class TowerLogic : MonoBehaviour
 
 }
 
-
-public enum TowerType
-{
-    Arrow,
-    Cannon,
-    Twin,
-    Mage,
-}
 
 public static class TowerTypeExtension
 {
@@ -267,11 +264,16 @@ public abstract class TowerProperty
     public TowerType Type { get; protected set; }
     public int Level { get; protected set; }
     public int Damage { get; protected set; }
-    public int[] Cost { get; protected set; }
+    public int Cost { get; protected set; }
+    public int[] TopCost { get; protected set; }
+    public int[] BaseCost { get; protected set; }
+    public int[] WeaponCost { get; protected set; }
 
     public TowerProperty(int level = 0)
     {
         Level = level;
+        BaseCost = new int[2] { 100, 150 };
+        TopCost = new int[2] { 200, 300 };
     }
 }
 public class ArrowProperty : TowerProperty
@@ -280,7 +282,8 @@ public class ArrowProperty : TowerProperty
     {
         Type = TowerType.Arrow;
         Damage = 1;
-        Cost = new int[3] { 120, 160, 200 };
+        Cost = 120;
+        WeaponCost = new int[2] { 160, 200 };
     }
 }
 public class MageProperty : TowerProperty
@@ -289,7 +292,8 @@ public class MageProperty : TowerProperty
     {
         Type = TowerType.Mage;
         Damage = 1;
-        Cost = new int[3] { 180, 220, 280 };
+        Cost = 180;
+        WeaponCost = new int[2] { 220, 280 };
     }
 }
 public class CannonProperty : TowerProperty
@@ -298,7 +302,8 @@ public class CannonProperty : TowerProperty
     {
         Type = TowerType.Cannon;
         Damage = 1;
-        Cost = new int[3] { 20, 280, 300 };
+        Cost = 220;
+        WeaponCost = new int[2] { 280, 300 };
     }
 }
 public class TwinProperty : TowerProperty
@@ -307,6 +312,7 @@ public class TwinProperty : TowerProperty
     {
         Type = TowerType.Twin;
         Damage = 1;
-        Cost = new int[3] { 100, 140, 200 };
+        Cost = 100;
+        WeaponCost = new int[2] { 140, 200 };
     }
 }
