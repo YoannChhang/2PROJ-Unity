@@ -38,9 +38,7 @@ public class PlayerManager : NetworkBehaviour
 
     public void OnDestroy()
     {
-
-        if (NetworkManager.Singleton.IsServer)
-        {
+        if (IsServer){
             SyncedPlayers.Clear();
         }
         SyncedPlayers.Dispose();

@@ -224,9 +224,9 @@ public class GameManager : NetworkBehaviour
     private void returnToMenuClientRpc()
     {
 
-        LobbyManager lbm = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
 
-        if (lbm.IsLobbyHost())
+
+        if (IsServer)
         {
             GameObject.Find("LobbyManager").GetComponent<LobbyManager>().CloseLobby();
 
@@ -236,6 +236,7 @@ public class GameManager : NetworkBehaviour
         Destroy(GameObject.Find("PlayerManager"));
         Destroy(GameObject.Find("LobbyManager"));
         Destroy(GameObject.Find("RelayManager"));
+        Destroy(GameObject.Find("TowerMap"));
 
         NetworkManager.Shutdown();
         Destroy(GameObject.Find("NetworkManager"));

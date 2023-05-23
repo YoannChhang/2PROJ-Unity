@@ -245,7 +245,7 @@ public class TowerManager : NetworkBehaviour
     {
 
         string name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-        GameObject existingTower = GameObject.Find("TowerMap").transform.Find(name)?.gameObject;
+        GameObject existingTower = transform.Find(name)?.gameObject;
 
         if (existingTower != null)
         {
@@ -372,7 +372,11 @@ public class TowerManager : NetworkBehaviour
         // Clean up resources and perform necessary destruction tasks
 
 
-
+        if (IsServer)
+        {
+            SyncedTowers.Clear();
+            
+        }
         SyncedTowers.Dispose();
         lastTowerId.Dispose();
 
