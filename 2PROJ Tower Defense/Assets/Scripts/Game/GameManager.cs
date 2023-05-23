@@ -223,17 +223,43 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void returnToMenuClientRpc()
     {
+
+        LobbyManager lbm = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
+
+        if (lbm.IsLobbyHost())
+        {
+            GameObject.Find("LobbyManager").GetComponent<LobbyManager>().CloseLobby();
+
+        }
+
+        Destroy(GameObject.Find("SceneChangeForDev"));
+        Destroy(GameObject.Find("PlayerManager"));
+        Destroy(GameObject.Find("LobbyManager"));
+        Destroy(GameObject.Find("RelayManager"));
+
+        NetworkManager.Shutdown();
+        Destroy(GameObject.Find("NetworkManager"));
+
+        SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
+
+
+
+
         isOver = false;
         Time.timeScale = 1f;
-        
+
     }
+
 
     [ServerRpc(RequireOwnership = false)]
     public void returnToMenuServerRpc()
     {
-        destroyTowers();
+
         returnToMenuClientRpc();
-        NetworkManager.Singleton.SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
+      
+
+
+
     }
 
 

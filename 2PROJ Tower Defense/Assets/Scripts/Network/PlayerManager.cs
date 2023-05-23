@@ -36,7 +36,16 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
 
+        if (NetworkManager.Singleton.IsServer)
+        {
+            SyncedPlayers.Clear();
+        }
+        SyncedPlayers.Dispose();
+        
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayerServerRpc(PlayerData playerData)

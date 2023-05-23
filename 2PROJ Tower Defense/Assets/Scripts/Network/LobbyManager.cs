@@ -68,11 +68,22 @@ public class LobbyManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        playerName = "Player" + UnityEngine.Random.Range(10, 99);
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
 
-        PlayerPrefs.SetString("PLAYER_NAME", playerName);
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            playerName = "Player" + UnityEngine.Random.Range(10, 99);
+
+            PlayerPrefs.SetString("PLAYER_NAME", playerName);
+
+        }
+        else
+        {
+            playerName = PlayerPrefs.GetString("PLAYER_NAME");
+        }
+
         Debug.Log($"Player name {playerName}");
+
 
         //GameObject.Find("Return").GetComponentInChildren<Button>().onClick.AddListener(Disconnect);
 
@@ -298,6 +309,7 @@ public class LobbyManager : MonoBehaviour
             };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, createLobbyOptions); ;
 
+
             hostLobby = lobby;
             joinedLobby = hostLobby;
 
@@ -310,8 +322,6 @@ public class LobbyManager : MonoBehaviour
             
 
             Debug.Log($"Created the lobby {lobby.Id}, mode : {lobby.Data.GetValueOrDefault("SELECTED_MODE").Value}");
-
-
 
 
             SetReadyButton();
@@ -497,9 +507,11 @@ public class LobbyManager : MonoBehaviour
 
 
 
-    private bool IsLobbyHost()
+    public bool IsLobbyHost()
     {
+        
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
+
     }
     
     private void SetReadyButton()
@@ -548,6 +560,14 @@ public class LobbyManager : MonoBehaviour
         await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, playerId);
     }
 
+    public async void CloseLobby()
+    {
+        if (IsLobbyHost())
+        {
+            await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+
+        }
+    }
 
     public void Disconnect()
     {
@@ -571,17 +591,25 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClientDisconnect(ulong clientId)
     {
-        string id = null;
-        foreach (Player p in joinedLobby.Players)
+        try
         {
-            if (p.Data["PlayerName"].Value == playerName)
+            string id = null;
+            foreach (Player p in joinedLobby.Players)
             {
-                id = p.Id;
+                if (p.Data["PlayerName"].Value == playerName)
+                {
+                    id = p.Id;
+                }
+
             }
+            //Debug.Log("Disconnection of " + id);
+            //DisconnectUserServerRpc(id);
 
         }
-        //Debug.Log("Disconnection of " + id);
-        //DisconnectUserServerRpc(id);
+        catch
+        {
+
+        }
         
     }
 }

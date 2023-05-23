@@ -172,6 +172,7 @@ public class TowerManager : NetworkBehaviour
             SyncedTowers.OnListChanged -= OnServerListChanged;
 
         }
+
     }
 
     //This is made so that the client can modify NetworkVariable
@@ -368,22 +369,21 @@ public class TowerManager : NetworkBehaviour
 
     private void OnDestroy()
     {
-        //if (NetworkManager.Singleton == null)
-        //{
-        //    return;
-        //}
+        // Clean up resources and perform necessary destruction tasks
 
-        //if (NetworkManager.Singleton.IsClient)
-        //{
-        //    SyncedTowers.OnListChanged -= OnClientListChanged;
-        //}
-        //if (NetworkManager.Singleton.IsServer)
-        //{
-        //    SyncedTowers.OnListChanged -= OnServerListChanged;
-        //}
 
-        //cleanTowers();
-        //GetComponent<NetworkObject>().Despawn(true);
+
+        SyncedTowers.Dispose();
+        lastTowerId.Dispose();
+
+ 
+        // Clear the towerData dictionary
+        towerData = null;
+
+        // Additional cleanup tasks as needed
+
+        // Ensure the object is destroyed
+        Destroy(gameObject);
     }
 }
 
