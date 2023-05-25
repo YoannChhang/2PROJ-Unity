@@ -58,13 +58,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e592cd826bac4d29bfcf095fd89de04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverManager: {fileID: -9160810930997535356, guid: 2e334f46b98205048a4cbd2e440804c6, type: 3}
   towerPrefab: {fileID: 6930177028462422865, guid: be1fbfb2658b2ed488f7eb18d1bb75e3, type: 3}
+  towerOptionsPrefab: {fileID: 8135315913982718552, guid: c481a6d4f018ba64c892220670d6941f, type: 3}
   grid: {fileID: 2175353760177175719}
   baseTilemap: {fileID: -8821142417424934210, guid: 6850886f03d0444db864a4334a4157fd, type: 3}
   midTilemap: {fileID: 280632308621450653, guid: 2ae828f6cd4aff44f86893e6e5863981, type: 3}
   weaponTilemap: {fileID: -7562125970091603924, guid: a42d9b7266e8bbb4cbdf3ee29646da74, type: 3}
   paths: {fileID: 7165501790920665188, guid: 76ca62ea647b64b3e8e9bc91bfd89524, type: 3}
   towers: {fileID: 5136590537350472297, guid: ea9a1208c584c5243a189b0848a289ee, type: 3}
+  towersList:
+  - {fileID: 5799954978555504850, guid: 31b946b2e3a380049afe4477614a53f7, type: 3}
+  - {fileID: 4027825965311188674, guid: f078c2da084672848973e56e14f1f26d, type: 3}
+  - {fileID: 2554131848728765988, guid: 4f0314339e1dd4745b66f7f78f159de4, type: 3}
+  - {fileID: 1464481503036510409, guid: 484334a28b0274c4ca0c62dcf1c916f9, type: 3}
+  - {fileID: 4612617732858946569, guid: 6543319712bb88b479727e22f3e6fb99, type: 3}
+  - {fileID: 2383782277689800885, guid: 955d2ab7b424272419c77bfdf524628c, type: 3}
+  - {fileID: 5388504404149878349, guid: 1e1c25d5c3cef3543b7d3b7d68d11359, type: 3}
+  - {fileID: 6946076894354104701, guid: 2529be01cc4e9b1429537966979db8c0, type: 3}
+  - {fileID: 3773052643530579355, guid: f60b4558d481ebe43961f235cdb5f05d, type: 3}
+  weaponsList:
+  - {fileID: 1682728804951146550, guid: 340ffca6621412748ba0bfbf40160d6e, type: 3}
+  - {fileID: 5617973673915786333, guid: f2142690fa5fd6141bee2a5d16477a53, type: 3}
+  - {fileID: 2741853036121373023, guid: 7a5df3f1b3c985c419efb15e0768883c, type: 3}
 --- !u!114 &2175353760177175721
 MonoBehaviour:
   m_ObjectHideFlags: 0

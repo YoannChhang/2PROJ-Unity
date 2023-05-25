@@ -45,5 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 6512287394422431475, guid: d94c185d7434d2f4e896e6d9a654b484, type: 3}
+  enemyPrefab2: {fileID: 7153639522334460636, guid: 8c6ecd133fe3e2441af571407eb2cc95, type: 3}
+  enemyPrefab3: {fileID: 2478984627878052890, guid: d97acd15e7c40964982cc208b25bbd9f, type: 3}
   waypoints: {fileID: 0}
   timeBetweenWaves: 5
+  waveIndex: 0

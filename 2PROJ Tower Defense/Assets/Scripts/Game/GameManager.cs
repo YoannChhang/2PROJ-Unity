@@ -96,17 +96,31 @@ public class GameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        void setRectTransformForUI(GameObject menu)
+        {
+            RectTransform rectTransform = menu.GetComponent<RectTransform>();
+            rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0, 0);
+            rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 0);
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        }
+
         GameObject parent = GameObject.Find("UI");
         Debug.Log(parent);
 
-        GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        GameObject pauseMenu = Instantiate(pauseMenuPrefab, default, Quaternion.identity, parent.transform);
         pauseMenu.gameObject.name = "PauseMenu";
+        setRectTransformForUI(pauseMenu);
 
         GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
         winMenu.gameObject.name = "WinMenu";
+        setRectTransformForUI(winMenu);
 
         GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
         loseMenu.gameObject.name = "LoseMenu";
+        setRectTransformForUI(loseMenu);
+
 
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
@@ -211,13 +225,15 @@ public class GameManager : NetworkBehaviour
     {
         isOver = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartMenu");
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void returnToMenuServerRpc()
     {
+        destroyTowers();
         returnToMenuClientRpc();
+        NetworkManager.Singleton.SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
     }
 
 
@@ -226,13 +242,15 @@ public class GameManager : NetworkBehaviour
     { 
         isOver = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     [ServerRpc(RequireOwnership = false)]
     public void retryServerRpc()
     {
         retryClientRpc();
+        destroyTowers();
+        NetworkManager.Singleton.SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+
     }
 
 
@@ -274,5 +292,17 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void destroyTowers()
+    {
+        //Find all objects with the "Tower" tag
+        GameObject towers = GameObject.Find("TowerMap").gameObject;
+
+        // Loop through all the towers and destroy them on the network
+        towers.GetComponent<TowerManager>().cleanTowers();
+        // wait for the towers to be destroyed
+        System.Threading.Thread.Sleep(1000);
+
+        towers.GetComponent<NetworkObject>().Despawn(true);
+    }
 
 }

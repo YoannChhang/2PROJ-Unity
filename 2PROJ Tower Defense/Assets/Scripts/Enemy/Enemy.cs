@@ -13,13 +13,16 @@ public class Enemy : NetworkBehaviour
     private Waypoints path;
     private int currentWaypoint = 1;
 
-    private float speed = 5f;
+    public float speed ;
     private float minDistance = 0.2f;
-    private int damage = 10;
-    private int gold = 5;
+    public int damage ;
+    public int gold ;
     private int difficulty = 1;
 
-    private float maxHealth = 20;
+    public GameObject deathParticles;
+
+
+    public float maxHealth;
     private NetworkVariable<float> currentHealth;
     [SerializeField] private Image healthbar;
 
@@ -114,7 +117,7 @@ public class Enemy : NetworkBehaviour
     private void DealDamageToBase()
     {
         target.GetComponent<Base>().TakeDamageServerRpc(damage);
-        gameObject.GetComponent<NetworkObject>().Despawn();
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -126,7 +129,11 @@ public class Enemy : NetworkBehaviour
 
         if (currentHealth.Value <= 0)
         {
-            gameObject.GetComponent<NetworkObject>().Despawn();
+            GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
+            Destroy(deathParticles,1f);
+            gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
     }
+
+    
 }

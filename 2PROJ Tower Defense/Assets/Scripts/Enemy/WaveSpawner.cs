@@ -8,6 +8,10 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab;
     [SerializeField]
+    private GameObject enemyPrefab2;
+    [SerializeField]
+    private GameObject enemyPrefab3;
+    [SerializeField]
     private Waypoints waypoints;
 
     private float countdown = 2f;
@@ -80,7 +84,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < enemyCount; i++)
         {
             
-            SpawnEnemy(enemyPrefab, waveIndex, i, myArray[waveIndex][i]);
+            SpawnEnemy(waveIndex, i, myArray[waveIndex][i]);
 
             //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
                    
@@ -92,11 +96,30 @@ public class WaveSpawner : MonoBehaviour
         isWaveGenerating = false;
     }
 
-    private void SpawnEnemy(GameObject prefab, int wave, int numInWave, int enemyType)
+    private void SpawnEnemy(int wave, int numInWave, int enemyType)
     {
+        
+        GameObject enemy;
+        if (enemyType == 1)
+        {
+            enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        }
+        else if (enemyType == 2)
+        {
+            enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
+        }
+        else if (enemyType ==3)
+        {
+            enemy = Instantiate(enemyPrefab3, pos, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Invalid enemy type: " + enemyType);
+            return;
+        }
         // Use enemyType to identify the correct type of the enemy.
-        Debug.Log("VOICI LE POS AVANT   /////////"+ waypoints.waypoints[0]);
-        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
+
+        //GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         enemy.name = "Enemy " + wave + " " + numInWave;
         enemy.GetComponent<Enemy>().SetPath(waypoints);
         enemy.GetComponent<NetworkObject>().Spawn();

@@ -13,6 +13,14 @@ public enum TowerTarget
     Closest
 }
 
+public enum TowerType
+{
+    Arrow,
+    Cannon,
+    Twin,
+    Mage,
+}
+
 public class TowerLogic : MonoBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
@@ -95,8 +103,12 @@ public class TowerLogic : MonoBehaviour
         //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
         //newAttack.GetComponent<NAME>().target = target;
         //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
-
-        DealDamageToEnemy(target);
+        
+        if (target.GetComponent<NetworkObject>().IsSpawned)
+        {
+            //DISPLAY
+            DealDamageToEnemy(target);
+        }
 
         yield return new WaitForSeconds(shootInterval);
 
@@ -107,13 +119,9 @@ public class TowerLogic : MonoBehaviour
     void DealDamageToEnemy(GameObject enemy)
     {
         Enemy e = enemy.GetComponent<Enemy>();
-        if (e != null){
 
-            e.TakeDamageServerRpc(attackDamage);
+        e.TakeDamageServerRpc(attackDamage);
 
-        } else {
-            Debug.LogError("No script ennemy");
-        }
         
     }
 
@@ -217,9 +225,6 @@ public class TowerLogic : MonoBehaviour
     }
 
     #endregion
-
-
-
     
     private void OnDrawGizmos()
     {
@@ -230,10 +235,84 @@ public class TowerLogic : MonoBehaviour
 }
 
 
-public enum TowerType
+public static class TowerTypeExtension
 {
-    Arrow,
-    Mage,
-    Rocket,
-    Soldier
+    public static TowerProperty GetProperty(this TowerType towerType)
+    {
+        switch (towerType)
+        {
+            case TowerType.Arrow:
+                return new ArrowProperty();
+
+            case TowerType.Mage:
+                return new MageProperty();
+
+            case TowerType.Cannon:
+                return new CannonProperty();
+
+            case TowerType.Twin:
+                return new TwinProperty();
+
+            default:
+                return null;
+        }
+    }
+}
+
+public abstract class TowerProperty
+{
+    public TowerType Type { get; protected set; }
+    public int Level { get; protected set; }
+    public int Damage { get; protected set; }
+    public int Cost { get; protected set; }
+    public int[] TopCost { get; protected set; }
+    public int[] BaseCost { get; protected set; }
+    public int[] WeaponCost { get; protected set; }
+
+    public TowerProperty(int level = 0)
+    {
+        Level = level;
+        BaseCost = new int[2] { 100, 150 };
+        TopCost = new int[2] { 200, 300 };
+    }
+}
+public class ArrowProperty : TowerProperty
+{
+    public ArrowProperty() 
+    {
+        Type = TowerType.Arrow;
+        Damage = 1;
+        Cost = 120;
+        WeaponCost = new int[2] { 160, 200 };
+    }
+}
+public class MageProperty : TowerProperty
+{
+    public MageProperty()
+    {
+        Type = TowerType.Mage;
+        Damage = 1;
+        Cost = 180;
+        WeaponCost = new int[2] { 220, 280 };
+    }
+}
+public class CannonProperty : TowerProperty
+{
+    public CannonProperty()
+    {
+        Type = TowerType.Cannon;
+        Damage = 1;
+        Cost = 220;
+        WeaponCost = new int[2] { 280, 300 };
+    }
+}
+public class TwinProperty : TowerProperty
+{
+    public TwinProperty()
+    {
+        Type = TowerType.Twin;
+        Damage = 1;
+        Cost = 100;
+        WeaponCost = new int[2] { 140, 200 };
+    }
 }
