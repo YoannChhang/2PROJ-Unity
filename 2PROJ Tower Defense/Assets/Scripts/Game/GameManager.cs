@@ -15,6 +15,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject pauseMenuPrefab;
     [SerializeField] private GameObject winMenuPrefab;
     [SerializeField] private GameObject loseMenuPrefab;
+    [SerializeField] private GameObject towerOptionsPrefab;
 
 
     // Start is called before the first frame update
@@ -121,10 +122,14 @@ public class GameManager : NetworkBehaviour
         loseMenu.gameObject.name = "LoseMenu";
         setRectTransformForUI(loseMenu);
 
+        //GameObject towerOptions = Instantiate(towerOptionsPrefab, Vector3.zero, Quaternion.identity, parent.transform);
+        //towerOptions.gameObject.name = "TowerOptions";
+        //setRectTransformForUI(towerOptions);
 
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
         loseMenu.SetActive(false);
+        //towerOptions.SetActive(false);
 
     }
 

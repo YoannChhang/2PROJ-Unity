@@ -19,7 +19,7 @@ public class Enemy : NetworkBehaviour
     public int gold ;
     private int difficulty = 1;
 
-    public GameObject deathParticles;
+    [SerializeField] private GameObject deathParticles;
 
 
     public float maxHealth;
@@ -130,7 +130,9 @@ public class Enemy : NetworkBehaviour
         if (currentHealth.Value <= 0)
         {
             GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
-            Destroy(deathParticles,1f);
+            deathEffect.GetComponent<NetworkObject>().Spawn();
+            deathEffect.GetComponent<NetworkObject>().Despawn(true);
+            //Destroy(deathParticles,1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
     }

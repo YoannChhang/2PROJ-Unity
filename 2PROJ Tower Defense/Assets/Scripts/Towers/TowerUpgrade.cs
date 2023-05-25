@@ -21,7 +21,6 @@ public class TowerUpgrade : MonoBehaviour
         TopButton = transform.Find("ButtonGrid").transform.Find("Top Upgrade").gameObject.GetComponent<Button>();
         BaseButton = transform.Find("ButtonGrid").transform.Find("Base Upgrade").gameObject.GetComponent<Button>();
         WeaponButton = transform.Find("ButtonGrid").transform.Find("Weapon Upgrade").gameObject.GetComponent<Button>();
-        manager = GameObject.Find("TowerMap").GetComponent<TowerManager>();
 
         Top = TopButton.gameObject.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>();
         Base = BaseButton.gameObject.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>(); ;
@@ -34,15 +33,30 @@ public class TowerUpgrade : MonoBehaviour
     {
         // Checks if clicked outside of UI Frame
 
-        if (Input.GetMouseButtonDown(0))
+        if (manager == null)
         {
-            if (!RectTransformUtility.RectangleContainsScreenPoint(GetComponent<RectTransform>(), Input.mousePosition))
+            try
             {
-                manager.changeSelected();
-                Destroy(gameObject);
+                manager = GameObject.Find("TowerMap").GetComponent<TowerManager>();
+            } catch { 
+                Debug.LogError("TowerMap doesn't exist yet");
             }
         }
 
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (!RectTransformUtility.RectangleContainsScreenPoint(GetComponent<RectTransform>(), Input.mousePosition))
+        //    {
+        //        gameObject.SetActive(false);
+
+        //    }
+        //}
+
+    }
+
+    private void OnDisable()
+    {
+        manager.changeSelected(false);
     }
 
     public void UpdateText()
@@ -83,8 +97,7 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel);
 
         manager.UpdateTowerServerRpc(currTower, newData);
-        currTower = newData;
-        UpdateText();
+        StartCoroutine(WaitAndAssignData(newData));
     }
 
     public void UpgradeBase()
@@ -97,8 +110,7 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel);
 
         manager.UpdateTowerServerRpc(currTower, newData);
-        currTower = newData;
-        UpdateText();
+        StartCoroutine(WaitAndAssignData(newData));
     }
 
     public void UpgradeWeapon()
@@ -111,6 +123,12 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel + 1);
 
         manager.UpdateTowerServerRpc(currTower, newData);
+        StartCoroutine(WaitAndAssignData(newData));
+    }
+
+    private IEnumerator WaitAndAssignData(TowerData newData)
+    {
+        yield return new WaitForSeconds(0.01f);
         currTower = newData;
         UpdateText();
     }

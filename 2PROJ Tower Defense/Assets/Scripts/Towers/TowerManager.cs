@@ -17,7 +17,7 @@ public class TowerManager : NetworkBehaviour
     [SerializeField] private HoverMouse hoverManager;
 
     [SerializeField] private GameObject towerPrefab;
-    [SerializeField] private GameObject towerOptionsPrefab;
+    private GameObject towerOptions;
 
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap baseTilemap;
@@ -52,6 +52,10 @@ public class TowerManager : NetworkBehaviour
         {
             gameObject.name = "TowerMap";
         }
+
+        towerOptions = GameObject.Find("UI").transform.Find("TowerOptions").gameObject;
+        towerOptions.SetActive(false);
+
     }
 
     void Start()
@@ -77,69 +81,66 @@ public class TowerManager : NetworkBehaviour
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
                 bool available = hoverManager.checkTileAvailability(cellIndex);
 
-                if (!isSelected)
+                if (Input.GetMouseButtonDown(0) && available && !isSelected)
                 {
 
-                    if (Input.GetMouseButtonDown(0) && available)
+                    if (towerData.ContainsKey(cellIndex))
+                    {
+                        changeSelected(true);
+                        towerOptions.SetActive(true);
+                        TowerUpgrade towerUpgrade = towerOptions.GetComponent<TowerUpgrade>();
+                        towerUpgrade.currTower = towerData[cellIndex];
+                        towerUpgrade.UpdateText();
+                    }
+                    else
                     {
 
-                        if (towerData.ContainsKey(cellIndex))
+                        ///Checks before placing tower
+
+                        //Get Tower Info
+                        TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
+                        TowerProperty tp = SelectedTower.GetProperty();
+                        Debug.Log(SelectedTower.ToString());
+
+                        //Get Current Money
+                        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+                        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+
+                        //If balance >= 0 when purchasing tower/upgrade
+                        if (player.money - tp.Cost >= 0)
                         {
-                            changeSelected();
-                            GameObject towerOptions = Instantiate(towerOptionsPrefab);
-                            TowerUpgrade towerUpgrade = towerOptions.GetComponent<TowerUpgrade>();
-                            towerUpgrade.currTower = towerData[cellIndex];
-                            //towerUpgrade.UpdateText();    
+
+
+                            var newTower = new TowerData();
+                            newTower.cellIndex = cellIndex;
+                            newTower.type = SelectedTower;
+                            AddTowerServerRpc(newTower);
+
+
+
+                            //Remove player money
+                            //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
+
                         }
                         else
                         {
-
-                            ///Checks before placing tower
-
-                            //Get Tower Info
-                            TowerType SelectedTower = GameObject.Find("Interface").GetComponentInChildren<InterfaceManager>().SelectedTowerType;
-                            TowerProperty tp = SelectedTower.GetProperty();
-                            Debug.Log(SelectedTower.ToString());
-
-                            //Get Current Money
-                            PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
-
-                            PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
-
-                            //If balance >= 0 when purchasing tower/upgrade
-                            if (player.money - tp.Cost >= 0)
-                            {
-
-
-                                var newTower = new TowerData();
-                                newTower.cellIndex = cellIndex;
-                                newTower.type = SelectedTower;
-                                AddTowerServerRpc(newTower);
-
-
-
-                                //Remove player money
-                                //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
-
-                            }
-                            else
-                            {
-                                Debug.Log("Not enough money to place tower");
-                            }
+                            Debug.Log("Not enough money to place tower");
                         }
-
                     }
-            
-                } 
 
-            }
+                }
+            
+            } 
+
         }
+        
 
     }
 
-    public void changeSelected()
+    public void changeSelected(bool status)
     {
-        isSelected = !isSelected;
+        isSelected = status;
     }
 
     //When NetworkSpawns
@@ -148,14 +149,14 @@ public class TowerManager : NetworkBehaviour
         base.OnNetworkSpawn();
 
         //Add eventlisteners
-        if (NetworkManager.Singleton.IsClient)
-        {
-            SyncedTowers.OnListChanged += OnClientListChanged;
-        }
         if (NetworkManager.Singleton.IsServer)
         {
             SyncedTowers.OnListChanged += OnServerListChanged;
 
+        }
+        else if (NetworkManager.Singleton.IsClient)
+        {
+            SyncedTowers.OnListChanged += OnClientListChanged;
         }
     }
 
@@ -163,14 +164,14 @@ public class TowerManager : NetworkBehaviour
     {
         base.OnNetworkDespawn();
 
-        if (NetworkManager.Singleton.IsClient)
-        {
-            SyncedTowers.OnListChanged -= OnClientListChanged;
-        }
         if (NetworkManager.Singleton.IsServer)
         {
             SyncedTowers.OnListChanged -= OnServerListChanged;
 
+        }
+        else if (NetworkManager.Singleton.IsClient)
+        {
+            SyncedTowers.OnListChanged -= OnClientListChanged;
         }
 
     }
@@ -188,7 +189,15 @@ public class TowerManager : NetworkBehaviour
     public void UpdateTowerServerRpc(TowerData currTower, TowerData changeTower)
     {
 
+        StartCoroutine(UpdateTowers(currTower, changeTower));
+
+    }
+
+    private IEnumerator UpdateTowers(TowerData currTower, TowerData changeTower)
+    {
+
         SyncedTowers.Remove(currTower);
+        yield return new WaitForSeconds(0.01f);
         SyncedTowers.Add(changeTower);
 
     }
