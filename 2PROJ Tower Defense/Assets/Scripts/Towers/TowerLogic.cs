@@ -32,6 +32,7 @@ public class TowerLogic : MonoBehaviour
     [SerializeField] private float shootInterval = 2f;
     private int attackDamage = 5;
 
+    [SerializeField] private TowerType type;
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
     private bool shooting = false;
 
@@ -110,26 +111,60 @@ public class TowerLogic : MonoBehaviour
     private IEnumerator SpawnAttacks(GameObject target)
     {
 
+        switch (type)
+        {
+            case TowerType.Arrow:
+
+                GameObject newAttack = Instantiate(attackPrefab, transform.position, transform.rotation, transform);
+                newAttack.GetComponent<NetworkObject>().Spawn(true);
+                StartCoroutine(ProjectileHandler(target, newAttack));
+                break;
+
+            default:
+                DealDamageToEnemy(target);
+                break;
+
+        }
         
-
-        //Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-        //Vector3 attackPos = new Vector3(0f, 0f, 0f);
-        //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
-        //newAttack.GetComponent<NAME>().target = target;
-        //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
-
-
-        
-
-        //DISPLAY
-        DealDamageToEnemy(target);
-        
-
         yield return new WaitForSeconds(shootInterval);
 
         shooting = false;
 
     }
+    IEnumerator ProjectileHandler(GameObject target, GameObject projectile)
+    {
+        float speed = 15f; // Adjust the speed as needed
+
+        Vector3 startPosition = projectile.transform.position;
+        Quaternion startRotation = projectile.transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - startPosition, Vector3.up);
+        targetRotation.x = -45f;
+
+        float journeyLength = Vector3.Distance(startPosition, target.transform.position);
+        float startTime = Time.time;
+
+        while (projectile != null)
+        {
+            float distCovered = (Time.time - startTime) * speed;
+            float fractionOfJourney = distCovered / journeyLength;
+
+            projectile.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, fractionOfJourney);
+            projectile.transform.position = Vector3.Lerp(startPosition, target.transform.position, fractionOfJourney);
+
+            if (fractionOfJourney >= 1f)
+            {
+                // Perform the collision action here
+                DealDamageToEnemy(target);
+
+                // Destroy the projectile
+                projectile.GetComponent<NetworkObject>().Despawn(true);
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
 
     void DealDamageToEnemy(GameObject enemy)
     {
