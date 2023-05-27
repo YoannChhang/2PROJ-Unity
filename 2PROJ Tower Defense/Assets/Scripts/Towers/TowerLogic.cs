@@ -21,6 +21,8 @@ public enum TowerType
     Mage,
 }
 
+
+
 public class TowerLogic : MonoBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
@@ -35,6 +37,7 @@ public class TowerLogic : MonoBehaviour
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
     private bool shooting = false;
 
+    private TowerType towerType;
 
 
     private void Start()
@@ -93,6 +96,11 @@ public class TowerLogic : MonoBehaviour
 
     }
 
+    private TowerType GetTowerType()
+    {
+        return towerType;
+    }
+
     private IEnumerator SpawnAttacks()
     {
 
@@ -107,6 +115,7 @@ public class TowerLogic : MonoBehaviour
         if (target.GetComponent<NetworkObject>().IsSpawned)
         {
             //DISPLAY
+            
             DealDamageToEnemy(target);
         }
 
@@ -119,10 +128,9 @@ public class TowerLogic : MonoBehaviour
     void DealDamageToEnemy(GameObject enemy)
     {
         Enemy e = enemy.GetComponent<Enemy>();
+        TowerType towerType = GetTowerType();
+        e.TakeDamageServerRpc(towerType);
 
-        e.TakeDamageServerRpc(attackDamage);
-
-        
     }
 
     #endregion

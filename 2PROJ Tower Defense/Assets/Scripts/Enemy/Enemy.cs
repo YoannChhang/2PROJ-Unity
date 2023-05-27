@@ -121,19 +121,41 @@ public class Enemy : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageServerRpc(int amount)
+    public void TakeDamageServerRpc(TowerType towerType)
     {
+        int amount = 0;
+        Debug.Log("Tower : " + towerType);
+        switch (towerType)
+        {
+            case TowerType.Arrow:
+                amount = 10; // Dégâts pour la tour Arrow
+                break;
+            case TowerType.Cannon:
+                amount = 20; // Dégâts pour la tour Cannon
+                break;
+            case TowerType.Twin:
+                amount = 15; // Dégâts pour la tour Twin
+                break;
+            case TowerType.Mage:
+                amount = 25; // Dégâts pour la tour Mage
+                break;
+            default:
+                amount = 0; // Valeur par défaut si le type de tour n'est pas reconnu
+                break;
+        }
+
         currentHealth.Value -= amount;
 
-        Debug.Log("Health : "+ currentHealth.Value);
+        Debug.Log("Health : " + currentHealth.Value);
 
         if (currentHealth.Value <= 0)
         {
-            GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
-            Destroy(deathParticles,1f);
+            GameObject deathEffect = Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(deathEffect, 1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
     }
+
 
     
 }
