@@ -111,13 +111,10 @@ public class TowerManager : NetworkBehaviour
                         if (player.money - tp.Cost >= 0)
                         {
 
-
                             var newTower = new TowerData();
                             newTower.cellIndex = cellIndex;
                             newTower.type = SelectedTower;
                             AddTowerServerRpc(newTower);
-
-
 
                             //Remove player money
                             playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);

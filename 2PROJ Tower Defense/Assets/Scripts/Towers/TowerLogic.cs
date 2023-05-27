@@ -51,13 +51,27 @@ public class TowerLogic : MonoBehaviour
         if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
         {
             // There are enemies in the detection radius, do something
-            
-            if (!shooting)
-            {
-                shooting = true;
-                StartCoroutine(SpawnAttacks());
-            }
 
+            GameObject target = GetTarget(enemiesInRadius);
+            if (target != null && !GameObject.ReferenceEquals(target, null)){
+
+
+                if (target.GetComponent<NetworkObject>().IsSpawned)
+                {
+                    Vector3 relativePosition = target.transform.position - transform.position;
+                    Quaternion targetRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+                    float rotationDegree = targetRotation.eulerAngles.y;
+
+                    transform.rotation = Quaternion.Euler(-45f, rotationDegree, 0f);
+
+                    if (!shooting)
+                    {
+                        shooting = true;
+                        StartCoroutine(SpawnAttacks(target));
+                    }
+                }
+
+            }
         }
     }
 
@@ -93,22 +107,23 @@ public class TowerLogic : MonoBehaviour
 
     }
 
-    private IEnumerator SpawnAttacks()
+    private IEnumerator SpawnAttacks(GameObject target)
     {
 
-        GameObject target = GetTarget(enemiesInRadius);
+        
 
         //Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
         //Vector3 attackPos = new Vector3(0f, 0f, 0f);
         //GameObject newAttack = Instantiate(attackPrefab, attackPos, rotation);
         //newAttack.GetComponent<NAME>().target = target;
         //newAttack.GetComponent<NetworkObject>().Spawn(newAttackNetObject);
+
+
         
-        if (target.GetComponent<NetworkObject>().IsSpawned)
-        {
-            //DISPLAY
-            DealDamageToEnemy(target);
-        }
+
+        //DISPLAY
+        DealDamageToEnemy(target);
+        
 
         yield return new WaitForSeconds(shootInterval);
 
@@ -145,7 +160,7 @@ public class TowerLogic : MonoBehaviour
                 return GetWeakEnemy(targets);
             case TowerTarget.Closest:
                 return GetCloseEnemy(targets);
-
+            
         }
 
         return target;
