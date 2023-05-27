@@ -15,12 +15,15 @@ public class WaveSpawner : MonoBehaviour
     private Waypoints waypoints;
 
     private float countdown = 5f;
-
+    
     [SerializeField]
     private float timeBetweenWaves = 5f;
 
+    public static bool boolStart = false;
+    public static bool boolAuto = false;
     private Vector3 pos;
     public int waveIndex=0;
+    private bool isWaveGenerating = false;
     int[][] myArray = new int[][] {
         new int[] {1,3},
         new int[] {3},
@@ -33,14 +36,29 @@ public class WaveSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+     private void Update()
     {
-        if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // {
+        //     StartCoroutine(SpawnWave());
+        //     countdown = timeBetweenWaves;
+        // }
+        // //NoEnemiesLeft();
+        // countdown -= Time.deltaTime;
+        if (countdown <= 0f && waveIndex < myArray.Length)
         {
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            if (boolStart)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                boolStart = false;
+            }
+            else if (boolAuto)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+            }
         }
-        //NoEnemiesLeft();
         countdown -= Time.deltaTime;
     }
 
@@ -56,10 +74,17 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        for (int i=0;i<myArray[waveIndex].Length;i++)
+        if (isWaveGenerating)
+        {
+            yield break; 
+        }
+        isWaveGenerating = true;
+
+        int enemyCount = boolAuto ? 1 : myArray[waveIndex].Length;
+        for (int i = 0; i < enemyCount; i++)
         {
             
-            SpawnEnemy(waveIndex, i, myArray[waveIndex][i]);
+            SpawnEnemy( waveIndex, i, myArray[waveIndex][i]);
 
             //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
                    
@@ -68,7 +93,7 @@ public class WaveSpawner : MonoBehaviour
         }
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
-        
+        isWaveGenerating = false;
     }
 
     private void SpawnEnemy(int wave, int numInWave, int enemyType)
