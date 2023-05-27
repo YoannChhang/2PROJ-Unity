@@ -120,7 +120,7 @@ public class TowerManager : NetworkBehaviour
 
 
                             //Remove player money
-                            //playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
+                            playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
 
                         }
                         else

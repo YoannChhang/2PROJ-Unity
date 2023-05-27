@@ -89,6 +89,17 @@ public class TowerUpgrade : MonoBehaviour
 
     public void UpgradeTop()
     {
+        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+        TowerProperty tp = currTower.type.GetProperty();
+
+        if (player.money < tp.TopCost[currTower.topLevel])
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+
         TowerData newData = new TowerData(currTower.id,
                                           currTower.type, 
                                           currTower.cellIndex, 
@@ -96,12 +107,25 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.topLevel + 1,
                                           currTower.weaponLevel);
 
+        playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.TopCost[currTower.topLevel]);
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
     }
 
     public void UpgradeBase()
     {
+
+        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+        TowerProperty tp = currTower.type.GetProperty();
+
+        if (player.money < tp.BaseCost[currTower.baseLevel])
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+
         TowerData newData = new TowerData(currTower.id,
                                           currTower.type,
                                           currTower.cellIndex,
@@ -109,12 +133,26 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.topLevel,
                                           currTower.weaponLevel);
 
+        playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.BaseCost[currTower.baseLevel]);
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
+
     }
 
     public void UpgradeWeapon()
     {
+
+        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>();
+
+        PlayerData player = playerManager.GetCurrentPlayerData().GetValueOrDefault();
+        TowerProperty tp = currTower.type.GetProperty();
+
+        if (player.money < tp.WeaponCost[currTower.weaponLevel])
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+
         TowerData newData = new TowerData(currTower.id,
                                           currTower.type,
                                           currTower.cellIndex,
@@ -122,8 +160,10 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.topLevel,
                                           currTower.weaponLevel + 1);
 
+        playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.WeaponCost[currTower.weaponLevel]);
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
+
     }
 
     private IEnumerator WaitAndAssignData(TowerData newData)
