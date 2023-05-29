@@ -21,7 +21,7 @@ public enum TowerType
     Mage,
 }
 
-public class TowerLogic : MonoBehaviour
+public class TowerLogic : NetworkBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
 
@@ -120,6 +120,30 @@ public class TowerLogic : MonoBehaviour
                 StartCoroutine(ProjectileHandler(target, newAttack));
                 break;
 
+            case TowerType.Twin:
+
+                MuzzleActiveClientRpc();
+                yield return new WaitForSeconds(0.1f);
+                MuzzleDeactiveClientRpc();
+                DealDamageToEnemy(target);
+
+                yield return new WaitForSeconds(0.1f);
+
+                MuzzleActiveClientRpc();
+                yield return new WaitForSeconds(0.1f);
+                MuzzleDeactiveClientRpc();
+                DealDamageToEnemy(target);
+
+                break;
+
+            case TowerType.Cannon:
+
+                MuzzleActiveClientRpc();
+                yield return new WaitForSeconds(0.1f);
+                MuzzleDeactiveClientRpc();
+                DealDamageToEnemy(target);
+                break;
+
             default:
                 DealDamageToEnemy(target);
                 break;
@@ -165,6 +189,19 @@ public class TowerLogic : MonoBehaviour
         }
     }
 
+    [ClientRpc]
+    private void MuzzleActiveClientRpc()
+    {
+        GameObject muzzleFlash = transform.Find("MuzzleFlash").gameObject;
+        muzzleFlash.SetActive(true);
+    }
+
+    [ClientRpc]
+    private void MuzzleDeactiveClientRpc()
+    {
+        GameObject muzzleFlash = transform.Find("MuzzleFlash").gameObject;
+        muzzleFlash.SetActive(false);
+    }
 
     void DealDamageToEnemy(GameObject enemy)
     {
