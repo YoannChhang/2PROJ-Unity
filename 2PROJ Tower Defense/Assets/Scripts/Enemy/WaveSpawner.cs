@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class WaveSpawner : MonoBehaviour
 
     private float countdown = 5f;
     
+    private PlayerManager playerManager;
+
     [SerializeField]
     private float timeBetweenWaves = 5f;
 
@@ -32,6 +35,7 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         pos = waypoints.waypoints[0];
     }
 
@@ -91,6 +95,26 @@ public class WaveSpawner : MonoBehaviour
             
             yield return new WaitForSeconds(0.5f);
         }
+
+        int AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        while(AllEnemyKilled>0){
+            yield return null;
+            AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (AllEnemyKilled == 0)
+        {   
+            PlayerData[] allPlayerData = playerManager.GetAllPlayerData();
+            Debug.Log("DANS LE COUNT");
+            foreach (PlayerData playerData in allPlayerData)
+            {
+                Debug.Log("DANS LE FOREACH");
+                int golds = BonusGold(waveIndex);
+                playerManager.SetPlayerAttributeServerRpc(playerData.name, playerData.money + golds);
+            }
+        }
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
         isWaveGenerating = false;
@@ -133,6 +157,12 @@ public class WaveSpawner : MonoBehaviour
     //         Debug.Log("Plus aucun ennemis sur la map");
     //     }
     // }
+
+    private int BonusGold(int waveIndex)
+    {
+        int golds =  10; 
+        return golds;
+    }
 
 }
         
