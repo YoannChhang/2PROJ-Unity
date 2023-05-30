@@ -5,6 +5,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
 using Unity.Netcode.Components;
+using System;
 
 public class Enemy : NetworkBehaviour
 {
@@ -20,7 +21,7 @@ public class Enemy : NetworkBehaviour
     private int difficulty = 1;
 
     public GameObject deathParticles;
-
+    private PlayerManager playerManager;
 
     public float maxHealth;
     private NetworkVariable<float> currentHealth;
@@ -34,6 +35,7 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     public void SetPath(Waypoints path)
@@ -153,6 +155,16 @@ public class Enemy : NetworkBehaviour
             GameObject deathEffect = Instantiate(deathParticles, transform.position, Quaternion.identity);
             Destroy(deathEffect, 1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
+
+
+            
+            string playerName = PlayerPrefs.GetString("PLAYER_NAME");
+            Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();
+
+            if (playerData.HasValue && playerData.Value.name == playerName)
+            {
+                playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
+            }
         }
     }
 
