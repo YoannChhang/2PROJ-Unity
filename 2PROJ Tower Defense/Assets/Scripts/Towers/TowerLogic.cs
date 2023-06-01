@@ -25,18 +25,22 @@ public class TowerLogic : NetworkBehaviour
 {
     private List<GameObject> enemiesInRadius = new List<GameObject>();
 
-    [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private float detectionInterval = 0.25f;
+    private int attackDamage;
+    private float detectionRadius;
+    private float shootInterval;
+    private bool shooting = false;
+
+    [SerializeField] private float detectionInterval = 0.1f;
 
     [SerializeField] private GameObject attackPrefab;
-    [SerializeField] private float shootInterval = 2f;
-    private int attackDamage = 5;
 
     [SerializeField] private TowerType type;
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
-    private bool shooting = false;
 
-    private TowerType towerType;
+
+    private int topLevel = 0;
+    private int baseLevel = 0;
+    private int weaponLevel = 0;
 
 
     private void Start()
@@ -47,6 +51,7 @@ public class TowerLogic : NetworkBehaviour
             InvokeRepeating("DetectEnemiesInRadius", 0f, detectionInterval);
         }
     }
+
     private void Update()
     {
 
@@ -85,6 +90,39 @@ public class TowerLogic : NetworkBehaviour
         }
     }
 
+    public void SetTowerData(TowerData tower)
+    {
+
+        SetTopLevel(tower.topLevel);
+        SetBaseLevel(tower.baseLevel);
+        SetWeaponLevel(tower.weaponLevel);
+
+    }
+
+    public void SetTopLevel(int level)
+    {
+        topLevel = level;
+
+        TowerProperty properties = type.GetProperty();
+        detectionRadius = properties.Range[topLevel];
+    }
+
+    public void SetBaseLevel(int level)
+    {
+        baseLevel = level;
+
+        TowerProperty properties = type.GetProperty();
+        shootInterval = properties.Speed[baseLevel];
+    }
+
+    public void SetWeaponLevel(int level)
+    {
+        weaponLevel = level;
+
+        TowerProperty properties = type.GetProperty();
+        attackDamage = properties.Damage[weaponLevel];
+    }
+
     #region AttackTarget
 
     private void DetectEnemiesInRadius()
@@ -119,7 +157,7 @@ public class TowerLogic : NetworkBehaviour
 
     private TowerType GetTowerType()
     {
-        return towerType;
+        return type;
     }
 
     private IEnumerator SpawnAttacks(GameObject target)
@@ -138,14 +176,14 @@ public class TowerLogic : NetworkBehaviour
             case TowerType.Twin:
 
                 MuzzleActiveClientRpc();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
                 MuzzleDeactiveClientRpc();
                 DealDamageToEnemy(target);
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
 
                 MuzzleActiveClientRpc();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
                 MuzzleDeactiveClientRpc();
                 DealDamageToEnemy(target);
 
@@ -154,7 +192,7 @@ public class TowerLogic : NetworkBehaviour
             case TowerType.Cannon:
 
                 MuzzleActiveClientRpc();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.15f);
                 MuzzleDeactiveClientRpc();
                 DealDamageToEnemy(target);
                 break;
@@ -170,6 +208,7 @@ public class TowerLogic : NetworkBehaviour
         shooting = false;
 
     }
+    
     IEnumerator ProjectileHandler(GameObject target, GameObject projectile)
     {
         float speed = 15f; // Adjust the speed as needed
@@ -223,8 +262,8 @@ public class TowerLogic : NetworkBehaviour
         if (enemy)
         {
             Enemy e = enemy.GetComponent<Enemy>();
-            TowerType towerType = GetTowerType();
-            e.TakeDamageServerRpc(towerType);
+            TowerProperty properties = type.GetProperty();
+            e.TakeDamageServerRpc(properties.Damage[weaponLevel]);
         }
 
     }
@@ -367,7 +406,9 @@ public abstract class TowerProperty
 {
     public TowerType Type { get; protected set; }
     public int Level { get; protected set; }
-    public int Damage { get; protected set; }
+    public int[] Damage { get; protected set; }
+    public float[] Speed { get; protected set; }
+    public float[] Range { get; protected set; }
     public int Cost { get; protected set; }
     public int[] TopCost { get; protected set; }
     public int[] BaseCost { get; protected set; }
@@ -385,9 +426,14 @@ public class ArrowProperty : TowerProperty
     public ArrowProperty() 
     {
         Type = TowerType.Arrow;
-        Damage = 1;
+        Damage = new int[3] { 10, 20, 50 };
+        Range = new float[3] { 2, 3, 4 };
+        Speed = new float[3] { 0.5f, 0.25f, 0.1f };
+
         Cost = 120;
         WeaponCost = new int[2] { 160, 200 };
+        TopCost = new int[2] { 200, 300 };
+        BaseCost = new int[2] { 150, 350 };
     }
 }
 public class MageProperty : TowerProperty
@@ -395,7 +441,10 @@ public class MageProperty : TowerProperty
     public MageProperty()
     {
         Type = TowerType.Mage;
-        Damage = 1;
+
+        Damage = new int[3] { 10, 25, 50 };
+        Range = new float[3] { 2, 3, 4 };
+        Speed = new float[3] { 0.5f, 0.25f, 0.1f };
         Cost = 180;
         WeaponCost = new int[2] { 220, 280 };
     }
@@ -405,9 +454,15 @@ public class CannonProperty : TowerProperty
     public CannonProperty()
     {
         Type = TowerType.Cannon;
-        Damage = 1;
+
+        Damage = new int[3] { 30, 60, 90 };
+        Range = new float[3] { 0.75f, 1.25f, 2 };
+        Speed = new float[3] { 3f, 1.5f, 1f };
+
         Cost = 220;
-        WeaponCost = new int[2] { 280, 300 };
+        WeaponCost = new int[2] { 280, 350 };
+        TopCost = new int[2] { 200, 400 };
+        BaseCost = new int[2] { 250, 350 };
     }
 }
 public class TwinProperty : TowerProperty
@@ -415,8 +470,14 @@ public class TwinProperty : TowerProperty
     public TwinProperty()
     {
         Type = TowerType.Twin;
-        Damage = 1;
+
+        Damage = new int[3] { 5, 10, 30 };
+        Range = new float[3] { 2.5f, 3.5f, 5f };
+        Speed = new float[3] { 0.5f, 0.2f, 0.05f };
+
         Cost = 100;
         WeaponCost = new int[2] { 140, 200 };
+        TopCost = new int[2] { 250, 600 };
+        BaseCost = new int[2] { 300, 500 };
     }
 }

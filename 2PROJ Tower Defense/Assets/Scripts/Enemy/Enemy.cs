@@ -123,28 +123,8 @@ public class Enemy : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageServerRpc(TowerType towerType)
+    public void TakeDamageServerRpc(int amount)
     {
-        int amount = 0;
-        Debug.Log("Tower : " + towerType);
-        switch (towerType)
-        {
-            case TowerType.Arrow:
-                amount = 10; // Dégâts pour la tour Arrow
-                break;
-            case TowerType.Cannon:
-                amount = 20; // Dégâts pour la tour Cannon
-                break;
-            case TowerType.Twin:
-                amount = 15; // Dégâts pour la tour Twin
-                break;
-            case TowerType.Mage:
-                amount = 25; // Dégâts pour la tour Mage
-                break;
-            default:
-                amount = 0; // Valeur par défaut si le type de tour n'est pas reconnu
-                break;
-        }
 
         currentHealth.Value -= amount;
 

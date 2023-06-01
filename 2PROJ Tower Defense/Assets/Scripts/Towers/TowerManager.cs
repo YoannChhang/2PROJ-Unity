@@ -270,7 +270,6 @@ public class TowerManager : NetworkBehaviour
         if (SyncedTowers.Contains(tower))
         {
 
-
             GameObject towerPrefab = GetTowerPrefab(tower.topLevel, tower.baseLevel);
             GameObject weaponPrefab = GetWeaponPrefab(tower.type);
 
@@ -293,6 +292,8 @@ public class TowerManager : NetworkBehaviour
             newWeapon.GetComponent<NetworkObject>().Spawn(true);
             newWeapon.name = "Weapon";
             newWeapon.transform.SetParent(newTower.transform, false);
+
+            newWeapon.GetComponent<TowerLogic>().SetTowerData(tower);
 
         }
 

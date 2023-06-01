@@ -149,10 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9f83bea46adf848ac15674a21aa866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
-  detectionInterval: 0.25
+  detectionRadius: 2
+  detectionInterval: 0.1
   attackPrefab: {fileID: 3331606456473632019, guid: 5b5fbe0b1a96da54a87b89a9cad2628c, type: 3}
-  shootInterval: 2
+  shootInterval: 0.5
   type: 0
   targetType: 0
 --- !u!114 &-4754954564585957139
