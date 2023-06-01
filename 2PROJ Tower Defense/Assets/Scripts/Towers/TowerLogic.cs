@@ -121,6 +121,7 @@ public class TowerLogic : NetworkBehaviour
         {
             case TowerType.Arrow:
 
+                Debug.Log(attackPrefab);
                 GameObject newAttack = Instantiate(attackPrefab, transform.position, transform.rotation, transform);
                 newAttack.GetComponent<NetworkObject>().Spawn(true);
                 StartCoroutine(ProjectileHandler(target, newAttack));
@@ -211,10 +212,12 @@ public class TowerLogic : NetworkBehaviour
 
     void DealDamageToEnemy(GameObject enemy)
     {
-        Enemy e = enemy.GetComponent<Enemy>();
-        TowerType towerType = GetTowerType();
-        e.TakeDamageServerRpc(towerType);
-
+        if (enemy)
+        {
+            Enemy e = enemy.GetComponent<Enemy>();
+            TowerType towerType = GetTowerType();
+            e.TakeDamageServerRpc(towerType);
+        }
 
     }
 

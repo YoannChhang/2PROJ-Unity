@@ -887,7 +887,7 @@ MonoBehaviour:
   MonstersLeft: {fileID: 152344028}
   PlayerUIRightPrefab: {fileID: 9131299661964385052, guid: 5c7a564abb0d14dfb84540f3e02b19fa, type: 3}
   PlayerListGrid: {fileID: 744564098}
-  SelectedTowerType: 2
+  SelectedTowerType: 0
 --- !u!1 &274469381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1287282066}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 11.56203
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1655,7 +1655,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 11.56203
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -66942,11 +66942,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786218020}
   m_CullTransparentMesh: 1
---- !u!224 &1932649546 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6465040902752475336, guid: c481a6d4f018ba64c892220670d6941f, type: 3}
-  m_PrefabInstance: {fileID: 32898107}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1796194473
 GameObject:
   m_ObjectHideFlags: 0
@@ -67082,6 +67077,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796194473}
   m_CullTransparentMesh: 1
+--- !u!224 &1932649546 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6465040902752475336, guid: c481a6d4f018ba64c892220670d6941f, type: 3}
+  m_PrefabInstance: {fileID: 32898107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1981666970
 GameObject:
   m_ObjectHideFlags: 0

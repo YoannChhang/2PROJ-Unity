@@ -150,6 +150,9 @@ public class Enemy : NetworkBehaviour
 
         Debug.Log("Health : " + currentHealth.Value);
 
+        string playerName = PlayerPrefs.GetString("PLAYER_NAME");
+        Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();
+
         if (currentHealth.Value <= 0)
         {
             GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
@@ -157,19 +160,29 @@ public class Enemy : NetworkBehaviour
             deathEffect.GetComponent<NetworkObject>().Despawn(true);
             //Destroy(deathParticles,1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
-
-
             
-            string playerName = PlayerPrefs.GetString("PLAYER_NAME");
-            Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();
 
             if (playerData.HasValue && playerData.Value.name == playerName)
             {
                 playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
+                playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, enemy_killed:1, damage_dealt: amount, money_made: 5);
+                
             }
         }
-    }
+        else
+        {
+            if (playerData.HasValue && playerData.Value.name == playerName)
+            {
+                playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, damage_dealt: amount);
+
+            }
+
+        }
+
+        
+
+}
 
 
-    
+
 }

@@ -175,7 +175,7 @@ MonoBehaviour:
   detectionInterval: 0.25
   attackPrefab: {fileID: 0}
   shootInterval: 2
-  type: 0
+  type: 2
   targetType: 0
 --- !u!4 &3262528504677753829 stripped
 Transform:

@@ -39,7 +39,7 @@ public class TowerUpgrade : MonoBehaviour
             {
                 manager = GameObject.Find("TowerMap").GetComponent<TowerManager>();
             } catch { 
-                Debug.LogError("TowerMap doesn't exist yet");
+                Debug.Log("TowerMap doesn't exist yet");
             }
         }
 
@@ -56,7 +56,10 @@ public class TowerUpgrade : MonoBehaviour
 
     private void OnDisable()
     {
-        manager.changeSelected(false);
+        if (manager)
+        {
+            manager.changeSelected(false);
+        }
     }
 
     public void UpdateText()
@@ -108,6 +111,8 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel);
 
         playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.TopCost[currTower.topLevel]);
+        playerManager.SetPlayerSpecificStatServerRpc(player.name, money_spent: tp.TopCost[currTower.topLevel]);
+
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
     }
@@ -134,6 +139,8 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel);
 
         playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.BaseCost[currTower.baseLevel]);
+        playerManager.SetPlayerSpecificStatServerRpc(player.name, money_spent: tp.BaseCost[currTower.baseLevel]);
+
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
 
@@ -161,6 +168,7 @@ public class TowerUpgrade : MonoBehaviour
                                           currTower.weaponLevel + 1);
 
         playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.WeaponCost[currTower.weaponLevel]);
+        playerManager.SetPlayerSpecificStatServerRpc(player.name, money_spent: tp.WeaponCost[currTower.weaponLevel]);
         manager.UpdateTowerServerRpc(currTower, newData);
         StartCoroutine(WaitAndAssignData(newData));
 

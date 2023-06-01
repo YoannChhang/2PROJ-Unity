@@ -118,6 +118,8 @@ public class TowerManager : NetworkBehaviour
 
                             //Remove player money
                             playerManager.SetPlayerAttributeServerRpc(player.name, player.money - tp.Cost);
+                            playerManager.SetPlayerSpecificStatServerRpc(player.name, tower_placed: 1, money_spent: tp.Cost);
+
 
                         }
                         else
@@ -268,7 +270,6 @@ public class TowerManager : NetworkBehaviour
         if (SyncedTowers.Contains(tower))
         {
 
-            // TODO Get Tower prefab then display it with network control and ballista rotation.
 
             GameObject towerPrefab = GetTowerPrefab(tower.topLevel, tower.baseLevel);
             GameObject weaponPrefab = GetWeaponPrefab(tower.type);
@@ -280,6 +281,7 @@ public class TowerManager : NetworkBehaviour
 
             Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+            cellWorldPos.z = -1;
             GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
             newTower.GetComponent<NetworkObject>().Spawn(true);
             newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
