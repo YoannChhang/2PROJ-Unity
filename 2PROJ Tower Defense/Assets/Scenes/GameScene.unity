@@ -887,7 +887,7 @@ MonoBehaviour:
   MonstersLeft: {fileID: 152344028}
   PlayerUIRightPrefab: {fileID: 9131299661964385052, guid: 5c7a564abb0d14dfb84540f3e02b19fa, type: 3}
   PlayerListGrid: {fileID: 744564098}
-  SelectedTowerType: 0
+  SelectedTowerType: 2
 --- !u!1 &274469381
 GameObject:
   m_ObjectHideFlags: 0

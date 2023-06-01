@@ -60,11 +60,19 @@ public class TowerLogic : NetworkBehaviour
 
                 if (target.GetComponent<NetworkObject>().IsSpawned)
                 {
-                    Vector3 relativePosition = target.transform.position - transform.position;
-                    Quaternion targetRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
-                    float rotationDegree = targetRotation.eulerAngles.y;
+                    Vector3 targetPos = target.transform.position;
+                    targetPos.z = 0f;
+                    Vector3 selfPos = transform.position;
+                    selfPos.z = 0f;
 
-                    transform.rotation = Quaternion.Euler(-45f, rotationDegree, 0f);
+                    Vector3 relativePosition = targetPos - selfPos;
+                    Quaternion targetRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+                    float rotationDegree = targetRotation.eulerAngles.y;    
+                    float xRotation = -45 * Mathf.Cos(rotationDegree * Mathf.PI / 180);
+                    float zRotation = -45 * Mathf.Sin(rotationDegree * Mathf.PI / 180);
+
+                    transform.rotation = Quaternion.Euler(xRotation, rotationDegree, zRotation);
+                    //transform.rotation = targetRotation;
 
                     if (!shooting)
                     {
