@@ -46,7 +46,7 @@ public class TowerManager : NetworkBehaviour
 
 
         //TODO : To be removed, this is so when game start you have money but this should be correctly implemented in WaveManager
-        GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(150);
+        GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(1500);
 
         if (gameObject.name != "TowerMap")
         {
