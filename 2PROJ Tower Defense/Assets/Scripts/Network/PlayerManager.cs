@@ -94,8 +94,16 @@ public class PlayerManager : NetworkBehaviour
         }
         return default(PlayerData?);
     }
-
     
+    public PlayerData[] GetAllPlayerData()
+    {
+        PlayerData[] playerDataArray = new PlayerData[SyncedPlayers.Count];
+        for (int i = 0; i < SyncedPlayers.Count; i++)
+        {
+            playerDataArray[i] = SyncedPlayers[i];
+        }
+        return playerDataArray;
+    }
 
 }
 
@@ -133,4 +141,7 @@ public struct PlayerData : INetworkSerializable, System.IEquatable<PlayerData>
     {
         return name == other.name && money == other.money;
     }
+
+    
+
 }

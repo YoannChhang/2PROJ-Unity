@@ -36,6 +36,7 @@ public class TowerLogic : NetworkBehaviour
     [SerializeField] private TowerTarget targetType = TowerTarget.First;
     private bool shooting = false;
 
+    private TowerType towerType;
 
 
     private void Start()
@@ -106,6 +107,11 @@ public class TowerLogic : NetworkBehaviour
 
         }
 
+    }
+
+    private TowerType GetTowerType()
+    {
+        return towerType;
     }
 
     private IEnumerator SpawnAttacks(GameObject target)
@@ -206,10 +212,10 @@ public class TowerLogic : NetworkBehaviour
     void DealDamageToEnemy(GameObject enemy)
     {
         Enemy e = enemy.GetComponent<Enemy>();
+        TowerType towerType = GetTowerType();
+        e.TakeDamageServerRpc(towerType);
 
-        e.TakeDamageServerRpc(attackDamage);
 
-        
     }
 
     #endregion

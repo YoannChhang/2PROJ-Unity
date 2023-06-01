@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -15,12 +16,17 @@ public class WaveSpawner : MonoBehaviour
     private Waypoints waypoints;
 
     private float countdown = 5f;
+    
+    private PlayerManager playerManager;
 
     [SerializeField]
     private float timeBetweenWaves = 5f;
 
+    public static bool boolStart = false;
+    public static bool boolAuto = false;
     private Vector3 pos;
     public int waveIndex=0;
+    private bool isWaveGenerating = false;
     int[][] myArray = new int[][] {
         new int[] {1,3},
         new int[] {3},
@@ -29,18 +35,34 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         pos = waypoints.waypoints[0];
     }
 
     // Update is called once per frame
-    private void Update()
+     private void Update()
     {
-        if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
+        // {
+        //     StartCoroutine(SpawnWave());
+        //     countdown = timeBetweenWaves;
+        // }
+        // //NoEnemiesLeft();
+        // countdown -= Time.deltaTime;
+        if (countdown <= 0f && waveIndex < myArray.Length)
         {
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
+            if (boolStart)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                boolStart = false;
+            }
+            else if (boolAuto)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+            }
         }
-        //NoEnemiesLeft();
         countdown -= Time.deltaTime;
     }
 
@@ -56,19 +78,46 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        for (int i=0;i<myArray[waveIndex].Length;i++)
+        if (isWaveGenerating)
+        {
+            yield break; 
+        }
+        isWaveGenerating = true;
+
+        int enemyCount = boolAuto ? 1 : myArray[waveIndex].Length;
+        for (int i = 0; i < enemyCount; i++)
         {
             
-            SpawnEnemy(waveIndex, i, myArray[waveIndex][i]);
+            SpawnEnemy( waveIndex, i, myArray[waveIndex][i]);
 
             //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
                    
             
             yield return new WaitForSeconds(0.5f);
         }
+
+        int AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        while(AllEnemyKilled>0){
+            yield return null;
+            AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (AllEnemyKilled == 0)
+        {   
+            PlayerData[] allPlayerData = playerManager.GetAllPlayerData();
+            Debug.Log("DANS LE COUNT");
+            foreach (PlayerData playerData in allPlayerData)
+            {
+                Debug.Log("DANS LE FOREACH");
+                int golds = BonusGold(waveIndex);
+                playerManager.SetPlayerAttributeServerRpc(playerData.name, playerData.money + golds);
+            }
+        }
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
-        
+        isWaveGenerating = false;
     }
 
     private void SpawnEnemy(int wave, int numInWave, int enemyType)
@@ -108,6 +157,12 @@ public class WaveSpawner : MonoBehaviour
     //         Debug.Log("Plus aucun ennemis sur la map");
     //     }
     // }
+
+    private int BonusGold(int waveIndex)
+    {
+        int golds =  10; 
+        return golds;
+    }
 
 }
         

@@ -5,6 +5,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
 using Unity.Netcode.Components;
+using System;
 
 public class Enemy : NetworkBehaviour
 {
@@ -20,7 +21,7 @@ public class Enemy : NetworkBehaviour
     private int difficulty = 1;
 
     [SerializeField] private GameObject deathParticles;
-
+    private PlayerManager playerManager;
 
     public float maxHealth;
     private NetworkVariable<float> currentHealth;
@@ -34,6 +35,7 @@ public class Enemy : NetworkBehaviour
 
     private void Start()
     {
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     public void SetPath(Waypoints path)
@@ -121,11 +123,32 @@ public class Enemy : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamageServerRpc(int amount)
+    public void TakeDamageServerRpc(TowerType towerType)
     {
+        int amount = 0;
+        Debug.Log("Tower : " + towerType);
+        switch (towerType)
+        {
+            case TowerType.Arrow:
+                amount = 10; // Dégâts pour la tour Arrow
+                break;
+            case TowerType.Cannon:
+                amount = 20; // Dégâts pour la tour Cannon
+                break;
+            case TowerType.Twin:
+                amount = 15; // Dégâts pour la tour Twin
+                break;
+            case TowerType.Mage:
+                amount = 25; // Dégâts pour la tour Mage
+                break;
+            default:
+                amount = 0; // Valeur par défaut si le type de tour n'est pas reconnu
+                break;
+        }
+
         currentHealth.Value -= amount;
 
-        Debug.Log("Health : "+ currentHealth.Value);
+        Debug.Log("Health : " + currentHealth.Value);
 
         if (currentHealth.Value <= 0)
         {
@@ -134,8 +157,19 @@ public class Enemy : NetworkBehaviour
             deathEffect.GetComponent<NetworkObject>().Despawn(true);
             //Destroy(deathParticles,1f);
             gameObject.GetComponent<NetworkObject>().Despawn(true);
+
+
+            
+            string playerName = PlayerPrefs.GetString("PLAYER_NAME");
+            Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();
+
+            if (playerData.HasValue && playerData.Value.name == playerName)
+            {
+                playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
+            }
         }
     }
+
 
     
 }
