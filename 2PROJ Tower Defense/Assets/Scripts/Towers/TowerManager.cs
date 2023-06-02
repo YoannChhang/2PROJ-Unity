@@ -130,7 +130,7 @@ public class TowerManager : NetworkBehaviour
 
                 }
 
-                else if (isSelected)
+                else if (Input.GetMouseButtonDown(0) && isSelected)
                 {
                     changeSelected(false);
                     towerOptions.SetActive(false);
