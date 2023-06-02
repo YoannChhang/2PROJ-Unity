@@ -43,15 +43,6 @@ public class TowerUpgrade : MonoBehaviour
             }
         }
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (!RectTransformUtility.RectangleContainsScreenPoint(GetComponent<RectTransform>(), Input.mousePosition))
-        //    {
-        //        gameObject.SetActive(false);
-
-        //    }
-        //}
-
     }
 
     private void OnDisable()

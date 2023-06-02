@@ -86,8 +86,8 @@ public class HoverMouse : MonoBehaviour
 
         Vector3Int cellIndex = grid.WorldToCell(worldPos);
 
-        cellIndex.x += 1;
-        cellIndex.y += 1;
+        //cellIndex.x += 1;
+        //cellIndex.y += 1;
 
         return cellIndex;
 

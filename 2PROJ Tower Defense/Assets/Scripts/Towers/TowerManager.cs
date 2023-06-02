@@ -75,7 +75,7 @@ public class TowerManager : NetworkBehaviour
         
         {
 
-            if (!game.GetComponent<GameManager>().IsPaused() && !game.GetComponent<GameManager>().IsOver())
+            if (!game.GetComponent<GameManager>().IsPaused() && !game.GetComponent<GameManager>().IsOver() && !UIHover.IsPointerOverUIElement())
             {
 
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
@@ -128,6 +128,12 @@ public class TowerManager : NetworkBehaviour
                         }
                     }
 
+                }
+
+                else if (isSelected)
+                {
+                    changeSelected(false);
+                    towerOptions.SetActive(false);
                 }
             
             } 
@@ -275,8 +281,8 @@ public class TowerManager : NetworkBehaviour
 
             // Spawns Tower
             Vector3Int correctIndex = tower.cellIndex;
-            correctIndex.x += 1;
-            correctIndex.y -= 1;
+            correctIndex.x += 2;
+            //correctIndex.y -= 1;
 
             Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
