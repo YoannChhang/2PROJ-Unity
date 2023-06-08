@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerMapPrefab: {fileID: 2175353760177175716, guid: 496b33e63a13e4598b7dbeefb5ac9917, type: 3}
   gameManagerPrefab: {fileID: 2483076946168418834, guid: 8b8794d2fca8c4044953e978a82925eb, type: 3}
+  basePrefab: {fileID: 0}
+  spawnerPrefab: {fileID: 0}

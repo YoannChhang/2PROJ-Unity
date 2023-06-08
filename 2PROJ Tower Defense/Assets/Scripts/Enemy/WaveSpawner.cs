@@ -27,10 +27,7 @@ public class WaveSpawner : MonoBehaviour
     private Vector3 pos;
     public int waveIndex=0;
     private bool isWaveGenerating = false;
-    int[][] myArray = new int[][] {
-        new int[] {1,3},
-        new int[] {3},
-    };
+    int[][] myArray;
 
     // Start is called before the first frame update
     private void Start()
@@ -71,10 +68,14 @@ public class WaveSpawner : MonoBehaviour
         waypoints = path;
     }
 
-    public Waypoints GetPath()
+    public Waypoints GetPath() { return waypoints; }
+
+    public void SetWaves(int[][] waves)
     {
-        return waypoints;
+        myArray = waves;
     }
+
+    public int[][] GetWaves() { return myArray; }
 
     private IEnumerator SpawnWave()
     {
