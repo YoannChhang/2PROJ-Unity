@@ -59,12 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverManager: {fileID: -9160810930997535356, guid: 2e334f46b98205048a4cbd2e440804c6, type: 3}
-  towerPrefab: {fileID: 6930177028462422865, guid: be1fbfb2658b2ed488f7eb18d1bb75e3, type: 3}
-  towerOptionsPrefab: {fileID: 8135315913982718552, guid: c481a6d4f018ba64c892220670d6941f, type: 3}
+  basePrefab: {fileID: 2103783527258823856, guid: f2b52a3d1668770448b07b5987c06727, type: 3}
   grid: {fileID: 2175353760177175719}
-  baseTilemap: {fileID: -8821142417424934210, guid: 6850886f03d0444db864a4334a4157fd, type: 3}
-  midTilemap: {fileID: 280632308621450653, guid: 2ae828f6cd4aff44f86893e6e5863981, type: 3}
-  weaponTilemap: {fileID: -7562125970091603924, guid: a42d9b7266e8bbb4cbdf3ee29646da74, type: 3}
   paths: {fileID: 7165501790920665188, guid: 76ca62ea647b64b3e8e9bc91bfd89524, type: 3}
   towers: {fileID: 5136590537350472297, guid: ea9a1208c584c5243a189b0848a289ee, type: 3}
   towersList:

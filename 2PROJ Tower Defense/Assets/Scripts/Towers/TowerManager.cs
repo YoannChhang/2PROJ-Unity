@@ -16,13 +16,10 @@ public class TowerManager : NetworkBehaviour
     private GameObject game;
     [SerializeField] private HoverMouse hoverManager;
 
-    [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private GameObject basePrefab;
     private GameObject towerOptions;
 
     [SerializeField] private Grid grid;
-    [SerializeField] private Tilemap baseTilemap;
-    [SerializeField] private Tilemap midTilemap;
-    [SerializeField] private Tilemap weaponTilemap;
 
     [SerializeField] private Tilemap paths;
     [SerializeField] private Tilemap towers;
@@ -60,7 +57,19 @@ public class TowerManager : NetworkBehaviour
 
     void Start()
     {
+        if (NetworkManager.Singleton.IsServer)
+        {
+
+            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+            Vector3 cellWorldPos = grid.CellToWorld(new Vector3Int(-19, -43));
+            cellWorldPos.z = -1;
+            GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
+            @base.GetComponent<NetworkObject>().Spawn(true);
+            @base.name = "Base";
+            @base.transform.SetParent(grid.transform, false);
         
+        }
+
     }
 
     private void Update()

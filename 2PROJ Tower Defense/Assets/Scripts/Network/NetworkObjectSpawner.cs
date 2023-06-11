@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class NetworkObjectSpawner : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class NetworkObjectSpawner : MonoBehaviour
 
     [SerializeField] private GameObject towerMapPrefab;
     [SerializeField] private GameObject gameManagerPrefab;
-    [SerializeField] private GameObject basePrefab;
     [SerializeField] private GameObject spawnerPrefab;
 
 
@@ -29,16 +29,11 @@ public class NetworkObjectSpawner : MonoBehaviour
         {
             GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
             gameManager.gameObject.name = "GameManager";
-            gameManager.GetComponent<NetworkObject>().Spawn();
+            gameManager.GetComponent<NetworkObject>().Spawn(true);
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
             towerMap.gameObject.name = "TowerMap";
-            towerMap.GetComponent<NetworkObject>().Spawn();
-
-            GameObject baseTower = Instantiate(basePrefab, Vector3.zero, Quaternion.identity);
-            baseTower.gameObject.name = "Base";
-            baseTower.GetComponent<Base>().SetGame(GameObject.Find("GameManager").GetComponent<GameManager>());
-            baseTower.GetComponent<NetworkObject>().Spawn();
+            towerMap.GetComponent<NetworkObject>().Spawn(true);
             
             PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
