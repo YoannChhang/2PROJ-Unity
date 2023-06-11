@@ -27,15 +27,23 @@ public class Enemy : NetworkBehaviour
     private NetworkVariable<float> currentHealth;
     [SerializeField] private Image healthbar;
 
+    public float maxShield;
+    private NetworkVariable<float> currentShield;
+    [SerializeField] private Image shieldbar;
+
+    private List<RegenerationBuff> activeBuffs = new List<RegenerationBuff>();
+
     private void Awake()
     {
         target = GameObject.Find("Base");
         currentHealth = new NetworkVariable<float>(maxHealth);
+        currentShield = new NetworkVariable<float>(maxShield);
     }
 
     private void Start()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        TestRegenerationBuff();
     }
 
     public void SetPath(Waypoints path)
@@ -63,7 +71,7 @@ public class Enemy : NetworkBehaviour
     public void OnDamageTaken(float prev, float curr)
     {
         healthbar.fillAmount = curr / maxHealth;
-
+        shieldbar.fillAmount = currentShield.Value / maxShield;
         //gameObject.transform.Find("Sprite").GetComponent<Light>().color = Color.red;
         //Thread.Sleep(500); doesn't work
         //gameObject.transform.Find("Sprite").GetComponent<Light>().color = Color.white;
@@ -74,7 +82,7 @@ public class Enemy : NetworkBehaviour
     {
         if (NetworkManager.Singleton.IsServer)
         {
-
+            ApplyRegenerationBuffs();
             if (currentWaypoint < path.waypoints.Length)
             {
                 Vector3 targetPosition = path.waypoints[currentWaypoint];
@@ -122,47 +130,138 @@ public class Enemy : NetworkBehaviour
         gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 
+
+
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(int amount)
     {
 
-        currentHealth.Value -= amount;
 
         Debug.Log("Health : " + currentHealth.Value);
+        Debug.Log("Shield : " + currentShield.Value);
 
         string playerName = PlayerPrefs.GetString("PLAYER_NAME");
         Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();
 
-        if (currentHealth.Value <= 0)
-        {
-            GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
-            deathEffect.GetComponent<NetworkObject>().Spawn();
-            deathEffect.GetComponent<NetworkObject>().Despawn(true);
-            //Destroy(deathParticles,1f);
-            gameObject.GetComponent<NetworkObject>().Despawn(true);
-            
 
-            if (playerData.HasValue && playerData.Value.name == playerName)
+        if (currentShield.Value > 0)
             {
-                playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
-                playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, enemy_killed:1, damage_dealt: amount, money_made: 5);
+                currentShield.Value -= amount;
+                shieldbar.fillAmount = currentShield.Value / maxShield;
+                if (currentShield.Value <= 0)
+                {
+                    GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
+                    deathEffect.GetComponent<NetworkObject>().Spawn();
+                    deathEffect.GetComponent<NetworkObject>().Despawn(true);
+                }
                 
             }
-        }
-        else
-        {
-            if (playerData.HasValue && playerData.Value.name == playerName)
+            else
             {
-                playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, damage_dealt: amount);
+                currentHealth.Value -= amount;
+                healthbar.fillAmount = currentHealth.Value / maxHealth;
+                if (currentHealth.Value <= 0)
+                {
+                    GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
+                    deathEffect.GetComponent<NetworkObject>().Spawn();
+                    deathEffect.GetComponent<NetworkObject>().Despawn(true);
+                    //Destroy(deathParticles,1f);
+                    gameObject.GetComponent<NetworkObject>().Despawn(true);
+                    
 
+                    if (playerData.HasValue && playerData.Value.name == playerName)
+                    {
+                        playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
+                        playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, enemy_killed:1, damage_dealt: amount, money_made: 5);
+                        
+                    }
+                }else{
+                    {
+                        if (playerData.HasValue && playerData.Value.name == playerName)
+                        {
+                            playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, damage_dealt: amount);
+
+                        }
+
+                    }
+                }
             }
 
-        }
+
+
+
+
+        // if (currentHealth.Value <= 0)
+        // {
+        //     GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
+        //     deathEffect.GetComponent<NetworkObject>().Spawn();
+        //     deathEffect.GetComponent<NetworkObject>().Despawn(true);
+        //     //Destroy(deathParticles,1f);
+        //     gameObject.GetComponent<NetworkObject>().Despawn(true);
+            
+
+        //     if (playerData.HasValue && playerData.Value.name == playerName)
+        //     {
+        //         playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
+        //         playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, enemy_killed:1, damage_dealt: amount, money_made: 5);
+                
+        //     }
+        // }
+        // else
+        // {
+        //     if (playerData.HasValue && playerData.Value.name == playerName)
+        //     {
+        //         playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, damage_dealt: amount);
+
+        //     }
+
+        // }
 
         
 
 }
+    public void ActivateRegenerationBuff(float regenAmount, float duration)
+        {
+            RegenerationBuff regenBuff = new RegenerationBuff(regenAmount, duration);
+            activeBuffs.Add(regenBuff);
+        }
 
+    private void ApplyRegenerationBuffs()
+    {
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            RegenerationBuff buff = activeBuffs[i];
+            buff.duration -= Time.deltaTime;
 
+            if (buff.duration <= 0)
+            {
+                activeBuffs.RemoveAt(i);
+            }
+            else
+            {
+                currentHealth.Value = Mathf.Clamp(currentHealth.Value + buff.regenAmount * Time.deltaTime, 0f, maxHealth);
+            }
+        }
+    }
+
+    private void TestRegenerationBuff()
+{
+    float regenAmount = 100f; // Montant de régénération par seconde
+    float duration = 5f; // Durée du buff en secondes
+
+    ActivateRegenerationBuff(regenAmount, duration);
+}
 
 }
+public class RegenerationBuff
+{
+    public float regenAmount;
+    public float duration;
+
+    public RegenerationBuff(float amount, float time)
+    {
+        regenAmount = amount;
+        duration = time;
+    }
+}
+
