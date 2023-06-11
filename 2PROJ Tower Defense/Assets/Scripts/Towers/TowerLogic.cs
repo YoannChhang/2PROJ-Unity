@@ -49,6 +49,7 @@ public class TowerLogic : NetworkBehaviour
         if (NetworkManager.Singleton.IsServer)
         {
             InvokeRepeating("DetectEnemiesInRadius", 0f, detectionInterval);
+            MuzzleDeactiveClientRpc();
         }
     }
 
@@ -371,7 +372,9 @@ public class TowerLogic : NetworkBehaviour
     
     private void OnDrawGizmos()
     {
-        Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.Euler(-45f, 0f, 0f), Vector3.one);
+        Vector3 pos = transform.position;
+        pos.z = 0f;
+        Gizmos.matrix = Matrix4x4.TRS(pos, Quaternion.Euler(-45f, 0f, 0f), Vector3.one);
         Gizmos.DrawWireSphere(Vector3.zero, detectionRadius);
     }
 

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Base
   - Towers
+  - Weapons
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
-  - Base
+  - 
+  - 
   - 
   - 
   - 
@@ -51,14 +52,8 @@ TagManager:
   - name: Enemies
     uniqueID: 3667519053
     locked: 0
-  - name: Towers Layer 1
+  - name: Towers Layer
     uniqueID: 2512275121
-    locked: 0
-  - name: Towers Layer 2
-    uniqueID: 3983148339
-    locked: 0
-  - name: Towers Layer 3
-    uniqueID: 2303184489
     locked: 0
   - name: UI
     uniqueID: 3020269529

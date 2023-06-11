@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3488757255124382814}
   - component: {fileID: 1815936445794738636}
   - component: {fileID: 7365792082898974658}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1841511689312692270}
   - component: {fileID: 7434179349364525295}
   - component: {fileID: 1758397512999790850}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 9091518469268633950}
   - component: {fileID: 7969613277662560444}
   - component: {fileID: 4478434389717349578}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HealthBar BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80f89bc01f305784999a0992d7bd4c2b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80f89bc01f305784999a0992d7bd4c2b, type: 3}
       propertyPath: m_TagString
