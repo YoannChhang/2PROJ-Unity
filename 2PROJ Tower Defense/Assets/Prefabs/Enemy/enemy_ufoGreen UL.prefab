@@ -621,9 +621,9 @@ MonoBehaviour:
   damage: 10
   gold: 5
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
-  maxHealth: 10
+  maxHealth: 100
   healthbar: {fileID: 1520908755}
-  maxShield: 20
+  maxShield: 0
   shieldbar: {fileID: 8045248577505039701}
 --- !u!114 &6242309249049863076
 MonoBehaviour:

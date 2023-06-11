@@ -31,6 +31,8 @@ public class Enemy : NetworkBehaviour
     private NetworkVariable<float> currentShield;
     [SerializeField] private Image shieldbar;
 
+    private List<RegenerationBuff> activeBuffs = new List<RegenerationBuff>();
+
     private void Awake()
     {
         target = GameObject.Find("Base");
@@ -41,6 +43,7 @@ public class Enemy : NetworkBehaviour
     private void Start()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        TestRegenerationBuff();
     }
 
     public void SetPath(Waypoints path)
@@ -79,7 +82,7 @@ public class Enemy : NetworkBehaviour
     {
         if (NetworkManager.Singleton.IsServer)
         {
-
+            ApplyRegenerationBuffs();
             if (currentWaypoint < path.waypoints.Length)
             {
                 Vector3 targetPosition = path.waypoints[currentWaypoint];
@@ -126,6 +129,8 @@ public class Enemy : NetworkBehaviour
         target.GetComponent<Base>().TakeDamageServerRpc(damage);
         gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
+
+
 
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(int amount)
@@ -215,7 +220,48 @@ public class Enemy : NetworkBehaviour
         
 
 }
+    public void ActivateRegenerationBuff(float regenAmount, float duration)
+        {
+            RegenerationBuff regenBuff = new RegenerationBuff(regenAmount, duration);
+            activeBuffs.Add(regenBuff);
+        }
 
+    private void ApplyRegenerationBuffs()
+    {
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            RegenerationBuff buff = activeBuffs[i];
+            buff.duration -= Time.deltaTime;
 
+            if (buff.duration <= 0)
+            {
+                activeBuffs.RemoveAt(i);
+            }
+            else
+            {
+                currentHealth.Value = Mathf.Clamp(currentHealth.Value + buff.regenAmount * Time.deltaTime, 0f, maxHealth);
+            }
+        }
+    }
+
+    private void TestRegenerationBuff()
+{
+    float regenAmount = 100f; // Montant de régénération par seconde
+    float duration = 5f; // Durée du buff en secondes
+
+    ActivateRegenerationBuff(regenAmount, duration);
+}
 
 }
+public class RegenerationBuff
+{
+    public float regenAmount;
+    public float duration;
+
+    public RegenerationBuff(float amount, float time)
+    {
+        regenAmount = amount;
+        duration = time;
+    }
+}
+
