@@ -146,7 +146,7 @@ public class GameCameraMover : MonoBehaviour
         transform.position = new Vector3(
             0,
             -((gridHeight / 2) - (cameraHeight / 2))
-            , -2);
+            , -20);
 
 
 
