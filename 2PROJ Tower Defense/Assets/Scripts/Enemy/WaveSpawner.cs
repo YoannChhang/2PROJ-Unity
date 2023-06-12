@@ -30,7 +30,7 @@ public class WaveSpawner : MonoBehaviour
     protected int[][] myArray;
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         pos = waypoints.waypoints[0];
@@ -77,7 +77,7 @@ public class WaveSpawner : MonoBehaviour
 
     public int[][] GetWaves() { return myArray; }
 
-    protected IEnumerator SpawnWave()
+    protected virtual IEnumerator SpawnWave()
     {
         if (isWaveGenerating)
         {
@@ -153,14 +153,6 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
-    // protected void NoEnemiesLeft()
-    // {
-    //     int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    //     if(enemyCount == 0)
-    //     {
-    //         Debug.Log("Plus aucun ennemis sur la map");
-    //     }
-    // }
 
     protected int BonusGold(int waveIndex)
     {

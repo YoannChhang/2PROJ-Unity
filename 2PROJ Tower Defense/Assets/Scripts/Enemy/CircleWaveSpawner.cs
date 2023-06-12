@@ -8,15 +8,27 @@ public class CircleWaveSpawner : WaveSpawner
 {
     
     protected Waypoints loop;
+    protected GameManager gameManager;
 
+    protected override void Start()
+    {
+        base.Start();
+        InvokeRepeating("endOnEnemyLimit", 0f, 0.05f);
+    }
     public void SetLoop(Waypoints path)
     {
         loop = path;
     }
 
+
     public Waypoints GetLoop() { return loop; }
 
-    protected IEnumerator SpawnWave()
+    public void SetGame(GameManager game)
+    {
+        gameManager = game;
+    }
+
+    protected override IEnumerator SpawnWave()
     {
         if (isWaveGenerating)
         {
@@ -93,15 +105,15 @@ public class CircleWaveSpawner : WaveSpawner
         enemy.GetComponent<CircleEnemy>().SetLoop(loop);
         enemy.GetComponent<NetworkObject>().Spawn();
     }
-        
-    // protected void NoEnemiesLeft()
-    // {
-    //     int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-    //     if(enemyCount == 0)
-    //     {
-    //         Debug.Log("Plus aucun ennemis sur la map");
-    //     }
-    // }
+
+    protected void endOnEnemyLimit()
+    {
+        int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if (enemyCount > 1)
+        {
+            gameManager.GameOverServerRpc();
+        }
+    }
 
     protected int BonusGold(int waveIndex)
     {

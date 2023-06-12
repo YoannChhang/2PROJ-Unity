@@ -10,6 +10,7 @@ using System;
 public class CircleEnemy : Enemy
 {
     protected Waypoints loop;
+    protected GameManager gameManager;
     
     public void SetLoop(Waypoints loop)
     {
@@ -44,7 +45,7 @@ public class CircleEnemy : Enemy
                 if (loop != null)
                 {
                     path = loop;
-                    currentWaypoint = 1;
+                    currentWaypoint = 0;
                 }
 
             }

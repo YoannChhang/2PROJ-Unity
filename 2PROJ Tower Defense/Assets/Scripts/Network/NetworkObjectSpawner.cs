@@ -39,7 +39,7 @@ public class NetworkObjectSpawner : MonoBehaviour
             Grid grid = towerMap.GetComponent<Grid>();
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
             Vector3 cellWorldPos = grid.CellToWorld(new Vector3Int(-19, -43));
-            cellWorldPos.z = -0.5f;
+            cellWorldPos.z = -1;
             GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
             @base.GetComponent<Base>().SetGame(gameManager.GetComponent<GameManager>());
             @base.GetComponent<NetworkObject>().Spawn(true);

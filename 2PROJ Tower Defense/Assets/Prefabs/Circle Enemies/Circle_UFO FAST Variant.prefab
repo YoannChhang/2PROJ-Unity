@@ -511,9 +511,9 @@ MonoBehaviour:
   gold: 5
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
   maxHealth: 5
-  healthbar: {fileID: 0}
+  healthbar: {fileID: 7365792082898974658}
   maxShield: 20
-  shieldbar: {fileID: 0}
+  shieldbar: {fileID: 7975668409791747542}
 --- !u!114 &-3259523267510126754
 MonoBehaviour:
   m_ObjectHideFlags: 0
