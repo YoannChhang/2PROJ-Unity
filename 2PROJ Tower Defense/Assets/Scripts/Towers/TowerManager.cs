@@ -16,7 +16,6 @@ public class TowerManager : NetworkBehaviour
     private GameObject game;
     [SerializeField] private HoverMouse hoverManager;
 
-    [SerializeField] private GameObject basePrefab;
     private GameObject towerOptions;
 
     [SerializeField] private Grid grid;
@@ -57,18 +56,6 @@ public class TowerManager : NetworkBehaviour
 
     void Start()
     {
-        if (NetworkManager.Singleton.IsServer)
-        {
-
-            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-            Vector3 cellWorldPos = grid.CellToWorld(new Vector3Int(-19, -43));
-            cellWorldPos.z = -1;
-            GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
-            @base.GetComponent<NetworkObject>().Spawn(true);
-            @base.name = "Base";
-            @base.transform.SetParent(grid.transform, false);
-        
-        }
 
     }
 
@@ -295,7 +282,7 @@ public class TowerManager : NetworkBehaviour
 
             Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-            cellWorldPos.z = -1;
+            cellWorldPos.z = -0.5f;
             GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
             newTower.GetComponent<NetworkObject>().Spawn(true);
             newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;

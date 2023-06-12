@@ -9,38 +9,38 @@ using System;
 
 public class Enemy : NetworkBehaviour
 {
-    private GameObject target;
+    protected GameObject target;
 
-    private Waypoints path;
-    private int currentWaypoint = 1;
+    protected Waypoints path;
+    protected int currentWaypoint = 1;
 
     public float speed ;
-    private float minDistance = 0.2f;
+    protected float minDistance = 0.2f;
     public int damage ;
     public int gold ;
-    private int difficulty = 1;
+    protected int difficulty = 1;
 
-    [SerializeField] private GameObject deathParticles;
-    private PlayerManager playerManager;
+    [SerializeField] protected GameObject deathParticles;
+    protected PlayerManager playerManager;
 
     public float maxHealth;
-    private NetworkVariable<float> currentHealth;
-    [SerializeField] private Image healthbar;
+    protected NetworkVariable<float> currentHealth;
+    [SerializeField] protected Image healthbar;
 
     public float maxShield;
-    private NetworkVariable<float> currentShield;
-    [SerializeField] private Image shieldbar;
+    protected NetworkVariable<float> currentShield;
+    [SerializeField] protected Image shieldbar;
 
-    private List<RegenerationBuff> activeBuffs = new List<RegenerationBuff>();
+    protected List<RegenerationBuff> activeBuffs = new List<RegenerationBuff>();
 
-    private void Awake()
+    protected void Awake()
     {
         target = GameObject.Find("Base");
         currentHealth = new NetworkVariable<float>(maxHealth);
         currentShield = new NetworkVariable<float>(maxShield);
     }
 
-    private void Start()
+    protected void Start()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         TestRegenerationBuff();
@@ -78,7 +78,7 @@ public class Enemy : NetworkBehaviour
 
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (NetworkManager.Singleton.IsServer)
         {
@@ -124,7 +124,7 @@ public class Enemy : NetworkBehaviour
         return difficulty;
     }
 
-    private void DealDamageToBase()
+    protected void DealDamageToBase()
     {
         target.GetComponent<Base>().TakeDamageServerRpc(damage);
         gameObject.GetComponent<NetworkObject>().Despawn(true);
@@ -226,7 +226,7 @@ public class Enemy : NetworkBehaviour
             activeBuffs.Add(regenBuff);
         }
 
-    private void ApplyRegenerationBuffs()
+    protected void ApplyRegenerationBuffs()
     {
         for (int i = activeBuffs.Count - 1; i >= 0; i--)
         {
@@ -244,7 +244,7 @@ public class Enemy : NetworkBehaviour
         }
     }
 
-    private void TestRegenerationBuff()
+    protected void TestRegenerationBuff()
 {
     float regenAmount = 100f; // Montant de régénération par seconde
     float duration = 5f; // Durée du buff en secondes

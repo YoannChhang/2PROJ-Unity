@@ -13,6 +13,7 @@ public class NetworkObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject towerMapPrefab;
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject spawnerPrefab;
+    [SerializeField] private GameObject basePrefab;
 
 
     void Start()
@@ -34,7 +35,17 @@ public class NetworkObjectSpawner : MonoBehaviour
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
             towerMap.gameObject.name = "TowerMap";
             towerMap.GetComponent<NetworkObject>().Spawn(true);
-            
+
+            Grid grid = towerMap.GetComponent<Grid>();
+            Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+            Vector3 cellWorldPos = grid.CellToWorld(new Vector3Int(-19, -43));
+            cellWorldPos.z = -0.5f;
+            GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
+            @base.GetComponent<Base>().SetGame(gameManager.GetComponent<GameManager>());
+            @base.GetComponent<NetworkObject>().Spawn(true);
+            @base.name = "Base";
+            @base.transform.SetParent(grid.transform, false);
+
             PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
             int count = playerManager.SyncedPlayers.Count;

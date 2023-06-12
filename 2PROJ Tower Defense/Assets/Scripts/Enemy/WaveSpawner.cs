@@ -7,37 +7,37 @@ using System;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemyPrefab;
+    protected GameObject enemyPrefab;
     [SerializeField]
-    private GameObject enemyPrefab2;
+    protected GameObject enemyPrefab2;
     [SerializeField]
-    private GameObject enemyPrefab3;
-    [SerializeField]
-    private Waypoints waypoints;
+    protected GameObject enemyPrefab3;
 
-    private float countdown = 5f;
+    protected Waypoints waypoints;
+
+    protected float countdown = 5f;
     
-    private PlayerManager playerManager;
+    protected PlayerManager playerManager;
 
     [SerializeField]
-    private float timeBetweenWaves = 5f;
+    protected float timeBetweenWaves = 5f;
 
     public static bool boolStart = false;
     public static bool boolAuto = false;
-    private Vector3 pos;
+    protected Vector3 pos;
     public int waveIndex=0;
-    private bool isWaveGenerating = false;
-    int[][] myArray;
+    protected bool isWaveGenerating = false;
+    protected int[][] myArray;
 
     // Start is called before the first frame update
-    private void Start()
+    protected void Start()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         pos = waypoints.waypoints[0];
     }
 
     // Update is called once per frame
-     private void Update()
+     protected void Update()
     {
         // if(countdown <=0f && NetworkManager.Singleton.IsServer && waveIndex < myArray.Length)
         // {
@@ -77,7 +77,7 @@ public class WaveSpawner : MonoBehaviour
 
     public int[][] GetWaves() { return myArray; }
 
-    private IEnumerator SpawnWave()
+    protected IEnumerator SpawnWave()
     {
         if (isWaveGenerating)
         {
@@ -121,27 +121,30 @@ public class WaveSpawner : MonoBehaviour
         isWaveGenerating = false;
     }
 
-    private void SpawnEnemy(int wave, int numInWave, int enemyType)
+    protected virtual void SpawnEnemy(int wave, int numInWave, int enemyType)
     {
         
         GameObject enemy;
-        if (enemyType == 1)
+
+        switch (enemyType)
         {
-            enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+            case 1:
+                enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+                break;
+
+            case 2:
+                enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
+                break;
+
+            case 3:
+                enemy = Instantiate(enemyPrefab3, pos, Quaternion.identity);
+                break;
+
+            default:
+                Debug.LogError("Invalid enemy type: " + enemyType);
+                return;
         }
-        else if (enemyType == 2)
-        {
-            enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
-        }
-        else if (enemyType ==3)
-        {
-            enemy = Instantiate(enemyPrefab3, pos, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("Invalid enemy type: " + enemyType);
-            return;
-        }
+        
         // Use enemyType to identify the correct type of the enemy.
 
         //GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
@@ -150,7 +153,7 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
-    // private void NoEnemiesLeft()
+    // protected void NoEnemiesLeft()
     // {
     //     int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
     //     if(enemyCount == 0)
@@ -159,7 +162,7 @@ public class WaveSpawner : MonoBehaviour
     //     }
     // }
 
-    private int BonusGold(int waveIndex)
+    protected int BonusGold(int waveIndex)
     {
         int golds =  10; 
         return golds;
