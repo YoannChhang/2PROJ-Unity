@@ -31,6 +31,7 @@ public class CircleNetworkObjectSpawner : MonoBehaviour
         {
             GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
             gameManager.gameObject.name = "GameManager";
+            gameManager.GetComponent<GameManager>().startEnemyCheck();
             gameManager.GetComponent<NetworkObject>().Spawn(true);
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
@@ -157,7 +158,6 @@ public class CircleNetworkObjectSpawner : MonoBehaviour
                 Waypoints waypoints = GameObject.Find(waypointName).GetComponent<Waypoints>();
 
                 CircleWaveSpawner waves = spawner.gameObject.GetComponent<CircleWaveSpawner>();
-                waves.SetGame(gameManager.GetComponent<GameManager>());
                 waves.SetPath(waypoints);
 
                 if (i <= 4) { waves.SetLoop(innerLoop); }
