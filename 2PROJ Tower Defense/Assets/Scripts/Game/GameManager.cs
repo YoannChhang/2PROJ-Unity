@@ -340,4 +340,20 @@ public class GameManager : NetworkBehaviour
         towers.GetComponent<NetworkObject>().Despawn(true);
     }
 
+    public void startEnemyCheck()
+    {
+        InvokeRepeating("endOnEnemyLimit", 0f, 0.05f);
+    }
+
+    private void endOnEnemyLimit()
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            if (enemyCount > 1)
+            {
+                GameOverServerRpc();
+            }
+        }
+    }
 }
