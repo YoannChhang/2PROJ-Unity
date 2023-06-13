@@ -82,12 +82,12 @@ public class HoverMouse : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 20.18f));
 
         Vector3Int cellIndex = grid.WorldToCell(worldPos);
 
-        //cellIndex.x += 1;
-        //cellIndex.y += 1;
+        cellIndex.x += 1;
+        cellIndex.y += 1;
 
         return cellIndex;
 

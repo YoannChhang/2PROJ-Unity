@@ -164,8 +164,20 @@ public class LobbyManager : MonoBehaviour
                     {
 
                         joinedLobby = null;
+                        switch(SELECTED_MODE)
+                        {
+                            case "0":
+                                SceneManager.LoadScene("GreenScene");
+                                break;
 
-                        SceneManager.LoadScene("GameScene");
+                            case "1":
+                                SceneManager.LoadScene("CircleScene");
+                                break;
+
+                            default:
+                                break;
+
+                        }
 
 
                     }
@@ -193,7 +205,7 @@ public class LobbyManager : MonoBehaviour
                 if (eventStartGame)
                 {
                     //Mode 1
-                    if (SELECTED_MODE == "0")
+                    if (SELECTED_MODE != null)
                     {
                         try
                         {

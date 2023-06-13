@@ -116,12 +116,12 @@ public class GameManager : NetworkBehaviour
         setRectTransformForUI(pauseMenu);
 
         GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity);
-        pauseMenu.transform.SetParent(parent.transform, false);
+        winMenu.transform.SetParent(parent.transform, false);
         winMenu.gameObject.name = "WinMenu";
         setRectTransformForUI(winMenu);
 
         GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity);
-        pauseMenu.transform.SetParent(parent.transform, false);
+        loseMenu.transform.SetParent(parent.transform, false);
         loseMenu.gameObject.name = "LoseMenu";
         setRectTransformForUI(loseMenu);
 

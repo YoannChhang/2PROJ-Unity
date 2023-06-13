@@ -157,9 +157,10 @@ public class CircleNetworkObjectSpawner : MonoBehaviour
                 Waypoints waypoints = GameObject.Find(waypointName).GetComponent<Waypoints>();
 
                 CircleWaveSpawner waves = spawner.gameObject.GetComponent<CircleWaveSpawner>();
+                waves.SetGame(gameManager.GetComponent<GameManager>());
                 waves.SetPath(waypoints);
 
-                if (i >= 4) { waves.SetLoop(innerLoop); }
+                if (i <= 4) { waves.SetLoop(innerLoop); }
                 else if (i >= 5) { waves.SetLoop(outerLoop); }
 
                 waves.SetWaves(waveMapping[i]);

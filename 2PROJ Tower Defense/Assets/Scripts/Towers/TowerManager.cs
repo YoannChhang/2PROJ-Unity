@@ -77,6 +77,8 @@ public class TowerManager : NetworkBehaviour
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
                 bool available = hoverManager.checkTileAvailability(cellIndex);
 
+                Debug.Log("x: " + cellIndex.x + " y: " + cellIndex.y + " z: " + cellIndex.z);
+
                 if (Input.GetMouseButtonDown(0) && available && !isSelected)
                 {
 
@@ -277,16 +279,16 @@ public class TowerManager : NetworkBehaviour
 
             // Spawns Tower
             Vector3Int correctIndex = tower.cellIndex;
-            correctIndex.x += 2;
-            //correctIndex.y -= 1;
+            correctIndex.x += 1;
+            correctIndex.y -= 1;
 
             Vector3 cellWorldPos = grid.GetCellCenterWorld(correctIndex);
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-            cellWorldPos.z = -0.5f;
+            cellWorldPos.z = -1;
             GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
             newTower.GetComponent<NetworkObject>().Spawn(true);
             newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
-            newTower.transform.SetParent(grid.transform, false);
+            newTower.transform.SetParent(grid.transform);
 
             // Spawns Weapon
             Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);

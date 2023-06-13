@@ -49,7 +49,11 @@ public class TowerLogic : NetworkBehaviour
         if (NetworkManager.Singleton.IsServer)
         {
             InvokeRepeating("DetectEnemiesInRadius", 0f, detectionInterval);
-            MuzzleDeactiveClientRpc();
+
+            if (type == TowerType.Twin || type == TowerType.Cannon)
+            {
+                MuzzleDeactiveClientRpc();
+            }
         }
     }
 
