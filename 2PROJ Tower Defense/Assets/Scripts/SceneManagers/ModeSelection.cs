@@ -11,6 +11,8 @@ public class ModeSelection : MonoBehaviour
     //When clicking on a level
     public void OnModeClick(string level)
     {
+        Debug.Log("test");
+        Debug.Log(FindObjectOfType<SoundManager>());
 
         FindObjectOfType<SoundManager>().PlaySound("click");
         //TODO : Open a UI with level info and then starting the game.
