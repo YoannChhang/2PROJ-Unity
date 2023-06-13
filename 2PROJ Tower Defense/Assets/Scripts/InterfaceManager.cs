@@ -13,6 +13,7 @@ public class InterfaceManager : MonoBehaviour
     [SerializeField] private GameObject MonstersLeft;
     [SerializeField] private GameObject PlayerUIRightPrefab;
     [SerializeField] private GameObject PlayerListGrid;
+    [SerializeField] private GameObject WaveAutoButtonText;
 
 
     //Get using GameObject.Find("InterfaceManager").GetComponentInChildren<InterfaceManager>.SelectedTowerType
@@ -90,4 +91,26 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
+    public void StartWaveButton()
+    {
+        WaveSpawner.boolStart = true;
+    }
+
+    public void ToggleAutomaticWaveButton()
+    {
+        if (WaveSpawner.boolAuto)
+        {
+            WaveSpawner.boolAuto = false;
+            Color c = WaveAutoButtonText.GetComponent<TMP_Text>().color;
+            c.a = 0.5f;
+            WaveAutoButtonText.GetComponent<TMP_Text>().color = c;
+        }
+        else
+        {
+            WaveSpawner.boolAuto = true;
+            Color c = WaveAutoButtonText.GetComponent<TMP_Text>().color;
+            c.a = 1f;
+            WaveAutoButtonText.GetComponent<TMP_Text>().color = c;
+        }
+    }
 }

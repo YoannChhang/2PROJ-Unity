@@ -50,16 +50,16 @@ public class GameCameraMover : MonoBehaviour
         int edgeScrollSize = 30;
 
 
-        if (Input.mousePosition.x < edgeScrollSize && transform.position.x > -13)
+        if (Input.mousePosition.x < edgeScrollSize && transform.position.x > -20)
         {
             inputDir.x = -1f ;
         }
-        if (Input.mousePosition.y < edgeScrollSize && transform.position.y > -16)
+        if (Input.mousePosition.y < edgeScrollSize && transform.position.y > -24)
         {
             inputDir.y = -1f;
         }
 
-        if (Input.mousePosition.x > Screen.width - edgeScrollSize && transform.position.x < 13)
+        if (Input.mousePosition.x > Screen.width - edgeScrollSize && transform.position.x < 20)
         {
 
             inputDir.x = +1f;

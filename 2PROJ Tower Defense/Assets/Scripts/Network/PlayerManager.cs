@@ -63,7 +63,7 @@ public class PlayerManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Sets the attribute of a specific player
+    /// Sets the attribute of a specific player,
     /// available : money
     /// </summary>
     [ServerRpc(RequireOwnership = false)]

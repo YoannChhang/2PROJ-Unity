@@ -11,7 +11,10 @@ public class ModeSelection : MonoBehaviour
     //When clicking on a level
     public void OnModeClick(string level)
     {
+        Debug.Log("test");
+        Debug.Log(FindObjectOfType<SoundManager>());
 
+        FindObjectOfType<SoundManager>().PlaySound("click");
         //TODO : Open a UI with level info and then starting the game.
 
         SELECTED_MODE = level;
@@ -20,6 +23,8 @@ public class ModeSelection : MonoBehaviour
     }
     void OnDisable()
     {
+        
+
         //Debug.Log("Setting SELECTED_MODE :" + SELECTED_MODE);
         PlayerPrefs.SetString("SELECTED_MODE", SELECTED_MODE);
     }
@@ -27,6 +32,8 @@ public class ModeSelection : MonoBehaviour
     //When clicking on return button
     public void OnReturnClick()
     {
+        FindObjectOfType<SoundManager>().PlaySound("click");
+
         SceneManager.LoadScene("StartMenu");
     }
 }
