@@ -47,6 +47,8 @@ public class SoundManager : MonoBehaviour
             case SoundList.click or SoundList.click_wrong:
                 src.clip = click;
                 src.time = 0.5f;
+                src.volume = 1f;
+
                 src.Play();
                 break;
         }

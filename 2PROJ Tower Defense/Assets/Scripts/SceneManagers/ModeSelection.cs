@@ -21,7 +21,7 @@ public class ModeSelection : MonoBehaviour
     }
     void OnDisable()
     {
-        FindObjectOfType<SoundManager>().PlaySound("click");
+        
 
         //Debug.Log("Setting SELECTED_MODE :" + SELECTED_MODE);
         PlayerPrefs.SetString("SELECTED_MODE", SELECTED_MODE);

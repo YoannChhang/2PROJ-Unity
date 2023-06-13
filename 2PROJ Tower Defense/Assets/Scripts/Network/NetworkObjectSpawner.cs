@@ -14,6 +14,7 @@ public class NetworkObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject spawnerPrefab;
     [SerializeField] private GameObject basePrefab;
+    [SerializeField] private GameObject soundManagerPrefab;
 
 
     void Start()
