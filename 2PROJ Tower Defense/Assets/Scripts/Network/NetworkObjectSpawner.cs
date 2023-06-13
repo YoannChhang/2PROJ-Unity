@@ -29,22 +29,22 @@ public class NetworkObjectSpawner : MonoBehaviour
         if (NetworkManager.Singleton.IsServer)
         {
             GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
-            gameManager.gameObject.name = "GameManager";
             gameManager.GetComponent<NetworkObject>().Spawn(true);
+            gameManager.gameObject.name = "GameManager";
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
-            towerMap.gameObject.name = "TowerMap";
             towerMap.GetComponent<NetworkObject>().Spawn(true);
+            towerMap.gameObject.name = "TowerMap";
 
             Grid grid = towerMap.GetComponent<Grid>();
             Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
-            Vector3 cellWorldPos = grid.CellToWorld(new Vector3Int(-19, -43));
+            Vector3 cellWorldPos = grid.GetCellCenterWorld(new Vector3Int(-19, -43, -1));
             cellWorldPos.z = -1;
             GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
             @base.GetComponent<Base>().SetGame(gameManager.GetComponent<GameManager>());
             @base.GetComponent<NetworkObject>().Spawn(true);
             @base.name = "Base";
-            @base.transform.SetParent(grid.transform, false);
+            @base.transform.SetParent(grid.transform);
 
             PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
