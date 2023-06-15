@@ -125,11 +125,32 @@ public class Enemy : NetworkBehaviour
     }
 
     protected void DealDamageToBase()
+{
+    if (target != null)
     {
-        target.GetComponent<Base>().TakeDamageServerRpc(damage);
+        Base targetBase = target.GetComponent<Base>();
+        if (targetBase != null)
+        {
+            targetBase.TakeDamageServerRpc(damage);
+        }
+    }
+    
+    if (gameObject != null)
+    {
         gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
+}
 
+
+    private void OnDestroy()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        if (enemies.Length == 0)
+        {
+
+            Debug.Log("Tous les ennemis sont détruits !");
+        }
+    }
 
 
     [ServerRpc(RequireOwnership = false)]
@@ -187,37 +208,8 @@ public class Enemy : NetworkBehaviour
                 }
             }
 
+    
 
-
-
-
-        // if (currentHealth.Value <= 0)
-        // {
-        //     GameObject deathEffect = (GameObject)Instantiate(deathParticles,transform.position,Quaternion.identity);
-        //     deathEffect.GetComponent<NetworkObject>().Spawn();
-        //     deathEffect.GetComponent<NetworkObject>().Despawn(true);
-        //     //Destroy(deathParticles,1f);
-        //     gameObject.GetComponent<NetworkObject>().Despawn(true);
-            
-
-        //     if (playerData.HasValue && playerData.Value.name == playerName)
-        //     {
-        //         playerManager.SetPlayerAttributeServerRpc(playerData.Value.name, playerData.Value.money + 5);
-        //         playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, enemy_killed:1, damage_dealt: amount, money_made: 5);
-                
-        //     }
-        // }
-        // else
-        // {
-        //     if (playerData.HasValue && playerData.Value.name == playerName)
-        //     {
-        //         playerManager.SetPlayerSpecificStatServerRpc(playerData.Value.name, damage_dealt: amount);
-
-        //     }
-
-        // }
-
-        
 
 }
     public void ActivateRegenerationBuff(float regenAmount, float duration)
