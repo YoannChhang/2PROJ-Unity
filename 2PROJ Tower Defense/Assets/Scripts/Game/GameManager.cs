@@ -350,7 +350,7 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.Singleton.IsServer)
         {
             int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-            if (enemyCount > 1)
+            if (enemyCount > 10)
             {
                 GameOverServerRpc();
             }

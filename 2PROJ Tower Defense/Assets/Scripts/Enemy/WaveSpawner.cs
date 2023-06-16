@@ -6,6 +6,8 @@ using System;
 
 public class WaveSpawner : MonoBehaviour
 {
+
+    [SerializeField] protected List<GameObject> enemyList;
     [SerializeField]
     protected GameObject enemyPrefab;
     [SerializeField]
@@ -46,7 +48,9 @@ public class WaveSpawner : MonoBehaviour
         // }
         // //NoEnemiesLeft();
         // countdown -= Time.deltaTime;
-        if (countdown <= 0f && waveIndex < myArray.Length)
+        //if (countdown <= 0f && waveIndex < myArray.Length)
+
+        if (countdown <= 0f)
         {
             if (boolStart)
             {
@@ -63,21 +67,15 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
     }
 
-    public void SetPath(Waypoints path)
-    {
-        waypoints = path;
-    }
+    public void SetPath(Waypoints path) {  waypoints = path; }
 
     public Waypoints GetPath() { return waypoints; }
 
-    public void SetWaves(int[][] waves)
-    {
-        myArray = waves;
-    }
+    public void SetWaves(int[][] waves) { myArray = waves; }
 
     public int[][] GetWaves() { return myArray; }
 
-    protected virtual IEnumerator SpawnWave()
+    protected IEnumerator SpawnWave()
     {
         if (isWaveGenerating)
         {
@@ -85,11 +83,16 @@ public class WaveSpawner : MonoBehaviour
         }
         isWaveGenerating = true;
 
-        int enemyCount = boolAuto ? 1 : myArray[waveIndex].Length;
+        //int enemyCount = boolAuto ? 1 : myArray[waveIndex].Length;
+
+        int enemyCount = 5 * (waveIndex + 1);
         for (int i = 0; i < enemyCount; i++)
         {
             
-            SpawnEnemy( waveIndex, i, myArray[waveIndex][i]);
+            // Random number between 1 and wave number for enemy type.
+            int enemyType = UnityEngine.Random.Range(0, waveIndex);
+            enemyType = enemyType % enemyList.Count;
+            SpawnEnemy(waveIndex, i, enemyType);
 
             //Debug.LogError("Index d'ennemi invalide: " + myArray[waveIndex][i]);
                    
@@ -98,6 +101,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         int AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
         while(AllEnemyKilled>0){
             yield return null;
             AllEnemyKilled = GameObject.FindGameObjectsWithTag("Enemy").Length;
@@ -116,6 +120,7 @@ public class WaveSpawner : MonoBehaviour
                 playerManager.SetPlayerAttributeServerRpc(playerData.name, playerData.money + golds);
             }
         }
+
         waveIndex++;
         yield return new WaitForSeconds(0.5f);
         isWaveGenerating = false;
@@ -126,24 +131,9 @@ public class WaveSpawner : MonoBehaviour
         
         GameObject enemy;
 
-        switch (enemyType)
-        {
-            case 1:
-                enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
-                break;
+        Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
 
-            case 2:
-                enemy = Instantiate(enemyPrefab2, pos, Quaternion.identity);
-                break;
-
-            case 3:
-                enemy = Instantiate(enemyPrefab3, pos, Quaternion.identity);
-                break;
-
-            default:
-                Debug.LogError("Invalid enemy type: " + enemyType);
-                return;
-        }
+        enemy = Instantiate(enemyList[enemyType], pos, rotation);
         
         // Use enemyType to identify the correct type of the enemy.
 
@@ -153,6 +143,7 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<NetworkObject>().Spawn();
     }
         
+
 
     protected int BonusGold(int waveIndex)
     {

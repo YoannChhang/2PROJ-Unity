@@ -617,11 +617,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e7386f01382054087bcc5b7b2f2152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   damage: 10
   gold: 5
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
-  maxHealth: 100
+  maxHealth: 10
   healthbar: {fileID: 1520908755}
   maxShield: 0
   shieldbar: {fileID: 8045248577505039701}
