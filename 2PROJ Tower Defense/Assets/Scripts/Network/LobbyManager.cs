@@ -220,7 +220,7 @@ public class LobbyManager : MonoBehaviour
                                 if (player.Data["ReadyStatus"].Value == "False")
                                 {
                                     Debug.Log("Could not start game, all players are not ready");
-                                    //return;
+                                    return;
                                 }
                             }
 
