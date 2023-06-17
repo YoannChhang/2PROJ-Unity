@@ -5,6 +5,7 @@ using UnityEngine;
 using Cinemachine;
 using TMPro;
 using UnityEngine.Tilemaps;
+using UnityEngine.EventSystems;
 
 public class GameCameraMover : MonoBehaviour
 {
@@ -37,7 +38,10 @@ public class GameCameraMover : MonoBehaviour
     {
 
 
-        CameraEdgeScrolling();
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            CameraEdgeScrolling();
+        }
         CameraZoomScrolling();
 
 
