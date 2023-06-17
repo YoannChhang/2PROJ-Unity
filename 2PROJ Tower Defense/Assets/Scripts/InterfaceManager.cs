@@ -27,7 +27,7 @@ public class InterfaceManager : MonoBehaviour
 
 
         try {
-            WaveText.GetComponent<TMP_Text>().text = "Wave : "+ GameObject.FindObjectOfType<WaveSpawner>().waveIndex.ToString();
+            WaveText.GetComponent<TMP_Text>().text = "Wave : "+ WaveSpawner.waveIndex.ToString();
         }
         catch (Exception e)
         {

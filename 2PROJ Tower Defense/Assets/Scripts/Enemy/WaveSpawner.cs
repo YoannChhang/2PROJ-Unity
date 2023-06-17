@@ -8,12 +8,6 @@ public class WaveSpawner : MonoBehaviour
 {
 
     [SerializeField] protected List<GameObject> enemyList;
-    [SerializeField]
-    protected GameObject enemyPrefab;
-    [SerializeField]
-    protected GameObject enemyPrefab2;
-    [SerializeField]
-    protected GameObject enemyPrefab3;
 
     protected Waypoints waypoints;
 
@@ -26,8 +20,9 @@ public class WaveSpawner : MonoBehaviour
 
     public static bool boolStart = false;
     public static bool boolAuto = false;
+    public static bool boolEndless = false;
+    public static int waveIndex=11;
     protected Vector3 pos;
-    public int waveIndex=0;
     protected bool isWaveGenerating = false;
     protected int[][] myArray;
 

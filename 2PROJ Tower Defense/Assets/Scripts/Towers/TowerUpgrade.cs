@@ -76,8 +76,11 @@ public class TowerUpgrade : MonoBehaviour
         Weapon.text = GetUpgradePrice(properties.WeaponCost, currTower.weaponLevel);
 
         if (Top.text == "Max") { TopButton.interactable = false; }
+        else { TopButton.interactable = true; }
         if (Base.text == "Max") { BaseButton.interactable = false; }
+        else { BaseButton.interactable = true; }
         if (Weapon.text == "Max") { WeaponButton.interactable = false; }
+        else { WeaponButton.interactable = true; }
 
     }
 
