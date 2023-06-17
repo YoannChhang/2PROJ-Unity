@@ -85,10 +85,10 @@ public class TowerManager : NetworkBehaviour
                     if (towerData.ContainsKey(cellIndex))
                     {
                         changeSelected(true);
-                        towerOptions.SetActive(true);
                         TowerUpgrade towerUpgrade = towerOptions.GetComponent<TowerUpgrade>();
                         towerUpgrade.currTower = towerData[cellIndex];
                         towerUpgrade.UpdateText();
+                        towerOptions.SetActive(true);
                     }
                     else
                     {
