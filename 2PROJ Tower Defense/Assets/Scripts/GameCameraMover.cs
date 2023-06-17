@@ -20,10 +20,11 @@ public class GameCameraMover : MonoBehaviour
 
     //Logic Variables
 
-    private float targetFieldOfView = 6f;
-    private float MaxFieldOfView = 13f;
-    private float MinFieldOfView = 2f;
-    private float zoomSpeed = 2f;
+    public float targetFieldOfView = 6f;
+    public float MaxFieldOfView = 13f;
+    public float MinFieldOfView = 2f;
+    public float zoomSpeed = 2f;
+    public float zoomIncrement = 2f;
 
 
 
@@ -84,11 +85,11 @@ public class GameCameraMover : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y > 0)
         {
-            targetFieldOfView -= 1;
+            targetFieldOfView -= zoomIncrement;
         }
         if (Input.mouseScrollDelta.y < 0)
         {
-            targetFieldOfView += 1;
+            targetFieldOfView += zoomIncrement;
         }
 
         targetFieldOfView = Mathf.Clamp(targetFieldOfView, MinFieldOfView, MaxFieldOfView);
