@@ -79,7 +79,7 @@ public class GameManager : NetworkBehaviour
                 }
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) || (WaveSpawner.waveIndex > 10 && !WaveSpawner.boolEndless))
             {
                 GameWonServerRpc();
             }
@@ -232,8 +232,6 @@ public class GameManager : NetworkBehaviour
     private void returnToMenuClientRpc()
     {
 
-
-
         if (IsServer)
         {
             GameObject.Find("LobbyManager").GetComponent<LobbyManager>().CloseLobby();
@@ -296,6 +294,7 @@ public class GameManager : NetworkBehaviour
         GameObject winMenu = GameObject.Find("UI").transform.Find("WinMenu").gameObject;
 
         isOver = false;
+        WaveSpawner.boolEndless = true;
         winMenu.SetActive(false);
         Time.timeScale = 1f;
     }
