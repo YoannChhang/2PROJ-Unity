@@ -12,6 +12,7 @@ public class GameManager : NetworkBehaviour
 
     private bool isPaused = false;
     private bool isOver = false;
+    private String name;
     [SerializeField] private GameObject pauseMenuPrefab;
     [SerializeField] private GameObject winMenuPrefab;
     [SerializeField] private GameObject loseMenuPrefab;
@@ -21,39 +22,12 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GameObject parent = GameObject.Find("UI");
-        //Debug.Log(parent);
-
-        //GameObject pauseMenu = Instantiate(pauseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
-        //pauseMenu.gameObject.name = "PauseMenu";
-
-        //GameObject winMenu = Instantiate(winMenuPrefab, Vector3.zero, Quaternion.identity,parent.transform);
-        //winMenu.gameObject.name = "WinMenu";
-
-        //GameObject loseMenu = Instantiate(loseMenuPrefab, Vector3.zero, Quaternion.identity, parent.transform);
-        //loseMenu.gameObject.name = "LoseMenu";
-
-        //pauseMenu.SetActive(false);
-        //winMenu.SetActive(false);
-        //loseMenu.SetActive(false);
+        name = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (NetworkManager.Singleton != null)
-        //{
-        //    if (!NetworkObject.IsSpawned && NetworkManager.Singleton.IsServer)
-        //    {
-        //        try
-        //        {
-        //            this.NetworkObject.Spawn();
-        //        }
-        //        catch
-        //        {
-        //        }
-        //    }
-        //}
        
         if (gameObject.name != "GameManager")
         {
@@ -79,6 +53,7 @@ public class GameManager : NetworkBehaviour
                 }
             }
 
+            // Only works in Green TD and not Circle TD
             if (Input.GetKeyUp(KeyCode.E) || (WaveSpawner.waveIndex > 10 && !WaveSpawner.boolEndless))
             {
                 GameWonServerRpc();
@@ -339,6 +314,7 @@ public class GameManager : NetworkBehaviour
         towers.GetComponent<NetworkObject>().Despawn(true);
     }
 
+    // Only called in Cricle TD
     public void startEnemyCheck()
     {
         InvokeRepeating("endOnEnemyLimit", 0f, 0.05f);
