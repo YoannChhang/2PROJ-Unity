@@ -67,97 +67,10 @@ public class NetworkObjectSpawner : MonoBehaviour
                 { 6, ("Spawner Low LowerRight", "Waypoints High Lower Right") },
                 { 7, ("Spawner High LowerLeft", "Waypoints Low Lower Left") },
                 { 8, ("Spawner High LowerRight", "Waypoints Low Lower Right") },
+                { 9, ("Spawner Middle", "Waypoints Middle") },
             };
 
-            Dictionary<int, int[][]> waveMapping = new Dictionary<int, int[][]>
-            {
-                { 1, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-
-                    }
-                },
-
-                { 2, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-                { 3, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-                { 4, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-
-                    }
-                },
-
-                { 5, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-                // Add more entries as needed
-                { 6, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-                { 7, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-                { 8, new int[][]
-                    {
-                        new int[] { 1, 1 },
-                        new int[] { 1, 2 },
-                        new int[] { 2, 1, 3 },
-                        new int[] { 1, 2, 3, 3 },
-                        new int[] { 3, 2, 1, 3, 3 },
-                    }
-                },
-
-            };
-
-
-
+            
             // Loop through the count and create spawners accordingly
             for (int i = 1; i <= count; i++)
             {
@@ -173,7 +86,6 @@ public class NetworkObjectSpawner : MonoBehaviour
 
                 WaveSpawner waves = spawner.gameObject.GetComponent<WaveSpawner>();
                 waves.SetPath(waypoints);
-                waves.SetWaves(waveMapping[i]);
 
             }
 

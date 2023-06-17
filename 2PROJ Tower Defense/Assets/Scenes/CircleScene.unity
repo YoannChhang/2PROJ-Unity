@@ -1544,6 +1544,14 @@ PrefabInstance:
       propertyPath: designGrid
       value: 
       objectReference: {fileID: 984144393}
+    - target: {fileID: 4025618508102772967, guid: fc107cc9ea70b504ea60c4e2889abe04, type: 3}
+      propertyPath: numberOfTilesX
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025618508102772967, guid: fc107cc9ea70b504ea60c4e2889abe04, type: 3}
+      propertyPath: numberOfTilesY
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4025618508102772968, guid: fc107cc9ea70b504ea60c4e2889abe04, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2272,6 +2280,11 @@ MonoBehaviour:
   CameraModeText: {fileID: 0}
   Interface: {fileID: 0}
   VisibleMap: {fileID: 505472323}
+  targetFieldOfView: 6
+  MaxFieldOfView: 13
+  MinFieldOfView: 2
+  zoomSpeed: 2
+  zoomIncrement: 2
 --- !u!1 &874328125
 GameObject:
   m_ObjectHideFlags: 0

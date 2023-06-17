@@ -24,7 +24,6 @@ public class WaveSpawner : MonoBehaviour
     public static int waveIndex=0;
     protected Vector3 pos;
     protected bool isWaveGenerating = false;
-    protected int[][] myArray;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -65,10 +64,6 @@ public class WaveSpawner : MonoBehaviour
     public void SetPath(Waypoints path) {  waypoints = path; }
 
     public Waypoints GetPath() { return waypoints; }
-
-    public void SetWaves(int[][] waves) { myArray = waves; }
-
-    public int[][] GetWaves() { return myArray; }
 
     protected IEnumerator SpawnWave()
     {
