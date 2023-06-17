@@ -422,9 +422,8 @@ public class LobbyManager : MonoBehaviour
             for (int i = 0; i < obj.transform.childCount; i++)
             {
                 Transform child = obj.transform.GetChild(i);
-                if (child.name == "ReadyIcon")
+                if (child.name == "READY")
                 {
-                    //Debug.Log(player.Data["ReadyStatus"].Value);
                     if (player.Data["ReadyStatus"].Value == "True")
                     {
                         child.gameObject.SetActive(true);
@@ -433,8 +432,32 @@ public class LobbyManager : MonoBehaviour
                     {
                         child.gameObject.SetActive(false);
                     }
-
                 }
+                if (child.name == "UNREADY")
+                {
+                    if (player.Data["ReadyStatus"].Value == "True")
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(true);
+                    }
+                }
+
+                //if (child.name == "ReadyIcon")
+                //{
+                //    //Debug.Log(player.Data["ReadyStatus"].Value);
+                //    if (player.Data["ReadyStatus"].Value == "True")
+                //    {
+                //        child.gameObject.SetActive(true);
+                //    }
+                //    else
+                //    {
+                //        child.gameObject.SetActive(false);
+                //    }
+
+                //}
             }
 
         }
