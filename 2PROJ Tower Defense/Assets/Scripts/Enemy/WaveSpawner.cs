@@ -21,7 +21,7 @@ public class WaveSpawner : MonoBehaviour
     public static bool boolStart = false;
     public static bool boolAuto = false;
     public static bool boolEndless = false;
-    public static int waveIndex=11;
+    public static int waveIndex=0;
     protected Vector3 pos;
     protected bool isWaveGenerating = false;
     protected int[][] myArray;

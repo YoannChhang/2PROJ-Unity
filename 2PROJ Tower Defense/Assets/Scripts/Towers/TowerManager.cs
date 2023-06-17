@@ -77,16 +77,17 @@ public class TowerManager : NetworkBehaviour
                 Vector3Int cellIndex = hoverManager.getCellIndexFromMouse();
                 bool available = hoverManager.checkTileAvailability(cellIndex);
 
-                Debug.Log("x: " + cellIndex.x + " y: " + cellIndex.y + " z: " + cellIndex.z);
+                //Debug.Log("x: " + cellIndex.x + " y: " + cellIndex.y + " z: " + cellIndex.z);
 
                 if (Input.GetMouseButtonDown(0) && available && !isSelected)
                 {
 
-                    if (towerData.ContainsKey(cellIndex))
+                    TowerData? data = GetTowerDataFromPos(cellIndex);
+                    if (data != null)
                     {
                         changeSelected(true);
                         TowerUpgrade towerUpgrade = towerOptions.GetComponent<TowerUpgrade>();
-                        towerUpgrade.currTower = towerData[cellIndex];
+                        towerUpgrade.currTower = (TowerData)data;
                         towerUpgrade.UpdateText();
                         towerOptions.SetActive(true);
                     }
@@ -157,10 +158,10 @@ public class TowerManager : NetworkBehaviour
             SyncedTowers.OnListChanged += OnServerListChanged;
 
         }
-        else if (NetworkManager.Singleton.IsClient)
-        {
-            SyncedTowers.OnListChanged += OnClientListChanged;
-        }
+        //else if (NetworkManager.Singleton.IsClient)
+        //{
+        //    SyncedTowers.OnListChanged += OnClientListChanged;
+        //}
     }
 
     public override void OnNetworkDespawn()
@@ -172,10 +173,10 @@ public class TowerManager : NetworkBehaviour
             SyncedTowers.OnListChanged -= OnServerListChanged;
 
         }
-        else if (NetworkManager.Singleton.IsClient)
-        {
-            SyncedTowers.OnListChanged -= OnClientListChanged;
-        }
+        //else if (NetworkManager.Singleton.IsClient)
+        //{
+        //    SyncedTowers.OnListChanged -= OnClientListChanged;
+        //}
 
     }
 
@@ -208,50 +209,54 @@ public class TowerManager : NetworkBehaviour
 
     void OnServerListChanged(NetworkListEvent<TowerData> changeEvent)
     {
-        UpdateDictionary();
+
+        //NetworkListEvent<TowerData>.EventType change = changeEvent.Type;
+
+        TowerData changed = changeEvent.Value;
+        UpdateDisplayTower(changed);
+
+        //UpdateDictionary();
         //HandleSyncedDataUpdates();
     }
 
     void OnClientListChanged(NetworkListEvent<TowerData> changeEvent)
     {
-        UpdateDictionary();
+        //UpdateDictionary();
         //HandleSyncedDataUpdates();
     }
 
-    void UpdateDictionary()
-    {
+    //void UpdateDictionary()
+    //{
 
         
-        var towersToRemove = new List<Vector3Int>();
+    //    var towersToRemove = new List<Vector3Int>();
 
-        foreach (var data in towerData.Values)
-        {
-            if (!SyncedTowers.Contains(data))
-            {
-                towersToRemove.Add(data.cellIndex);
-                UpdateDisplayTower(data);
-            }
-        }
+    //    foreach (var data in towerData.Values)
+    //    {
+    //        if (!SyncedTowers.Contains(data))
+    //        {
+    //            towersToRemove.Add(data.cellIndex);
+    //            UpdateDisplayTower(data);
+    //        }
+    //    }
 
-        foreach (var towerPos in towersToRemove)
-        {
-            towerData.Remove(towerPos);
-        }
+    //    foreach (var towerPos in towersToRemove)
+    //    {
+    //        towerData.Remove(towerPos);
+    //    }
 
-        towersToRemove.Clear();
+    //    towersToRemove.Clear();
 
-        foreach (var tower in SyncedTowers)
-        {
-            if (!towerData.ContainsValue(tower))
-            {
-                towerData[tower.cellIndex] = tower;
-                UpdateDisplayTower(tower);
-            }
-        }
-        
+    //    foreach (var tower in SyncedTowers)
+    //    {
+    //        if (!towerData.ContainsValue(tower))
+    //        {
+    //            towerData[tower.cellIndex] = tower;
+    //            UpdateDisplayTower(tower);
+    //        }
+    //    }
 
-
-    }
+    //}
 
     void UpdateDisplayTower(TowerData tower)
     {
@@ -287,7 +292,7 @@ public class TowerManager : NetworkBehaviour
             cellWorldPos.z = -1;
             GameObject newTower = Instantiate(towerPrefab, cellWorldPos, rotation);
             newTower.GetComponent<NetworkObject>().Spawn(true);
-            newTower.name = "Tower " + -tower.cellIndex.x + "," + -tower.cellIndex.y;
+            newTower.name = name;
             newTower.transform.SetParent(grid.transform);
 
             // Spawns Weapon
@@ -301,6 +306,19 @@ public class TowerManager : NetworkBehaviour
             newWeapon.GetComponent<TowerLogic>().SetTowerData(tower);
 
         }
+
+    }
+
+    private TowerData? GetTowerDataFromPos(Vector3Int pos)
+    {
+
+        foreach(TowerData data in SyncedTowers) {
+
+            if (data.cellIndex == pos) return data;
+
+        }
+
+        return null;
 
     }
 

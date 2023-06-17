@@ -30,18 +30,16 @@ public class NetworkObjectSpawner : MonoBehaviour
         if (NetworkManager.Singleton == null)
         {
             SceneManager.LoadScene("Lobby");
-
-
             return;
         }
         if (NetworkManager.Singleton.IsServer)
         {
             GameObject gameManager = Instantiate(gameManagerPrefab, Vector3.zero, Quaternion.identity);
-            gameManager.GetComponent<NetworkObject>().Spawn(true);
+            gameManager.GetComponent<NetworkObject>().Spawn();
             gameManager.gameObject.name = "GameManager";
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
-            towerMap.GetComponent<NetworkObject>().Spawn(true);
+            towerMap.GetComponent<NetworkObject>().Spawn();
             towerMap.gameObject.name = "TowerMap";
 
             Grid grid = towerMap.GetComponent<Grid>();
@@ -50,7 +48,7 @@ public class NetworkObjectSpawner : MonoBehaviour
             cellWorldPos.z = -1;
             GameObject @base = Instantiate(basePrefab, cellWorldPos, rotation);
             @base.GetComponent<Base>().SetGame(gameManager.GetComponent<GameManager>());
-            @base.GetComponent<NetworkObject>().Spawn(true);
+            @base.GetComponent<NetworkObject>().Spawn();
             @base.name = "Base";
             @base.transform.SetParent(grid.transform);
 
