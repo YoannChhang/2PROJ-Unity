@@ -292,6 +292,7 @@ public class TowerManager : NetworkBehaviour
 
             // Spawns Weapon
             Vector3 weaponRelativePos = new Vector3((float)-1.52, (float)0.26);
+
             GameObject newWeapon = Instantiate(weaponPrefab, weaponRelativePos, Quaternion.identity, newTower.transform);
             newWeapon.GetComponent<NetworkObject>().Spawn(true);
             newWeapon.name = "Weapon";

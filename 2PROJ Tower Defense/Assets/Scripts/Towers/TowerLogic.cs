@@ -394,9 +394,6 @@ public static class TowerTypeExtension
             case TowerType.Arrow:
                 return new ArrowProperty();
 
-            case TowerType.Mage:
-                return new MageProperty();
-
             case TowerType.Cannon:
                 return new CannonProperty();
 
@@ -434,7 +431,7 @@ public class ArrowProperty : TowerProperty
     {
         Type = TowerType.Arrow;
         Damage = new int[3] { 10, 20, 50 };
-        Range = new float[3] { 2, 3, 4 };
+        Range = new float[3] { 4, 6, 8 };
         Speed = new float[3] { 0.5f, 0.25f, 0.1f };
 
         Cost = 120;
@@ -443,19 +440,7 @@ public class ArrowProperty : TowerProperty
         BaseCost = new int[2] { 150, 350 };
     }
 }
-public class MageProperty : TowerProperty
-{
-    public MageProperty()
-    {
-        Type = TowerType.Mage;
 
-        Damage = new int[3] { 10, 25, 50 };
-        Range = new float[3] { 2, 3, 4 };
-        Speed = new float[3] { 0.5f, 0.25f, 0.1f };
-        Cost = 180;
-        WeaponCost = new int[2] { 220, 280 };
-    }
-}
 public class CannonProperty : TowerProperty
 {
     public CannonProperty()
@@ -463,7 +448,7 @@ public class CannonProperty : TowerProperty
         Type = TowerType.Cannon;
 
         Damage = new int[3] { 30, 60, 90 };
-        Range = new float[3] { 0.75f, 1.25f, 2 };
+        Range = new float[3] { 2.50f, 4f, 5.50f };
         Speed = new float[3] { 3f, 1.5f, 1f };
 
         Cost = 220;
@@ -479,7 +464,7 @@ public class TwinProperty : TowerProperty
         Type = TowerType.Twin;
 
         Damage = new int[3] { 5, 10, 30 };
-        Range = new float[3] { 2.5f, 3.5f, 5f };
+        Range = new float[3] { 3.50f, 5f, 6.50f };
         Speed = new float[3] { 0.5f, 0.2f, 0.05f };
 
         Cost = 100;

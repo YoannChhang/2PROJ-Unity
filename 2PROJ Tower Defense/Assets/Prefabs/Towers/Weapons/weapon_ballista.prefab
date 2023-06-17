@@ -112,8 +112,8 @@ Transform:
   m_GameObject: {fileID: 1682728804951146550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 714314720179324869}
   - {fileID: 8059306006517652973}
@@ -149,10 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9f83bea46adf848ac15674a21aa866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 2
   detectionInterval: 0.1
   attackPrefab: {fileID: 3331606456473632019, guid: 5b5fbe0b1a96da54a87b89a9cad2628c, type: 3}
-  shootInterval: 0.5
   type: 0
   targetType: 0
 --- !u!114 &-4754954564585957139
