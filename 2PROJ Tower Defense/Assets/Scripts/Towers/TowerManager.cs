@@ -26,7 +26,6 @@ public class TowerManager : NetworkBehaviour
     [SerializeField] private List<GameObject> towersList;
     [SerializeField] private List<GameObject> weaponsList;
 
-    private Dictionary<Vector3Int, TowerData> towerData;
     private NetworkList<TowerData> SyncedTowers;
     private static NetworkVariable<int> lastTowerId;
 
@@ -38,8 +37,6 @@ public class TowerManager : NetworkBehaviour
     {
         lastTowerId = new NetworkVariable<int>(0);
         SyncedTowers = new NetworkList<TowerData>();
-        towerData = new Dictionary<Vector3Int, TowerData>();
-
 
         //TODO : To be removed, this is so when game start you have money but this should be correctly implemented in WaveManager
         GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().SetMoneyAllServerRpc(1500);
@@ -158,10 +155,6 @@ public class TowerManager : NetworkBehaviour
             SyncedTowers.OnListChanged += OnServerListChanged;
 
         }
-        //else if (NetworkManager.Singleton.IsClient)
-        //{
-        //    SyncedTowers.OnListChanged += OnClientListChanged;
-        //}
     }
 
     public override void OnNetworkDespawn()
@@ -173,10 +166,6 @@ public class TowerManager : NetworkBehaviour
             SyncedTowers.OnListChanged -= OnServerListChanged;
 
         }
-        //else if (NetworkManager.Singleton.IsClient)
-        //{
-        //    SyncedTowers.OnListChanged -= OnClientListChanged;
-        //}
 
     }
 
@@ -210,53 +199,10 @@ public class TowerManager : NetworkBehaviour
     void OnServerListChanged(NetworkListEvent<TowerData> changeEvent)
     {
 
-        //NetworkListEvent<TowerData>.EventType change = changeEvent.Type;
-
         TowerData changed = changeEvent.Value;
         UpdateDisplayTower(changed);
 
-        //UpdateDictionary();
-        //HandleSyncedDataUpdates();
     }
-
-    void OnClientListChanged(NetworkListEvent<TowerData> changeEvent)
-    {
-        //UpdateDictionary();
-        //HandleSyncedDataUpdates();
-    }
-
-    //void UpdateDictionary()
-    //{
-
-        
-    //    var towersToRemove = new List<Vector3Int>();
-
-    //    foreach (var data in towerData.Values)
-    //    {
-    //        if (!SyncedTowers.Contains(data))
-    //        {
-    //            towersToRemove.Add(data.cellIndex);
-    //            UpdateDisplayTower(data);
-    //        }
-    //    }
-
-    //    foreach (var towerPos in towersToRemove)
-    //    {
-    //        towerData.Remove(towerPos);
-    //    }
-
-    //    towersToRemove.Clear();
-
-    //    foreach (var tower in SyncedTowers)
-    //    {
-    //        if (!towerData.ContainsValue(tower))
-    //        {
-    //            towerData[tower.cellIndex] = tower;
-    //            UpdateDisplayTower(tower);
-    //        }
-    //    }
-
-    //}
 
     void UpdateDisplayTower(TowerData tower)
     {
@@ -411,10 +357,6 @@ public class TowerManager : NetworkBehaviour
         }
         SyncedTowers.Dispose();
         lastTowerId.Dispose();
-
- 
-        // Clear the towerData dictionary
-        towerData = null;
 
         // Additional cleanup tasks as needed
 
