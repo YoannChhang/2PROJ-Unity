@@ -14,11 +14,18 @@ public class CircleNetworkObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject spawnerPrefab;
 
+    [SerializeField] private GameObject soundManagerPrefab;
+
     [SerializeField] private Waypoints outerLoop;
     [SerializeField] private Waypoints innerLoop;
 
     void Start()
     {
+        if (FindObjectOfType<SoundManager>() == null)
+        {
+            GameObject soundManager = Instantiate(soundManagerPrefab, Vector3.zero, Quaternion.identity);
+            soundManager.name = "SoundManager";
+        }
         //TO RUN GAME QUICKER WHEN DEV
         if (NetworkManager.Singleton == null)
         {
@@ -35,8 +42,8 @@ public class CircleNetworkObjectSpawner : MonoBehaviour
             gameManager.GetComponent<NetworkObject>().Spawn();
 
             GameObject towerMap = Instantiate(towerMapPrefab, Vector3.zero, Quaternion.identity);
-            towerMap.gameObject.name = "TowerMap";
             towerMap.GetComponent<NetworkObject>().Spawn();
+            towerMap.gameObject.name = "TowerMap";
             
             PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 

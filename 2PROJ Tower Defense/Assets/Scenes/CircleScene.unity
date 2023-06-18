@@ -1274,6 +1274,10 @@ PrefabInstance:
       propertyPath: outerLoop
       value: 
       objectReference: {fileID: 1672288516}
+    - target: {fileID: 518243830625245540, guid: 0acd646b8330e86419a2ceec7889695a, type: 3}
+      propertyPath: soundManagerPrefab
+      value: 
+      objectReference: {fileID: 433016451097302847, guid: f053b45999079495981e381edb35adb3, type: 3}
     - target: {fileID: 4259086802753142102, guid: 0acd646b8330e86419a2ceec7889695a, type: 3}
       propertyPath: m_RootOrder
       value: 0
