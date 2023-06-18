@@ -234,7 +234,7 @@ public class TowerLogic : NetworkBehaviour
             projectile.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, fractionOfJourney);
             projectile.transform.position = Vector3.Lerp(startPosition, target.transform.position, fractionOfJourney);
 
-            if (fractionOfJourney >= 1f)
+            if (fractionOfJourney >= 0.5f)
             {
                 // Perform the collision action here
                 DealDamageToEnemy(target);

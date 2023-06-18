@@ -16,6 +16,11 @@ public class Manual_Button: MonoBehaviour
     // Update is called once per frame
     void OnClick()
     {
-        WaveSpawner.boolStart=true;
+        WaveSpawner[] spawners = FindObjectOfType<WaveSpawner>().GetComponents<WaveSpawner>();
+
+        foreach (WaveSpawner spawner in spawners)
+        {
+            spawner.SetStart(true);
+        }
     }
 }

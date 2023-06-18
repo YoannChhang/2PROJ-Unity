@@ -18,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     protected float timeBetweenWaves = 5f;
 
-    public static bool boolStart = false;
+    private bool boolStart = false;
     public static bool boolAuto = false;
     public static bool boolEndless = false;
     public static int waveIndex=0;
@@ -48,6 +48,7 @@ public class WaveSpawner : MonoBehaviour
         {
             if (boolStart)
             {
+                Debug.Log(gameObject.name);
                 StartCoroutine(SpawnWave());
                 countdown = timeBetweenWaves;
                 boolStart = false;
@@ -65,6 +66,10 @@ public class WaveSpawner : MonoBehaviour
 
     public Waypoints GetPath() { return waypoints; }
 
+    public void SetStart(bool start) { boolStart = start; }
+
+    public bool GetStart() { return boolStart; }
+    
     protected IEnumerator SpawnWave()
     {
         if (isWaveGenerating)
