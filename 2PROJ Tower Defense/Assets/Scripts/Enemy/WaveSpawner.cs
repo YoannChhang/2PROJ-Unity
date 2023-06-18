@@ -107,10 +107,9 @@ public class WaveSpawner : MonoBehaviour
         if (AllEnemyKilled == 0)
         {   
             PlayerData[] allPlayerData = playerManager.GetAllPlayerData();
-            Debug.Log("DANS LE COUNT");
+            
             foreach (PlayerData playerData in allPlayerData)
             {
-                Debug.Log("DANS LE FOREACH");
                 int golds = BonusGold(waveIndex);
                 playerManager.SetPlayerAttributeServerRpc(playerData.name, playerData.money + golds);
             }

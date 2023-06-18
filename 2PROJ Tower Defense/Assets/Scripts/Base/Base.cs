@@ -11,7 +11,7 @@ public class Base : NetworkBehaviour
 
     private void Awake()
     {
-        health = new NetworkVariable<int>(10);
+        health = new NetworkVariable<int>(20);
     }
 
     // Start is called before the first frame update

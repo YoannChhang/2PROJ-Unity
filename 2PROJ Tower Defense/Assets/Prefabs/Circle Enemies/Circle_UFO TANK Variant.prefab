@@ -583,12 +583,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  damage: 15
-  gold: 5
+  damage: 10
+  gold: 50
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
-  maxHealth: 10
+  maxHealth: 50
   healthbar: {fileID: 7006742644109863985}
-  maxShield: 0
+  maxShield: 50
   shieldbar: {fileID: 6620567754954219858}
 --- !u!114 &7723807227715714375
 MonoBehaviour:

@@ -506,9 +506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64da877e1441a41b9590c21162ff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  damage: 5
-  gold: 5
+  speed: 5
+  damage: 2
+  gold: 10
   deathParticles: {fileID: 6170343013077801774, guid: e015138be0787544887f23e3c6b52c38, type: 3}
   maxHealth: 5
   healthbar: {fileID: 7365792082898974658}

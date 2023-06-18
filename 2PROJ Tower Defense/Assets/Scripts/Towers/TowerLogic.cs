@@ -183,14 +183,14 @@ public class TowerLogic : NetworkBehaviour
                 MuzzleActiveClientRpc();
                 yield return new WaitForSeconds(0.05f);
                 MuzzleDeactiveClientRpc();
-                DealDamageToEnemy(target);
+                if (target != null) DealDamageToEnemy(target);
 
                 yield return new WaitForSeconds(0.05f);
 
                 MuzzleActiveClientRpc();
                 yield return new WaitForSeconds(0.05f);
                 MuzzleDeactiveClientRpc();
-                DealDamageToEnemy(target);
+                if (target != null) DealDamageToEnemy(target);
 
                 break;
 
@@ -199,11 +199,11 @@ public class TowerLogic : NetworkBehaviour
                 MuzzleActiveClientRpc();
                 yield return new WaitForSeconds(0.15f);
                 MuzzleDeactiveClientRpc();
-                DealDamageToEnemy(target);
+                if (target != null) DealDamageToEnemy(target);
                 break;
 
             default:
-                DealDamageToEnemy(target);
+                if (target != null) DealDamageToEnemy(target);
                 break;
 
         }
@@ -226,7 +226,7 @@ public class TowerLogic : NetworkBehaviour
         float journeyLength = Vector3.Distance(startPosition, target.transform.position);
         float startTime = Time.time;
 
-        while (projectile != null)
+        while (projectile != null && target != null)
         {
             float distCovered = (Time.time - startTime) * speed;
             float fractionOfJourney = distCovered / journeyLength;
@@ -234,19 +234,21 @@ public class TowerLogic : NetworkBehaviour
             projectile.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, fractionOfJourney);
             projectile.transform.position = Vector3.Lerp(startPosition, target.transform.position, fractionOfJourney);
 
-            if (fractionOfJourney >= 0.5f)
+            if (fractionOfJourney >= 0.1f)
             {
                 // Perform the collision action here
+
                 DealDamageToEnemy(target);
 
-                // Destroy the projectile
-                projectile.GetComponent<NetworkObject>().Despawn(true);
-                Destroy(projectile);
                 yield break;
             }
 
             yield return null;
         }
+
+        // Destroy the projectile
+        projectile.GetComponent<NetworkObject>().Despawn(true);
+        Destroy(projectile);
     }
 
     [ClientRpc]
@@ -431,7 +433,7 @@ public class ArrowProperty : TowerProperty
     public ArrowProperty() 
     {
         Type = TowerType.Arrow;
-        Damage = new int[3] { 10, 20, 50 };
+        Damage = new int[3] { 10, 20, 35 };
         Range = new float[3] { 4, 6, 8 };
         Speed = new float[3] { 0.5f, 0.25f, 0.1f };
 
@@ -448,7 +450,7 @@ public class CannonProperty : TowerProperty
     {
         Type = TowerType.Cannon;
 
-        Damage = new int[3] { 30, 60, 90 };
+        Damage = new int[3] { 20, 40, 60 };
         Range = new float[3] { 2.50f, 4f, 5.50f };
         Speed = new float[3] { 3f, 1.5f, 1f };
 

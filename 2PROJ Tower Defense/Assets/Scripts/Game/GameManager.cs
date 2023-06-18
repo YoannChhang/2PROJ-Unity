@@ -224,9 +224,6 @@ public class GameManager : NetworkBehaviour
 
         SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
 
-
-
-
         isOver = false;
         Time.timeScale = 1f;
 
@@ -238,10 +235,6 @@ public class GameManager : NetworkBehaviour
     {
 
         returnToMenuClientRpc();
-      
-
-
-
     }
 
 
@@ -249,6 +242,8 @@ public class GameManager : NetworkBehaviour
     private void retryClientRpc()
     { 
         isOver = false;
+        GameObject loseMenu = GameObject.Find("UI").transform.Find("LoseMenu").gameObject;
+        loseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
     
@@ -257,7 +252,21 @@ public class GameManager : NetworkBehaviour
     {
         retryClientRpc();
         destroyTowers();
-        NetworkManager.Singleton.SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        WaveSpawner.waveIndex = 0;
+        PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        playerManager.SetMoneyAllServerRpc(1500);
+
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.GetComponent<NetworkObject>().Despawn(true);
+        }
+
+        if (name == "GreenScene")
+        {
+            Base @base = GameObject.Find("Base").GetComponent<Base>();
+            @base.health.Value = 20;
+        }
 
     }
 
@@ -311,7 +320,6 @@ public class GameManager : NetworkBehaviour
         // wait for the towers to be destroyed
         System.Threading.Thread.Sleep(1000);
 
-        towers.GetComponent<NetworkObject>().Despawn(true);
     }
 
     // Only called in Cricle TD
