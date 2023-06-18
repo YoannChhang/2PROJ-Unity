@@ -72,15 +72,18 @@ public class LobbyManager : MonoBehaviour
         {
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            playerName = "Player" + UnityEngine.Random.Range(10, 99);
+            if (PlayerPrefs.GetString("PLAYER_NAME") == null || PlayerPrefs.GetString("PLAYER_NAME") == "")
+            {
+                playerName = "Player" + UnityEngine.Random.Range(10, 99);
+                PlayerPrefs.SetString("PLAYER_NAME", playerName);
+            }
 
-            PlayerPrefs.SetString("PLAYER_NAME", playerName);
 
         }
         else
         {
-            playerName = PlayerPrefs.GetString("PLAYER_NAME");
         }
+        playerName = PlayerPrefs.GetString("PLAYER_NAME");
 
         Debug.Log($"Player name {playerName}");
 
