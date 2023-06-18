@@ -255,7 +255,7 @@ public class GameManager : NetworkBehaviour
         WaveSpawner.waveIndex = 0;
 
         PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        playerManager.SetMoneyAllServerRpc(1500);
+        playerManager.SetMoneyAllServerRpc(800);
 
         Enemy[] enemies = FindObjectsOfType<Enemy>();
         foreach (Enemy enemy in enemies)

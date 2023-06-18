@@ -30,7 +30,7 @@ public class PlayerManager : NetworkBehaviour
         {
             var playerData = new PlayerData();
             playerData.name = PlayerPrefs.GetString("PLAYER_NAME");
-            playerData.money = 1500;
+            playerData.money = 800;
             GameObject.Find("PlayerManager").GetComponentInChildren<PlayerManager>().AddPlayerServerRpc(playerData);
 
         }

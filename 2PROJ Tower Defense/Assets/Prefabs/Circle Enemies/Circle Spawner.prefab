@@ -46,10 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 6512287394422431475, guid: e3a9708e1b64fba4b9b6c44c8a4c393f, type: 3}
-  - {fileID: 7153639522334460636, guid: b3d8c7c786701914887e1b89e19d503d, type: 3}
+  - {fileID: 7153639522334460636, guid: 22fa70b3d61e14d4fbb7ba38121aa453, type: 3}
   - {fileID: 2478984627878052890, guid: 6c95cd5392dea6d4880eade9d3acaa47, type: 3}
-  enemyPrefab: {fileID: 6512287394422431475, guid: e3a9708e1b64fba4b9b6c44c8a4c393f, type: 3}
-  enemyPrefab2: {fileID: 7153639522334460636, guid: b3d8c7c786701914887e1b89e19d503d, type: 3}
-  enemyPrefab3: {fileID: 2478984627878052890, guid: 6c95cd5392dea6d4880eade9d3acaa47, type: 3}
   timeBetweenWaves: 5
-  waveIndex: 0
