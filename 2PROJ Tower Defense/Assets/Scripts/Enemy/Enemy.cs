@@ -158,8 +158,8 @@ public class Enemy : NetworkBehaviour
     {
 
 
-        Debug.Log("Health : " + currentHealth.Value);
-        Debug.Log("Shield : " + currentShield.Value);
+        // Debug.Log("Health : " + currentHealth.Value);
+        // Debug.Log("Shield : " + currentShield.Value);
 
         string playerName = PlayerPrefs.GetString("PLAYER_NAME");
         Nullable<PlayerData> playerData = playerManager.GetCurrentPlayerData();

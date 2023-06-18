@@ -110,11 +110,11 @@ public class PlayerManager : NetworkBehaviour
 
 
                 SyncedPlayers[i] = playerData;
-                Debug.Log("money made = " + playerData.stats.money_made);
-                Debug.Log("money spent = " + playerData.stats.money_spent);
-                Debug.Log("enemy killed = " + playerData.stats.enemy_killed);
-                Debug.Log("damage dealt = " + playerData.stats.damage_dealt);
-                Debug.Log("tower placed = " + playerData.stats.tower_placed);
+                // Debug.Log("money made = " + playerData.stats.money_made);
+                // Debug.Log("money spent = " + playerData.stats.money_spent);
+                // Debug.Log("enemy killed = " + playerData.stats.enemy_killed);
+                // Debug.Log("damage dealt = " + playerData.stats.damage_dealt);
+                // Debug.Log("tower placed = " + playerData.stats.tower_placed);
                 break;
             }
         }

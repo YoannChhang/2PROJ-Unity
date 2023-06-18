@@ -59,39 +59,46 @@ public class TowerLogic : NetworkBehaviour
 
     private void Update()
     {
-
-        if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
+        try
         {
-            // There are enemies in the detection radius, do something
 
-            GameObject target = GetTarget(enemiesInRadius);
-            if (target != null && !GameObject.ReferenceEquals(target, null)){
+            if (enemiesInRadius.Count > 0 && NetworkManager.Singleton.IsServer)
+            {
+                // There are enemies in the detection radius, do something
+
+                GameObject target = GetTarget(enemiesInRadius);
+                if (target != null && !GameObject.ReferenceEquals(target, null)){
 
 
-                if (target.GetComponent<NetworkObject>().IsSpawned)
-                {
-                    Vector3 targetPos = target.transform.position;
-                    targetPos.z = 0f;
-                    Vector3 selfPos = transform.position;
-                    selfPos.z = 0f;
-
-                    Vector3 relativePosition = targetPos - selfPos;
-                    Quaternion targetRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
-                    float rotationDegree = targetRotation.eulerAngles.y;    
-                    float xRotation = -45 * Mathf.Cos(rotationDegree * Mathf.PI / 180);
-                    float zRotation = -45 * Mathf.Sin(rotationDegree * Mathf.PI / 180);
-
-                    transform.rotation = Quaternion.Euler(xRotation, rotationDegree, zRotation);
-                    //transform.rotation = targetRotation;
-
-                    if (!shooting)
+                    if (target.GetComponent<NetworkObject>().IsSpawned)
                     {
-                        shooting = true;
-                        StartCoroutine(SpawnAttacks(target));
-                    }
-                }
+                        Vector3 targetPos = target.transform.position;
+                        targetPos.z = 0f;
+                        Vector3 selfPos = transform.position;
+                        selfPos.z = 0f;
 
+                        Vector3 relativePosition = targetPos - selfPos;
+                        Quaternion targetRotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+                        float rotationDegree = targetRotation.eulerAngles.y;    
+                        float xRotation = -45 * Mathf.Cos(rotationDegree * Mathf.PI / 180);
+                        float zRotation = -45 * Mathf.Sin(rotationDegree * Mathf.PI / 180);
+
+                        transform.rotation = Quaternion.Euler(xRotation, rotationDegree, zRotation);
+                        //transform.rotation = targetRotation;
+
+                        if (!shooting)
+                        {
+                            shooting = true;
+                            StartCoroutine(SpawnAttacks(target));
+                        }
+                    }
+
+                }
             }
+        }
+        catch
+        {
+
         }
     }
 
@@ -245,7 +252,7 @@ public class TowerLogic : NetworkBehaviour
 
             yield return null;
         }
-
+        Debug.Log("Destroying particles");
         // Destroy the projectile
         projectile.GetComponent<NetworkObject>().Despawn(true);
         Destroy(projectile);
