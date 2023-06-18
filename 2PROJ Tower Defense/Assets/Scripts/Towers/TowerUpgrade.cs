@@ -174,4 +174,6 @@ public class TowerUpgrade : MonoBehaviour
         currTower = newData;
         UpdateText();
     }
+
+    public void CallStopCouroutines() { StopAllCoroutines(); }
 }

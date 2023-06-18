@@ -253,6 +253,7 @@ public class GameManager : NetworkBehaviour
         retryClientRpc();
         destroyTowers();
         WaveSpawner.waveIndex = 0;
+
         PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         playerManager.SetMoneyAllServerRpc(1500);
 
@@ -261,6 +262,15 @@ public class GameManager : NetworkBehaviour
         {
             enemy.GetComponent<NetworkObject>().Despawn(true);
         }
+
+        WaveSpawner[] waveSpawners = FindObjectsOfType<WaveSpawner>();
+        foreach (WaveSpawner waveSpawner in waveSpawners)
+        {
+            waveSpawner.CallStopCouroutines();
+        }
+
+        TowerUpgrade towerUpgrade = GameObject.Find("UI").transform.Find("TowerOptions").GetComponent<TowerUpgrade>();
+        towerUpgrade.CallStopCouroutines();
 
         if (name == "GreenScene")
         {
@@ -314,11 +324,14 @@ public class GameManager : NetworkBehaviour
     {
         //Find all objects with the "Tower" tag
         GameObject towers = GameObject.Find("TowerMap").gameObject;
-
+        TowerManager manager = towers.GetComponent<TowerManager>();
         // Loop through all the towers and destroy them on the network
-        towers.GetComponent<TowerManager>().cleanTowers();
+        manager.cleanTowers();
+        manager.CallStopCouroutines();
         // wait for the towers to be destroyed
         System.Threading.Thread.Sleep(1000);
+
+       
 
     }
 

@@ -136,8 +136,8 @@ public class WaveSpawner : MonoBehaviour
         enemy.GetComponent<Enemy>().SetPath(waypoints);
         enemy.GetComponent<NetworkObject>().Spawn();
     }
-        
 
+    public void CallStopCouroutines() { StopAllCoroutines(); }
 
     protected int BonusGold(int waveIndex)
     {
