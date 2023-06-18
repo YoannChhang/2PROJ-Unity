@@ -121,7 +121,7 @@ public class WaveSpawner : MonoBehaviour
         
         GameObject enemy;
 
-        Quaternion rotation = Quaternion.Euler(-45f, 0f, 0f);
+        Quaternion rotation = Quaternion.identity;
 
         enemy = Instantiate(enemyList[enemyType], pos, rotation);
         
