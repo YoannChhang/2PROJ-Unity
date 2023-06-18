@@ -109,8 +109,8 @@ public class InterfaceManager : MonoBehaviour
 
     public void StartWaveButton()
     {
-        WaveSpawner[] spawners = FindObjectOfType<WaveSpawner>().GetComponents<WaveSpawner>();
-        
+        WaveSpawner[] spawners = FindObjectsOfType<WaveSpawner>();
+
         foreach (WaveSpawner spawner in spawners)
         {
             spawner.SetStart(true);

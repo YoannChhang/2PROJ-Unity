@@ -499,7 +499,7 @@ public class LobbyManager : MonoBehaviour
                     GameObject lobbyObj = Instantiate(lobbySelectionItemPrefab, lobbySelectionItemContainer.transform);
                     TMP_Text[] title_and_player_count = lobbyObj.GetComponentsInChildren<TMP_Text>();
                     title_and_player_count[0].text = lobby.Name;
-                    title_and_player_count[1].text = $"{lobby.Players.Count}/{lobby.Players.Capacity}";
+                    title_and_player_count[1].text = $"{lobby.Players.Count}/9";
                     lobbyObj.GetComponentInChildren<Text>().text = lobby.Id;
                     lobbyObj.GetComponentInChildren<Button>().onClick.AddListener(() =>
                     {
