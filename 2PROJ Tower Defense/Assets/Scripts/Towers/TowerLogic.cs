@@ -241,6 +241,7 @@ public class TowerLogic : NetworkBehaviour
 
                 // Destroy the projectile
                 projectile.GetComponent<NetworkObject>().Despawn(true);
+                Destroy(projectile);
                 yield break;
             }
 

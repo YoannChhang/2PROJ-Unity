@@ -55,6 +55,7 @@ public class NetworkObjectSpawner : MonoBehaviour
             PlayerManager playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
             int count = playerManager.SyncedPlayers.Count;
+            Debug.Log(count);
 
             // Define a mapping between count and spawner names and waypoints
             Dictionary<int, (string spawnerName, string waypointName)> spawnerMapping = new Dictionary<int, (string, string)>
