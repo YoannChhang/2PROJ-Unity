@@ -6,7 +6,7 @@ using Unity.Netcode;
 public class Base : NetworkBehaviour
 {
 
-    private NetworkVariable<int> health;
+    public NetworkVariable<int> health;
     private GameManager game;
 
     private void Awake()

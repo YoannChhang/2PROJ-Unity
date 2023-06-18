@@ -3676,6 +3676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353ff91b9558540199d4f7416fa63f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthText: {fileID: 0}
   WaveText: {fileID: 892657241}
   MonstersLeft: {fileID: 1965356941}
   PlayerUIRightPrefab: {fileID: 9131299661964385052, guid: 5c7a564abb0d14dfb84540f3e02b19fa, type: 3}

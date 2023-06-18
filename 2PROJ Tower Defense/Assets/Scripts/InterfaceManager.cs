@@ -9,6 +9,7 @@ using System;
 public class InterfaceManager : MonoBehaviour
 {
 
+    [SerializeField] private GameObject HealthText;
     [SerializeField] private GameObject WaveText;
     [SerializeField] private GameObject MonstersLeft;
     [SerializeField] private GameObject PlayerUIRightPrefab;
@@ -23,19 +24,34 @@ public class InterfaceManager : MonoBehaviour
     void Update()
     {
 
-        //TODO WaveNumber
-
-
-        try {
-            WaveText.GetComponent<TMP_Text>().text = "Wave : "+ WaveSpawner.waveIndex.ToString();
+        if (HealthText != null)
+        {
+            try
+            {
+                HealthText.GetComponent<TMP_Text>().text = "Health : " + FindObjectOfType<Base>().health.Value.ToString();
+            }
+            catch (Exception e)
+            {
+                HealthText.GetComponent<TMP_Text>().text = "Health : ?";
+            }
+        }
+        try
+        {
+            WaveText.GetComponent<TMP_Text>().text = "Wave : "+ (WaveSpawner.waveIndex+1).ToString();
         }
         catch (Exception e)
         {
             WaveText.GetComponent<TMP_Text>().text = "Wave : ?";
-
+        }
+        try
+        {
+            MonstersLeft.GetComponent<TMP_Text>().text = "Monsters : " + GameObject.FindGameObjectsWithTag("Enemy").Length;
+        }
+        catch (Exception e)
+        {
+            MonstersLeft.GetComponent<TMP_Text>().text = "Monsters : ?";
         }
 
-        //TODO MonstersLeft
 
 
         UpdatePlayerList();

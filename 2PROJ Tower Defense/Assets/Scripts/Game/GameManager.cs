@@ -12,7 +12,7 @@ public class GameManager : NetworkBehaviour
 
     private bool isPaused = false;
     private bool isOver = false;
-    private String name;
+    public String name;
     [SerializeField] private GameObject pauseMenuPrefab;
     [SerializeField] private GameObject winMenuPrefab;
     [SerializeField] private GameObject loseMenuPrefab;
