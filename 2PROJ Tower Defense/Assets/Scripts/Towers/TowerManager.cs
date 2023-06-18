@@ -186,6 +186,8 @@ public class TowerManager : NetworkBehaviour
 
     }
 
+    public void CallStopCouroutines() { StopAllCoroutines(); }
+
     private IEnumerator UpdateTowers(TowerData currTower, TowerData changeTower)
     {
 
@@ -199,8 +201,28 @@ public class TowerManager : NetworkBehaviour
     void OnServerListChanged(NetworkListEvent<TowerData> changeEvent)
     {
 
-        TowerData changed = changeEvent.Value;
-        UpdateDisplayTower(changed);
+        if (changeEvent.Type == NetworkListEvent<TowerData>.EventType.Clear)
+        {
+
+            TowerLogic[] weapons = FindObjectsOfType<TowerLogic>();
+
+            foreach (TowerLogic weapon in weapons)
+            {
+                GameObject parent = weapon.transform.parent.gameObject;
+                if (weapon != null)
+                {
+                    //weapon.transform.SetParent(null);
+                    weapon.GetComponent<NetworkObject>().Despawn(true);
+                }
+                //existingTower.transform.SetParent(null);
+                parent.GetComponent<NetworkObject>().Despawn(true);
+            }
+            
+        } else {
+
+            TowerData changed = changeEvent.Value;
+            UpdateDisplayTower(changed);
+        }
 
     }
 
